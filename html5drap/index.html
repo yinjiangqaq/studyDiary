@@ -1,0 +1,145 @@
+<!-- 页面内有一个正方形元素 A 以及一个待放置区域 B，实现对其拖拽和放下到 B 区域内，并且改变 B 区域背景颜色 (不可用 html5 原生事件)。
+题目的意思是让我们不用HTML5自带的drap api,所以换其他方法来实现拖拽，mousemove实现拖的效果
+这也是一道腾讯面试题，要求远程编程。 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用Drap api实现元素的拖拽</title>
+    <style>
+      #div1 {
+        width: 100px;
+        height: 100px;
+        margin: 200px auto;
+        background: olive;
+      }
+      #div2 {
+        width: 200px;
+        height: 300px;
+        position: absolute;
+        left: 100px;
+        top: 500px;
+        background: lightpink;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <script>
+      //  https://blog.csdn.net/github_36487770/article/details/80077294
+      var div1 = document.getElementById("div1");
+      var div2 = document.getElementById("div2");
+      var _newele = document.createElement("div");
+      var div1Style = getComputedStyle(div1);
+      var dropFlag = 0,
+        dragFlag = 0;
+
+      div1.addEventListener("mousedown", (event) => {
+        console.log("down");
+        var _ele = event.target;
+        _newele.style.width = div1Style.width;
+        _newele.style.height = div1Style.height;
+        _newele.style.backgroundColor = div1Style.backgroundColor;
+        _newele.style.position = "absolute";
+        _newele.style.left = _ele.offsetLeft + "px";
+        _newele.style.top = _ele.offsetTop + "px";
+        _newele.style.zIndex = 1;
+        _ele.style.position = "absolute";
+        _ele.style.left = _newele.style.left;
+        _ele.style.top = _newele.style.top;
+        _ele.style.margin = "0";
+        _ele.style.opacity = 0.5;
+
+        _ele.style.zIndex = 2;
+
+        document.body.append(_newele);
+
+        dragFlag = 1;
+      });
+      div1.addEventListener("mouseup", (event) => {
+        dragFlag = 0;
+        console.log("up");
+        console.log(dropFlag);
+        // 恢复原样，简易版就直接干掉div1，否则应该存储所有的style值，干掉new div,让div1回归原位
+        if (!dropFlag) {
+          document.body.removeChild(div1);
+        } else {
+          console.log("now drop in div2");
+
+          div2.style.backgroundColor = "#ccc000";
+          console.log(_newele);
+          document.body.removeChild(_newele);
+        }
+      });
+
+      div1.addEventListener("mousemove", (event) => {
+        if (!dragFlag) return false;
+
+        var _ele = event.target;
+
+        _ele.style.left = event.clientX - parseInt(div1Style.width) / 2 + "px";
+
+        _ele.style.top = event.clientY - parseInt(div1Style.height) / 2 + "px";
+
+        if (isEnter({ left: event.clientX, top: event.clientY }, div2)) {
+          dropFlag = 1;
+
+          div1.style.cursor = "copy";
+        } else {
+          dropFlag = 0;
+
+          div1.style.cursor = "move";
+        }
+      });
+
+      //mouseenter事件直到mouseup事件触发后才触发，不能用mouseenter了,只能用函数判断鼠标坐标是不是在div2元素的范围内了
+
+      function isEnter(point = { left: 0, top: 0 }, ele) {
+        //获取左右边距
+        var minLeft = ele.offsetLeft,
+          maxLeft = ele.offsetLeft + ele.offsetWidth;
+        //获取上下边距
+        var minTop = ele.offsetTop,
+          maxTop = ele.offsetTop + ele.offsetHeight;
+
+        if (
+          point.left > minLeft &&
+          point.left < maxLeft &&
+          point.top > minTop &&
+          point.top < maxTop
+        ) {
+          //console.log('enter', ele)
+
+          return true;
+        }
+
+        return false;
+      }
+
+      //HTML5的drag
+      //   div1.addEventListener("dragstart", (event) => {
+      //     //event.dataTransfer.setDragImage(img, 20, 20)
+
+      //     event.dataTransfer.setData("Text", event.target.id);
+      //   });
+
+      //   div2.addEventListener("dragenter", (e) => {
+      //     console.log("now enter the div2");
+      //   });
+
+      //   div2.addEventListener("dragover", (e) => {
+      //     e.dataTransfer.dropEffect = "copy"; //chrome 下默认就是copy, 也可以对链接用 link
+
+      //     e.preventDefault();
+      //   });
+
+      //   div2.addEventListener("drop", (e) => {
+      //     var _id = e.dataTransfer.getData("Text");
+
+      //     e.target.appendChild(document.getElementById(_id));
+      //   });
+    </script>
+  </body>
+</html>
