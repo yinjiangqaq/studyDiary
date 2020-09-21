@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <title>CSS设置一个正方形，宽度为父元素的一半</title>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      div.parent {
+        width: 288px;
+        background-color: yellow;
+      }
+      .child {
+        width: 50%;
+        padding-bottom: 50%;
+        height: 0;
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent">
+      <div class="child"></div>
+    </div>
+  </body>
+</html>

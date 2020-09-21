@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>两栏布局</title>
+    <style>
+      /* 清除浏览器默认边距 */
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .wrap {
+        display: flex;
+      }
+      .left {
+        height: 200px;
+        background: purple;
+        flex: 0 0 200px;
+      }
+      .right {
+        background: skyblue;
+        height: 200px;
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="left"></div>
+      <div class="right"></div>
+    </div>
+  </body>
+</html>
