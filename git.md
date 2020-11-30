@@ -10,3 +10,18 @@ git checkout --filename
 
 变更暂存区： reset
 ```
+
+
+## 查看全局配置
+
+```
+//查看全局的配置
+$ git config --global --list
+
+//设置全局的配置
+$ git config --global user.name "yourname"
+//删除全局的配置
+$ git config --global --unset user.name
+
+
+```
