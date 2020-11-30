@@ -88,3 +88,7 @@ nrm use taobao
 # 安装项目依赖
 npm install
 ```
+
+## 为什么npm install之后有.staging这一目录
+
+因为你的npm install 还没下载完，所以有.staging这个目录
