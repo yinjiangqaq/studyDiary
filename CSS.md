@@ -15,7 +15,8 @@
 
 - 父元素相对定位，子元素绝对定位，然后加负外边距
 
-```
+``` 
+
 //html
 <div class="main">
   <div class="middle"></div>
@@ -41,7 +42,8 @@
 
 - 父元素相对定位，子元素绝对定位加 margin:auto
 
-```
+``` 
+
 //html
 <div class="main">
   <div class="middle"></div>
@@ -266,52 +268,44 @@ flex 布局的默认值是 `0 1 auto`
 
 在层叠上下文中，子元素同样也按照上面解释的规则进行层叠。 重要的是，其子级层叠上下文的 z-index 值只在父级中才有意义。子级层叠上下文被自动视为父级层叠上下文的一个独立单元。
 
-## 怎么设置横向滚动条
+## vue引入css文件
 
-我们知道滚动条出现的原理是因为父级一个 div 设定了固定的宽度，然后子元素的宽度超过了父级的宽度，当我们设置了 `overflow-x:scroll`，便会出现滚动条，但是实际项目中，滚动条的出现，很影响观看体验，那怎么清除滚动条呢？
-
-原理其实很简单，父 div 的高度要小于子元素的高度（相差高度为大于等于滚动条本身的宽度）然后父元素设置`overflow:hidden`。这样就会把滚动条隐藏起来而不影响滚动效果。
-
-```vue
-<div class="docs_detail_header">
-      <el-breadcrumb separator-class="el-icon-arrow-right" class="breadCrumb">
-        <el-breadcrumb-item
-          class="breadcrumb-item"
-          v-for="item in breadcrumbs"
-          :key="item.index"
-        >
-          {{ item.name }}
-        </el-breadcrumb-item>
-      </el-breadcrumb>
-    </div>
+``` 
 
 <style lang="scss">
+@import "../scss/base/base.scss";
 
-$vwBase: 750; // 设计稿宽750px
+</style>
+//2
+<script>
+import '../scss/base/base.scss'
+</script>
 
+//base.scss做vw移动端适配
+//实际开发在具体的vue组件中，例如85px要写成vw(85),因为引用了下面这个函数
+
+@import './variable.scss';
 @function vw($px) {
   @return ($px / $vwBase) * 100vw;
 }
-.docs_detail_header {
-  display: flex;
-  height: vw(40);
-  overflow: hidden; //超过元素的隐藏
 
-  .breadCrumb {
-    flex: 1;
-    margin-left: vw(6);
-    width: 0;
-    height: vw(55); //高度高于父元素，让滚动条消失
-    line-height: vw(40);
-    white-space: nowrap;
-    overflow-y: hidden;
-    overflow-x: scroll; //设置了滚动
-    .breadcrumb-item {
-      font-size: vw(28);
-      float: none; //让横向滚动生效
-      //因为elementui的面包屑的每个item都是float:left的，所以需要覆盖掉
-    }
-  }
+// 处理elementui多个massage消息并存
+.el-message {
+  top: 20px !important;
+  transition: none;
 }
-</style>
+
+//variable.scss
+$primary: #1966FF;
+
+$themeColor: #089cfd;
+$btnColor: #1966FF;
+$btnHover: #1979FF;
+$btnActive: #1442CC;
+
+$menuTextColor: #6A6A73;
+$menuActiveAfter: #FFFFFF;
+$menuActiveTextColor: #FFFFFF;
+
+$vwBase: 750; // 设计稿宽750px
 ```
