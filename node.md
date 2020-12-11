@@ -306,6 +306,174 @@ module.exports = app => {
 };
 ```
 
+### egg.js的内置对象
+
+1. Application
+
+Application 是全局应用对象，在一个应用中，只会实例化一个，它继承自 Koa. Application，在它上面我们可以挂载一些全局的方法和对象。我们可以轻松的在插件或者应用中扩展 Application 对象。
+
+在框架运行时，会在 Application 实例上触发一些事件，应用开发者或者插件开发者可以监听这些事件做一些操作。作为应用开发者，我们一般会在启动自定义脚本中进行监听。
+
+* server: 该事件一个 worker 进程只会触发一次，在 HTTP 服务完成启动后，会将 HTTP server 通过这个事件暴露出来给开发者。
+* error: 运行时有任何的异常被 onerror 插件捕获后，都会触发 error 事件，将错误对象和关联的上下文（如果有）暴露给开发者，可以进行自定义的日志记录上报等处理。
+* request 和 response: 应用收到请求和响应请求时，分别会触发 request 和 response 事件，并将当前请求上下文暴露出来，开发者可以监听这两个事件来进行日志记录。
+
+``` js
+// app.js
+
+module.exports = app => {
+    app.once('server', server => {
+        // websocket
+    });
+    app.on('error', (err, ctx) => {
+        // report error
+    });
+    app.on('request', ctx => {
+        // log receive request
+    });
+    app.on('response', ctx => {
+        // ctx.starttime is set by framework
+        const used = Date.now() - ctx.starttime;
+        // log total cost
+    });
+};
+```
+
+Application 对象几乎可以在编写应用时的任何一个地方获取到，下面介绍几个经常用到的获取方式：
+
+几乎所有被框架 Loader 加载的文件（Controller，Service，Schedule 等），都可以 export 一个函数，这个函数会被 Loader 调用，并使用 app 作为参数：
+
+* 启动自定义脚本
+
+``` js
+// app.js
+module.exports = app => {
+    app.cache = new Cache();
+};
+```
+
+* Controller文件
+
+``` js
+// app/controller/user.js
+class UserController extends Controller {
+    async fetch() {
+        this.ctx.body = this.app.cache.get(this.ctx.query.id);
+    }
+}
+```
+
+和 Koa 一样，在 `Context` 对象上，可以通过 `ctx.app` 访问到 `Application` 对象。以上面的 `Controller` 文件举例：
+
+``` js
+// app/controller/user.js
+class UserController extends Controller {
+    async fetch() {
+        this.ctx.body = this.ctx.app.cache.get(this.ctx.query.id);
+    }
+}
+```
+
+**在继承于 Controller, Service 基类的实例中**，可以通过 `this.app` 访问到 Application 对象。
+
+``` js
+// app/controller/user.js
+class UserController extends Controller {
+    async fetch() {
+        this.ctx.body = this.app.cache.get(this.ctx.query.id);
+    }
+};
+```
+
+2. Controller
+
+框架提供了一个 Controller 基类，并推荐所有的 Controller 都继承于该基类实现。这个 Controller 基类有下列属性：
+
+* ctx - 当前请求的 Context 实例。
+* app - 应用的 Application 实例。
+* config - 应用的配置。
+* service - 应用所有的 service。
+* logger - 为当前 controller 封装的 logger 对象。
+
+在 Controller 文件中，可以通过两种方式来引用 Controller 基类：
+
+``` js
+// app/controller/user.js
+
+// 从 egg 上获取（推荐）
+const Controller = require('egg').Controller;
+class UserController extends Controller {
+    // implement
+}
+module.exports = UserController;
+
+// 从 app 实例上获取
+module.exports = app => {
+    return class UserController extends app.Controller {
+        // implement
+    };
+};
+```
+
+3. Service
+
+框架提供了一个 Service 基类，并推荐所有的 Service 都继承于该基类实现。
+
+Service 基类的属性和 Controller 基类属性一致，访问方式也类似：
+
+``` js
+// app/service/user.js
+
+// 从 egg 上获取（推荐）
+const Service = require('egg').Service;
+class UserService extends Service {
+    // implement
+}
+module.exports = UserService;
+
+// 从 app 实例上获取
+module.exports = app => {
+    return class UserService extends app.Service {
+        // implement
+    };
+};
+```
+
+4. Helper
+Helper 用来提供一些实用的 utility 函数。它的作用在于我们可以将一些常用的动作抽离在 helper.js 里面成为一个独立的函数，这样可以用 JavaScript 来写复杂的逻辑，避免逻辑分散各处，同时可以更好的编写测试用例。
+
+Helper 自身是一个类，有和 Controller 基类一样的属性，它也会在每次请求时进行实例化，因此 Helper 上的所有函数也能获取到当前请求相关的上下文信息。
+
+获取方式
+
+可以在 Context 的实例上获取到当前请求的 Helper(ctx.helper) 实例。
+
+```js
+// app/controller/user.js
+class UserController extends Controller {
+  async fetch() {
+    const { app, ctx } = this;
+    const id = ctx.query.id;
+    const user = app.cache.get(id);
+    ctx.body = ctx.helper.formatUser(user);
+  }
+}
+```
+除此之外，Helper 的实例还可以在模板中获取到，例如可以在模板中获取到 security 插件提供的 shtml 方法。
+
+自定义 helper 方法
+
+应用开发中，我们可能经常要自定义一些 helper 方法，例如上面例子中的 formatUser，我们可以通过框架扩展的形式来自定义 helper 方法。
+```js
+// app/extend/helper.js
+module.exports = {
+  formatUser(user) {
+    return only(user, [ 'name', 'phone' ]);
+  }
+};
+```
+
+
 ### egg.js 怎么在控制器中拿到前端传的参数
 
 框架通过在 Controller 上绑定的 Context 实例，提供了许多便捷方法和属性获取用户通过 HTTP 请求发送过来的参数
