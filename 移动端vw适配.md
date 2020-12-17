@@ -80,7 +80,7 @@ div{
 
 ## 如何解决兼容性问题
 
-
+https://www.jianshu.com/p/b26dce4d548f
 
 
 ## 移动端web项目，怎么本地在手机测试
@@ -89,3 +89,19 @@ https://jingyan.baidu.com/article/295430f192e3440c7e0050b4.html
 简单点说就是手机和电脑连同一个wifi,然后手机访问电脑的ip+项目开启的端口号
 
 例如 http://172.24.69.124:7500便可以连接上
+
+
+
+## PC如何调试移动端的web网页
+
+## 真机调试(没成功过)
+https://blog.csdn.net/yutao_1234/article/details/80031655
+
+## 摸索出来的新方法
+电脑下个android studio，然后装虚拟机，因为android studio 有各个版本号的Android镜像，所以拿来本地调试各大安卓版本的兼容性再好不过了。但是前提是电脑内存要足够大，至少16G以上
+
+下完android studio之后，记得要勾选AVD，然后打开AMD，新建虚拟机，下一个你想要的Android 版本的镜像，然后配置好你这台虚拟机的参数，开机便可。
+
+然后在虚拟机打开chrome，输入你本地项目的地址，便可在虚拟机上看到手机网页，然后打开电脑上的chrome，在地址栏输入 `about:inspect `；你会看到在你虚拟机上打开的网页，点击inspect，便可以调试虚拟机上的网页。
+
+![./assets/img/Androidinspect.png](./assets/imgs/Androidinspect.png)

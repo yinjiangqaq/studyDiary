@@ -343,12 +343,32 @@ https://blog.csdn.net/zhumengzj/article/details/80801556
 }
 ```
 
-## CSS表格如何适应屏幕宽度,不会出现横向滚动条
+## CSS表格如何适应屏幕宽度, 不会出现横向滚动条
 
 ``` 
+
 table{
     width:100%;
     word-break:break-all;//文字内容超过直接换行
 }
 
 ```
+
+## CSS3硬件加速
+
+https://www.cnblogs.com/kunmomo/p/13691633.html
+
+``` 
+x,y坐标要写具体的位置，不能是百分比这种，触发不了硬件加速
+transform:translate(x,y)
+```
+
+## CSS自动添加兼容性前缀
+
+https://www.jianshu.com/p/feafeb24ea1c?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation
+
+## 图片懒加载
+
+https://juejin.cn/post/6903774214780616718
+
+elementUI也有提供懒加载的组件
