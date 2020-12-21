@@ -689,3 +689,8 @@ npm install
 ## 为什么npm install之后有.staging这一目录
 
 因为你的npm install 还没下载完，所以有.staging这个目录
+
+## node 接口sequelize
+1. findAndCountAll这个是分页时候用的，里面的offset和limit这两个参数是，offset是当前从哪个位置开始取，limit是要取多少条.
+
+所以 offset通常是` (pageIndex-1)*pageSize`当前页减去一，再乘以页的大小
