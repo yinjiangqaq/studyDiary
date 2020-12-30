@@ -338,6 +338,8 @@ package-lock.json
 
 ### 前端代码
 
+//待更新的点
+(前端入口变成为VUE项目配置的入口，不做服务端渲染)
 - 编写 vue 服务端公共入口 `${app_root}/app/web/framework/vue/entry/server.js`
 
 ```js
@@ -447,3 +449,12 @@ npm run dev 做的三件事:
 - 首先启动 egg 应用，本地开发启动 webpack(egg-webpack) 构建, 默认 webpack 配置文件为项目根目录 webpack.config.js 文件。 SSR 需要配置两份 Webpack 配置，所以构建会同时启动两个 Webpack 构建服务。web 表示构建 JSBundle 给前端用，构建后文件目录 public, 默认端口 9000; node 表示构建 JSBundle 给前端用，构建后文件目录 app/view, 默认端口 9001.
 - 本地构建是 Webpack 内存构建，文件不落地磁盘，所以 app/view 和 public 在本地开发时，是看不到文件的。 只有发布模式(npm run build)才能在这两个目录中看到构建后的内容。
 - 构建完成，Egg 应用正式可用，自动打开浏览器
+
+
+
+## 后续前后端接口的交互
+
+
+## 最后附上项目地址
+
+https://github.com/yinjiangqaq/eggExample
