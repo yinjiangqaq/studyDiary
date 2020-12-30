@@ -14,15 +14,15 @@
 
 ## 项目开始
 
-### server端, client端
+### server 端, client 端
 
 server 主要使用 `Egg.js` 、 `mysql`
 
-client主要使用 `vue`
+client 主要使用 `vue`
 
 ### Egg Vue SSR Webpack 如何构建, 与普通 Webpack 构建有何区别？
 
-Vue 服务端渲染构建是需要构建两份 JSBundle 文件。SSR 模式开发时，SSR 运行需要 Webapck 单独构建 target: node 和 target: web 的JSBundle，主要的差异在于 Webpack需要处理 require 机制以及磨平 Node 和浏览器运行环境的差异。服务端的JSBundle用来生产HTML，客户端的JSBundle需要script到文档，用来进行事件绑定等操作，也就是 Vue 的 hydrate 机制。
+Vue 服务端渲染构建是需要构建两份 JSBundle 文件。SSR 模式开发时，SSR 运行需要 Webapck 单独构建 target: node 和 target: web 的 JSBundle，主要的差异在于 Webpack 需要处理 require 机制以及磨平 Node 和浏览器运行环境的差异。服务端的 JSBundle 用来生产 HTML，客户端的 JSBundle 需要 script 到文档，用来进行事件绑定等操作，也就是 Vue 的 hydrate 机制。
 
 ![eggvueWebpack.png](./assets/imgs/eggvueWebpack.png)
 
@@ -30,8 +30,8 @@ Vue 服务端渲染构建是需要构建两份 JSBundle 文件。SSR 模式开�
 
 在进行 Egg + Vue 进行 SSR 模式开发时，运行 npm run dev 后你会看到如下界面， 启动了两个 Webpack 构建实例：Node 模式 和 Web 模式。具体实现见 [egg-webpack 代码实现](https://github.com/easy-team/egg-webpack)。
 
-* 本地开发启动 Webpack 构建, 默认配置文件为项目根目录 webpack.config.js 文件。 SSR 需要配置两份 Webpack 配置，所以构建会同时启动两个 Webpack 构建服务。web 表示构建 JSBundle 给前端用，构建后文件目录 public, 默认端口 9000; node 表示构建 JSBundle 给服务端用，构建后文件目录 app/view, 默认端口 9001.
-* **本地构建是 Webpack 内存构建，文件不落地磁盘**，所以 `app/view` 和 `public` 在本地开发时，是看不到文件的。 只有发布模式(`npm run build`)才能在这两个目录中看到构建后的内容。
+- 本地开发启动 Webpack 构建, 默认配置文件为项目根目录 webpack.config.js 文件。 SSR 需要配置两份 Webpack 配置，所以构建会同时启动两个 Webpack 构建服务。web 表示构建 JSBundle 给前端用，构建后文件目录 public, 默认端口 9000; node 表示构建 JSBundle 给服务端用，构建后文件目录 app/view, 默认端口 9001.
+- **本地构建是 Webpack 内存构建，文件不落地磁盘**，所以 `app/view` 和 `public` 在本地开发时，是看不到文件的。 只有发布模式(`npm run build`)才能在这两个目录中看到构建后的内容。
 
 ### 初始化
 
@@ -56,7 +56,7 @@ egg-init
 vue 没有内置在 egg-view-vue-ssr 里面，项目需要显式安装依赖
 
 ```
-npm i vue vuex axios egg-view-vue-ssr egg-scripts --save
+npm i vue vuex axios egg-view-vue-ssr egg-scripts egg-router-plus --save
 
 ```
 
@@ -102,175 +102,193 @@ npm i vue-template-compiler --save-dev
 ```js
 /* eslint valid-jsdoc: "off" */
 
-"use strict";
-const fs = require("fs");
-const path = require("path");
+'use strict'
+const fs = require('fs')
+const path = require('path')
 
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
 module.exports = (appInfo) => {
-  /**
-   * built-in config
-   * @type {Egg.EggAppConfig}
-   **/
-  const config = (exports = {});
+ /**
+  * built-in config
+  * @type {Egg.EggAppConfig}
+  **/
+ const config = (exports = {})
 
-  // use for cookie sign key, should change to your own and keep security
-  config.keys = appInfo.name + "_1608725246223_8546";
+ // use for cookie sign key, should change to your own and keep security
+ config.keys = appInfo.name + '_1608725246223_8546'
 
-  // add your middleware config here
-  //全局配置的middleware,也就是每次router映射到相应的controller都会经过的middleware
-  config.middleware = [];
+ // add your middleware config here
+ //全局配置的middleware,也就是每次router映射到相应的controller都会经过的middleware
+ config.middleware = []
 
-  // add your user config here
-  const userConfig = {
-    // myAppName: 'egg',
-  };
-  // config.mysql = {
-  //   // 单数据库信息配置
-  //    //直接在model文件夹下面写相应的表就行了
-  //   client: {
-  //     // host
-  //     host: 'localhost',
-  //     // 端口号
-  //     port: '3306',
-  //     // 用户名
-  //     user: 'root',
-  //     // 密码
-  //     password: 'myshard',
-  //     // 数据库名
-  //     database: 'eggTest',
-  //   },
-  //   // 是否加载到 app 上，默认开启
-  //   app: true,
-  //   // 是否加载到 agent 上，默认关闭
-  //   agent: false,
-  // };
+ // add your user config here
+ const userConfig = {
+  // myAppName: 'egg',
+ }
+ // config.mysql = {
+ //   // 单数据库信息配置
+ //    //直接在model文件夹下面写相应的表就行了
+ //   client: {
+ //     // host
+ //     host: 'localhost',
+ //     // 端口号
+ //     port: '3306',
+ //     // 用户名
+ //     user: 'root',
+ //     // 密码
+ //     password: 'myshard',
+ //     // 数据库名
+ //     database: 'eggTest',
+ //   },
+ //   // 是否加载到 app 上，默认开启
+ //   app: true,
+ //   // 是否加载到 agent 上，默认关闭
+ //   agent: false,
+ // };
 
-  config.sequelize = {
-    dialectOptions: {
-      connectTimeout: 60000,
-      requestTimeout: 999999,
+ config.sequelize = {
+  dialectOptions: {
+   connectTimeout: 60000,
+   requestTimeout: 999999,
+  },
+  datasources: [
+   //多数据库配置
+   {
+    delegate: 'dbEggTest', // load all models to app.adminModel and ctx.adminModel
+    baseDir: 'model/dbEggTest', // load models from `app/admin_model/*.js`
+    dialect: 'mysql',
+    database: 'eggTest',
+    host: 'localhost',
+    port: 3306,
+    username: 'root',
+    password: 'myshard',
+    dbtype: 'myshard',
+    define: {
+     timestamps: false,
+     freezeTableName: true,
     },
-    datasources: [
-      //多数据库配置
-      {
-        delegate: "dbEggTest", // load all models to app.adminModel and ctx.adminModel
-        baseDir: "model/dbEggTest", // load models from `app/admin_model/*.js`
-        dialect: "mysql",
-        database: "eggTest",
-        host: "localhost",
-        port: 3306,
-        username: "root",
-        password: "myshard",
-        dbtype: "myshard",
-        define: {
-          timestamps: false,
-          freezeTableName: true,
-        },
-      },
-    ],
-  };
+   },
+  ],
+ }
 
-  // 跨域配置
-  // config.cors = {
-  //   origin: ['*'],
-  //   allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
-  //   credentials: true,
-  // };
-  config.vuessr = {
-    layout: path.join(appInfo.baseDir, "app/web/view/layout.html"),
-    renderOptions: {
-      basedir: path.join(appInfo.baseDir, "app/view"),
-    },
-    afterRender(html) {
-      return html.replace(/__BASE_URL__/g, "");
-    },
-  };
-  config.security = {
-    // csrf: false,
-    csrf: {
-      enable: false, // 前后端分离，post请求不方便携带_csrf
-      ignoreJSON: true,
-      headerName: "authorization",
-    },
-    methodnoallow: {
-      enable: false,
-    },
-  };
-  return {
-    ...config,
-    ...userConfig,
-  };
-};
+ // 跨域配置
+ // config.cors = {
+ //   origin: ['*'],
+ //   allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+ //   credentials: true,
+ // };
+ config.vuessr = {
+  layout: path.join(appInfo.baseDir, 'app/web/view/layout.html'),
+  renderOptions: {
+   basedir: path.join(appInfo.baseDir, 'app/view'),
+  },
+  afterRender(html) {
+   return html.replace(/__BASE_URL__/g, '')
+  },
+ }
+ config.security = {
+  // csrf: false,
+  csrf: {
+   enable: false, // 前后端分离，post请求不方便携带_csrf
+   ignoreJSON: true,
+   headerName: 'authorization',
+  },
+  methodnoallow: {
+   enable: false,
+  },
+ }
+ return {
+  ...config,
+  ...userConfig,
+ }
+}
 ```
 
 - 测试环境配置 ( `config.test.js` )默认配置相同的部分，会被测试环境配置文件覆盖
 
 ```js
-"use strict";
+'use strict'
 module.exports = () => {
-  const config = (exports = {});
-  config.CONST2 = "const2";
-  config.mysql = {
-    // 单数据库信息配置
-    client: {
-      // host
-      host: "xx.xxx.xxx.xxx",
-      // 端口号
-      port: "3306",
-      // 用户名
-      user: "root",
-      // 密码
-      password: "xxxxxxx",
-      // 数据库名
-      database: "wx",
-    },
-    // 是否加载到 app 上，默认开启
-    app: true,
-    // 是否加载到 agent 上，默认关闭
-    agent: false,
-  };
-  return {
-    ...config,
-  };
-};
+ const config = (exports = {})
+ config.CONST2 = 'const2'
+ config.mysql = {
+  // 单数据库信息配置
+  client: {
+   // host
+   host: 'xx.xxx.xxx.xxx',
+   // 端口号
+   port: '3306',
+   // 用户名
+   user: 'root',
+   // 密码
+   password: 'xxxxxxx',
+   // 数据库名
+   database: 'wx',
+  },
+  // 是否加载到 app 上，默认开启
+  app: true,
+  // 是否加载到 agent 上，默认关闭
+  agent: false,
+ }
+ return {
+  ...config,
+ }
+}
 ```
 
 - 添加`${app_root}/config/plugin.local.js` 配置
 
 ```js
 exports.webpack = {
-  enable: true,
-  package: "egg-webpack",
-};
+ enable: true,
+ package: 'egg-webpack',
+}
 
 exports.webpackvue = {
-  enable: true,
-  package: "egg-webpack-vue",
-};
+ enable: true,
+ package: 'egg-webpack-vue',
+}
 ```
 
 - 添加 `${app_root}/config/plugin.js` 配置
 
 ```js
+'use strict'
+
+/** @type Egg.EggPlugin */
+'use strict'
+
+exports.validate = {
+ enable: true,
+ package: 'egg-validate',
+}
+// 跨域
+exports.cors = {
+ enable: true,
+ package: 'egg-cors',
+}
+// mysql
+
+// 上传
+exports.multipart = {
+ enable: true,
+}
+//打开服务端ssr
 exports.vuessr = {
-  enable: true,
-  package: "egg-view-vue-ssr",
-};
-```
-
-- 添加 `easywebpack-cli` 配置文件` ${app_root}/webpack.config.js`
-
-```js
-module.exports = {
-  egg: true,
-  framework: "vue", // 使用 easywebpack-vue 构建解决方案
-  entry: {
-    "home/index": "app/web/page/home/index.js",
-  },
-};
+ enable: true,
+ package: 'egg-view-vue-ssr',
+}
+exports.sequelize = {
+ enable: true,
+ package: 'egg-sequelize',
+}
+//使用router.namespace的插件，方便路由管理
+exports.routerPlus = {
+ enable: true,
+ package: 'egg-router-plus',
+}
 ```
 
 - 添加` ${app_root}/.babelrc` 文件
@@ -301,8 +319,8 @@ npm i babel-preset-env babel-plugin-syntax-dynamic-import babel-plugin-transform
 
 ```js
 module.exports = {
-  plugins: [require("autoprefixer")],
-};
+ plugins: [require('autoprefixer')],
+}
 ```
 
 - 安装 autoprefixer 依赖
@@ -338,71 +356,109 @@ package-lock.json
 
 ### 前端代码
 
-//待更新的点
-(前端入口变成为VUE项目配置的入口，不做服务端渲染)
+yuque 官网上面的配置如下：
+
 - 编写 vue 服务端公共入口 `${app_root}/app/web/framework/vue/entry/server.js`
 
 ```js
-import Vue from "vue";
+import Vue from 'vue'
 export default function render(options) {
-  if (options.store && options.router) {
-    return (context) => {
-      options.router.push(context.state.url);
-      const matchedComponents = options.router.getMatchedComponents();
-      if (!matchedComponents) {
-        return Promise.reject({ code: "404" });
-      }
-      return Promise.all(
-        matchedComponents.map((component) => {
-          if (component.preFetch) {
-            return component.preFetch(options.store);
-          }
-          return null;
-        })
-      ).then(() => {
-        context.state = options.store.state;
-        return new Vue(options);
-      });
-    };
-  }
+ if (options.store && options.router) {
   return (context) => {
-    const VueApp = Vue.extend(options);
-    const app = new VueApp({ data: context.state });
-    return new Promise((resolve) => {
-      resolve(app);
-    });
-  };
+   options.router.push(context.state.url)
+   const matchedComponents = options.router.getMatchedComponents()
+   if (!matchedComponents) {
+    return Promise.reject({ code: '404' })
+   }
+   return Promise.all(
+    matchedComponents.map((component) => {
+     if (component.preFetch) {
+      return component.preFetch(options.store)
+     }
+     return null
+    })
+   ).then(() => {
+    context.state = options.store.state
+    return new Vue(options)
+   })
+  }
+ }
+ return (context) => {
+  const VueApp = Vue.extend(options)
+  const app = new VueApp({ data: context.state })
+  return new Promise((resolve) => {
+   resolve(app)
+  })
+ }
 }
 ```
 
 - 编写 vue 客户端公共入口 `${app_root}/app/web/framework/vue/entry/client.js`
 
 ```js
-import Vue from "vue";
+import Vue from 'vue'
 export default function (options) {
-  Vue.prototype.$http = require("axios");
-  if (options.store) {
-    options.store.replaceState(window.__INITIAL_STATE__ || {});
-  } else if (window.__INITIAL_STATE__) {
-    options.data = Object.assign(
-      window.__INITIAL_STATE__,
-      options.data && options.data()
-    );
-  }
-  const app = new Vue(options);
-  app.$mount("#app");
+ Vue.prototype.$http = require('axios')
+ if (options.store) {
+  options.store.replaceState(window.__INITIAL_STATE__ || {})
+ } else if (window.__INITIAL_STATE__) {
+  options.data = Object.assign(
+   window.__INITIAL_STATE__,
+   options.data && options.data()
+  )
+ }
+ const app = new Vue(options)
+ app.$mount('#app')
 }
 ```
 
 - 新建`${app_root}/app/web/page/home/home.js`页面文件
 
 ```js
-import Home from "./home.vue";
-import serverRender from "~/app/web/framework/vue/entry/server.js";
-import clientRender from "~/app/web/framework/vue/entry/client.js";
+import Home from './home.vue'
+import serverRender from '~/app/web/framework/vue/entry/server.js'
+import clientRender from '~/app/web/framework/vue/entry/client.js'
 export default EASY_ENV_IS_NODE
-  ? serverRender({ ...Home })
-  : clientRender({ ...Home });
+ ? serverRender({ ...Home })
+ : clientRender({ ...Home })
+```
+
+### 特殊的项目入口配置方式
+
+但是我们的项目是前端渲染，而且是前端项目和后端项目在同一个项目下，所以我们还是采取一种我们熟悉 vue 的入口文件方式:
+
+我们新建 `${app_root}/app/web/page/index.js`
+
+```js
+import Vue from 'vue'
+import store from '@store'
+import '@assets/css/global.css'
+import 'element-ui/lib/theme-chalk/index.css'
+import router from '@router'
+import App from './App.vue'
+import ElementUI from 'element-ui'
+Vue.use(ElementUI)
+
+const clientRender = () => {
+ new Vue({
+  el: '#app',
+  store,
+  router,
+  render: (h) => h(App),
+ })
+}
+
+export default clientRender()
+```
+
+然后修改`webpack.config.js`的`entry`
+
+```js
+...
+  entry: {
+    app: "app/web/page/app/index.js",
+  },
+
 ```
 
 ### Node 端代码
@@ -411,24 +467,24 @@ export default EASY_ENV_IS_NODE
 
 ```js
 module.exports = (app) => {
-  return class HomeController extends app.Controller {
-    async server() {
-      const { ctx } = this;
-      // home/index.js 对应 webpack entry 的 home/index, 构建后文件存在 app/view 目录
-      await ctx.render("home/index.js", {
-        message: "egg vue server side render",
-      });
-    }
+ return class HomeController extends app.Controller {
+  async server() {
+   const { ctx } = this
+   // home/index.js 对应 webpack entry 的 home/index, 构建后文件存在 app/view 目录
+   await ctx.render('home/index.js', {
+    message: 'egg vue server side render',
+   })
+  }
 
-    async client() {
-      const { ctx } = this;
-      // renderClient 前端渲染，Node层只做 layout.html和资源依赖组装，渲染交给前端渲染。与服务端渲染的差别你可以通过查看运行后页面源代码即可明白两者之间的差异
-      await ctx.renderClient("home/index.js", {
-        message: "egg vue client render render",
-      });
-    }
-  };
-};
+  async client() {
+   const { ctx } = this
+   // renderClient 前端渲染，Node层只做 layout.html和资源依赖组装，渲染交给前端渲染。与服务端渲染的差别你可以通过查看运行后页面源代码即可明白两者之间的差异
+   await ctx.renderClient('home/index.js', {
+    message: 'egg vue client render render',
+   })
+  }
+ }
+}
 ```
 
 - 添加路由配置
@@ -450,10 +506,7 @@ npm run dev 做的三件事:
 - 本地构建是 Webpack 内存构建，文件不落地磁盘，所以 app/view 和 public 在本地开发时，是看不到文件的。 只有发布模式(npm run build)才能在这两个目录中看到构建后的内容。
 - 构建完成，Egg 应用正式可用，自动打开浏览器
 
-
-
 ## 后续前后端接口的交互
-
 
 ## 最后附上项目地址
 
