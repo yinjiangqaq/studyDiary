@@ -10,12 +10,28 @@
 2. [egg.js](https://eggjs.org/zh-cn/intro/quickstart.html)
 3. [sequelize](https://www.sequelize.com.cn/)
 4. 数据库的，后端的一些概念
+5. vue 框架
 
 ## 项目开始
 
-### server 端
+### server端, client端
 
 server 主要使用 `Egg.js` 、 `mysql`
+
+client主要使用 `vue`
+
+### Egg Vue SSR Webpack 如何构建, 与普通 Webpack 构建有何区别？
+
+Vue 服务端渲染构建是需要构建两份 JSBundle 文件。SSR 模式开发时，SSR 运行需要 Webapck 单独构建 target: node 和 target: web 的JSBundle，主要的差异在于 Webpack需要处理 require 机制以及磨平 Node 和浏览器运行环境的差异。服务端的JSBundle用来生产HTML，客户端的JSBundle需要script到文档，用来进行事件绑定等操作，也就是 Vue 的 hydrate 机制。
+
+![eggvueWebpack.png](./assets/imgs/eggvueWebpack.png)
+
+### Webpack 本地开发构建文件是放到内存中，SSR 如何读取文件进行渲染？
+
+在进行 Egg + Vue 进行 SSR 模式开发时，运行 npm run dev 后你会看到如下界面， 启动了两个 Webpack 构建实例：Node 模式 和 Web 模式。具体实现见 [egg-webpack 代码实现](https://github.com/easy-team/egg-webpack)。
+
+* 本地开发启动 Webpack 构建, 默认配置文件为项目根目录 webpack.config.js 文件。 SSR 需要配置两份 Webpack 配置，所以构建会同时启动两个 Webpack 构建服务。web 表示构建 JSBundle 给前端用，构建后文件目录 public, 默认端口 9000; node 表示构建 JSBundle 给服务端用，构建后文件目录 app/view, 默认端口 9001.
+* **本地构建是 Webpack 内存构建，文件不落地磁盘**，所以 `app/view` 和 `public` 在本地开发时，是看不到文件的。 只有发布模式(`npm run build`)才能在这两个目录中看到构建后的内容。
 
 ### 初始化
 
