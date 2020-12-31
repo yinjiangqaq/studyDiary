@@ -212,29 +212,7 @@ module.exports = (appInfo) => {
 'use strict'
 module.exports = () => {
  const config = (exports = {})
- config.CONST2 = 'const2'
- config.mysql = {
-  // 单数据库信息配置
-  client: {
-   // host
-   host: 'xx.xxx.xxx.xxx',
-   // 端口号
-   port: '3306',
-   // 用户名
-   user: 'root',
-   // 密码
-   password: 'xxxxxxx',
-   // 数据库名
-   database: 'wx',
-  },
-  // 是否加载到 app 上，默认开启
-  app: true,
-  // 是否加载到 agent 上，默认关闭
-  agent: false,
- }
- return {
-  ...config,
- }
+ ...
 }
 ```
 
@@ -354,9 +332,55 @@ app/view/*
 package-lock.json
 ```
 
+### webpack 配置
+
+- yuque 官网配置
+
+```js
+module.exports = {
+ egg: true,
+ framework: 'vue', // 使用 easywebpack-vue 构建解决方案
+ entry: {
+  'home/index': 'app/web/page/home/index.js',
+ },
+}
+```
+
+- 我的配置
+
+```js
+/**
+ * 文档链接：https://www.yuque.com/easy-team/easywebpack/build
+ */
+const alias = require('./webpack/alias')
+
+module.exports = {
+ egg: true,
+ framework: 'vue',
+ resolve: {
+  alias,
+ },
+ entry: {
+  app: 'app/web/page/app/index.js',
+ },
+ devtool: 'source-map',
+ deploy: {
+  installNode: false,
+  installDeps: false,
+  nodejs: false, // 是否把 node 打进 node_modules, 默认 false
+  filename: 'dist',
+  source: ['app', 'config', 'public', 'app.js', 'favicon.ico', 'package.json'],
+  target: './',
+  done: async function (filepath) {
+   console.log('>>filepath', filepath)
+  },
+ },
+}
+```
+
 ### 前端代码
 
-yuque 官网上面的配置如下：
+#### yuque 官网上面的配置如下：
 
 - 编写 vue 服务端公共入口 `${app_root}/app/web/framework/vue/entry/server.js`
 
@@ -423,9 +447,9 @@ export default EASY_ENV_IS_NODE
  : clientRender({ ...Home })
 ```
 
-### 特殊的项目入口配置方式
+#### 我的项目入口配置方式
 
-但是我们的项目是前端渲染，而且是前端项目和后端项目在同一个项目下，所以我们还是采取一种我们熟悉 vue 的入口文件方式:
+但是我们的项目是前端渲染，而且是前端项目和后端项目在同一个项目下，所以我们还是采取一种我们熟悉 vue 的入口文件方式,这种方式固定了客户端渲染:
 
 我们新建 `${app_root}/app/web/page/index.js`
 
@@ -487,11 +511,62 @@ module.exports = (app) => {
 }
 ```
 
+我的项目的配置，对应的 node 端配置(详细参考文末 github 项目地址)
+
+```js
+//${app}/controller/index.js
+'use strict'
+
+const Controller = require('egg').Controller
+const path = require('path')
+class AppController extends Controller {
+ async render(ctx) {
+  //客户端渲染
+  const { app } = this
+  const { mode = 'csr' } = ctx.query
+  if (mode === 'csr') {
+   this.ctx.logger.info(`AppController, ctx.url is ${this.ctx.request.url}`)
+   // renderClient 前端渲染，Node层只做 layout.html和资源依赖组装，渲染交给前端渲染。与服务端渲染的差别你可以通过查看运行后页面源代码即可明白两者之间的差异
+   // app.js 对应 webpack entry 的 app, 构建后文件存在 app/view 目录
+   await this.ctx.renderClient(
+    'app.js',
+    {
+     url: this.ctx.url,
+     env: this.ctx.app.config.env,
+    },
+    { layout: path.join(app.baseDir, 'app/web/view/layout.html') }
+   )
+  } else {
+   await this.ctx.render('app.js', { url: this.ctx.url })
+  }
+ }
+}
+
+module.exports = AppController
+```
+
 - 添加路由配置
 
+```js
+app.get('/', app.controller.home.server)
+app.get('/client', app.controller.home.client)
 ```
-app.get('/', app.controller.home.server);
-app.get('/client', app.controller.home.client);
+
+- 我的目的路由配置
+
+```js
+//${app}/router/index.js
+;('use strict')
+
+/**
+ * @param {Egg.Application} app - egg application
+ */
+module.exports = (app) => {
+ const { router, controller } = app
+
+ //除了api之外的路由，跳到index controller，根据传递的参数，看是服务端渲染还是客户端渲染
+ router.get(/^(?!\/api).*/, controller.index.render)
+}
 ```
 
 ### 本地运行
@@ -502,11 +577,409 @@ npm run dev
 
 npm run dev 做的三件事:
 
-- 首先启动 egg 应用，本地开发启动 webpack(egg-webpack) 构建, 默认 webpack 配置文件为项目根目录 webpack.config.js 文件。 SSR 需要配置两份 Webpack 配置，所以构建会同时启动两个 Webpack 构建服务。web 表示构建 JSBundle 给前端用，构建后文件目录 public, 默认端口 9000; node 表示构建 JSBundle 给前端用，构建后文件目录 app/view, 默认端口 9001.
-- 本地构建是 Webpack 内存构建，文件不落地磁盘，所以 app/view 和 public 在本地开发时，是看不到文件的。 只有发布模式(npm run build)才能在这两个目录中看到构建后的内容。
+- 首先启动 egg 应用，本地开发启动 `webpack(egg-webpack)` 构建, 默认 webpack 配置文件为项目根目录 `webpack.config.js` 文件。 SSR 需要配置两份 `Webpack` 配置，所以构建会同时启动两个 Webpack 构建服务。web 表示构建 `JSBundle` 给前端用，构建后文件目录 public, 默认端口 `9000`; node 表示构建 `JSBundle` 给前端用，构建后文件目录 `app/view`, 默认端口 `9001`.
+- 本地构建是 Webpack 内存构建，文件不落地磁盘，所以 `app/view` 和 `public` 在本地开发时，是看不到文件的。 只有发布模式(`npm run build`)才能在这两个目录中看到构建后的内容。
 - 构建完成，Egg 应用正式可用，自动打开浏览器
 
-## 后续前后端接口的交互
+## 简单登录功能的实现
+
+相信在这之前看过 egg.js 或者有后端开发经验的同学，都知道接下来做一个登录功能需要做的事情，前端造页面，后端建表，写接口，提供接口，前后端联调。只不过上面这些事情，接下来我们都需要做。
+
+### 建表，建立 model
+
+用户的登录，我们首先新建项目目录 `app/model/dbEggTest`,然后新建 文件 user.js
+
+```js
+'use strict'
+module.exports = (app) => {
+ const { STRING, BIGINT, INTEGER } = app.Sequelize
+ const user = app.dbEggTest.define(
+  'user',
+  {
+   id: {
+    type: INTEGER(11),
+    primaryKey: true,
+   },
+   username: STRING(100),
+   password: STRING(100),
+   email: STRING(254),
+   createTime: INTEGER(11),
+   phone: STRING(20),
+  },
+  {
+   freezeTableName: true,
+   tableName: 'user',
+   timestamps: false,
+   underscored: true,
+  }
+ )
+ return user
+}
+
+/**
+ * 
+ * 用户表:MYSQL
+ *
+ #
+  CREATE TABLE eggTest.`user` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`username` varchar(100) DEFAULT NULL COMMENT '用户名',
+`password` varchar(100) DEFAULT NULL COMMENT '用户名',
+`email` varchar(254) DEFAULT NULL COMMENT '邮箱',
+`createTime`  INT(11) DEFAULT 0 COMMENT '创建时间',
+`phone` varchar(20) DEFAULT NULL COMMENT '手机号码',
+ PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_0900_ai_ci
+COMMENT='eggTest用户信息';
+ */
+```
+
+然后我们需要上 MySQL，我这边推荐使用 `DBeaver` 客户端，在起项目的时候，我们已经新建了名为`eggTest`的数据库。接下来我们需要建一个 user 表，具体的 SQL 语句上面已经写好了,照着复制粘贴就行了。
+
+### 写接口 controller 还有 service
+
+controller 和 service 具体的区别可以看 egg.js 的官方文档,简单点说就是，controller 是接口，而具体涉及到操作表的事情交给 service 来做，所以 service 层相对来更加抽象，更加可复用一点。
+
+新建目录 `app/controller/user`新建文件 `index.js`
+
+```js
+'use strict'
+
+const controller = require('egg').Controller
+
+class UserController extends controller {
+ /**
+  * 接口描述
+  * 用户登录
+  * 请求方式：post
+  * 参数：{
+  * account：string
+  *
+  * password: string
+  * }
+  */
+
+ async login() {
+  const { ctx, app } = this
+  const query = ctx.request.body
+  //this.logger.info('[UserController]')
+  const option = {
+   account: query.account,
+   password: query.password,
+  }
+  if (!query.account) {
+   app.throwError(400, '账号不能为空')
+  }
+  if (!query.password) {
+   app.throwError(400, '密码不能为空')
+  }
+  const user = await ctx.service.user.index.get(option)
+  if (!user) {
+   return ctx.fail({ msg: '账号密码错误' })
+  } else {
+   //封装过的context上下文，具体看github项目目录extend
+   return ctx.success({ msg: ' 登录成功 ' })
+  }
+ }
+}
+
+module.exports = UserController
+```
+
+新建目录 `app/service/user` 新建文件`index.js`
+
+```js
+'use strict'
+
+const service = require('egg').Service
+
+class UserService extends service {
+ //查询用户是否存在
+ async get(params) {
+  const { app } = this
+  //User要大写
+  const user = await app.dbEggTest.User.findAll({
+   where: {
+    username: params.account,
+    password: params.password,
+   },
+  })
+
+  return !!user.length
+ }
+}
+//写完要暴露出去
+module.exports = UserService
+```
+
+### 后端路由配置
+
+新建 `app/router/user` 目录，新建文件`index.js`
+
+```js
+'use strict'
+module.exports = (app) => {
+ const { router, controller } = app
+ //这里router.namespace 需要的插件是 routerPlus
+ const subRouter = router.namespace('/api/user')
+ subRouter.post('/login', controller.user.index.login)
+}
+```
+
+## 前端配置登录界面
+
+在`app/web/page/app/views` 目录下新建`login.vue`和`project.vue`,记得在 App.vue 配置 `routerview` ，然后配置好 `router` 路由
+
+```js
+//route.js
+export default [
+ {
+  name: 'home',
+  path: '/',
+  redirect: '/login',
+ },
+ {
+  name: 'login',
+  path: '/login',
+  component: () => import('@views/login.vue'),
+ },
+ {
+  name: 'project',
+  path: '/project',
+  component: () => import('@views/project.vue'),
+ },
+]
+```
+
+```vue
+//login.vue
+<template>
+ <div class="login-wrap">
+  <div class="login-mask"></div>
+  <div class="ms-login">
+   <div class="ms-title">后台管理系统</div>
+   <el-form
+    :model="ruleForm"
+    :rules="rules"
+    ref="ruleForm"
+    label-width="0px"
+    class="ms-content"
+   >
+    <el-form-item prop="username">
+     <el-input v-model="ruleForm.username" placeholder="username">
+      <el-button slot="prepend" icon="el-icon-user"></el-button>
+     </el-input>
+    </el-form-item>
+    <el-form-item prop="password">
+     <el-input
+      type="password"
+      placeholder="password"
+      v-model="ruleForm.password"
+      @keyup.enter.native="submitForm('ruleForm')"
+     >
+      <el-button slot="prepend" icon="el-icon-lock"></el-button>
+     </el-input>
+    </el-form-item>
+    <div class="login-btn">
+     <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+    </div>
+   </el-form>
+  </div>
+ </div>
+</template>
+
+<script>
+import { login } from '../services/user'
+export default {
+ data: function () {
+  return {
+   ruleForm: {
+    username: 'admin',
+    password: 'admin',
+   },
+   rules: {
+    username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+    password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+   },
+  }
+ },
+ created() {},
+ methods: {
+  submitForm(formName) {
+   this.$refs[formName].validate((valid) => {
+    if (valid) {
+     login({
+      account: this.ruleForm.username,
+      password: this.ruleForm.password,
+     }).then((res) => {
+      console.log(res)
+      if (res.data.code === 0) {
+       this.$router.push('/project')
+      }
+     })
+    } else {
+     return false
+    }
+   })
+  },
+ },
+}
+</script>
+
+<style scoped>
+.login-wrap {
+ position: relative;
+ width: 100%;
+ height: 100%;
+ background-image: url('../assets/imgs/IU.jpeg');
+ background-size: 100%;
+}
+.login-mask {
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ top: 0;
+ left: 0;
+ background-color: rgba(0, 0, 0, 0.3);
+}
+.ms-title {
+ width: 100%;
+ line-height: 50px;
+ text-align: center;
+ font-size: 20px;
+ color: #fff;
+ border-bottom: 1px solid #ddd;
+}
+.ms-login {
+ position: absolute;
+ left: 50%;
+ top: 50%;
+ width: 350px;
+ margin: -190px 0 0 -175px;
+ border-radius: 5px;
+ background: rgba(255, 255, 255, 0.3);
+ overflow: hidden;
+}
+.ms-content {
+ padding: 30px 30px;
+}
+.login-btn {
+ text-align: center;
+}
+.login-btn button {
+ width: 100%;
+ height: 36px;
+ margin-bottom: 10px;
+}
+.login-tips {
+ font-size: 12px;
+ line-height: 30px;
+ color: #fff;
+}
+</style>
+```
+
+```vue
+//project.vue
+<template>
+ <div class="container">项目首页</div>
+</template>
+```
+
+然后新建 `app/web/page/app/services`目录,配置一些公共服务，新建 index.js
+
+```js
+import xhr from 'axios'
+
+xhr.defaults.baseURL = process.env.NODE_ENV === 'development' ? '/' : `/` //还没配置生产环境的baseUrl
+xhr.defaults.withCredentials = true // 允许携带cookie
+// 公共get
+export const get = (url, params = {}, config = {}) =>
+ xhr({
+  url,
+  params,
+  method: 'get',
+  ...config,
+ }).catch((err) => {
+  console.log(
+   `${err.status || ''}：${err.statusText || ''} ${err.message || ''}`
+  )
+  return Promise.reject(err)
+ })
+
+// 公共post
+export const post = (url, data = {}, config = {}) =>
+ xhr({
+  url,
+  data: data || {},
+  method: 'post',
+  ...config,
+ }).catch((err) => {
+  console.log(
+   `${err.status || ''}：${err.statusText || ''} ${err.message || ''}`
+  )
+  return Promise.reject(err)
+ })
+
+export const jsonPost = (url, data = {}, config = {}) =>
+ xhr({
+  url,
+  data: data || {},
+  method: 'post',
+  headers: {
+   'Content-Type': 'application/json; charset=UTF-8',
+  },
+  transformRequest: (val) => JSON.stringify(val),
+  ...config,
+ }).catch((err) => {
+  console.log(
+   `${err.status || ''}：${err.statusText || ''} ${err.message || ''}`
+  )
+  return Promise.reject(err)
+ })
+
+// 公共put
+export const put = (url, data = {}, config = {}) =>
+ xhr({
+  url,
+  data: data || {},
+  method: 'put',
+  ...config,
+ }).catch((err) => {
+  console.log(
+   `${err.status || ''}：${err.statusText || ''} ${err.message || ''}`
+  )
+  return Promise.reject(err)
+ })
+
+// 公共delete
+export const del = (url, params = {}) =>
+ xhr({
+  url,
+  params,
+  method: 'delete',
+ }).catch((err) => {
+  console.log(
+   `${err.status || ''}：${err.statusText || ''} ${err.message || ''}`
+  )
+  return Promise.reject(err)
+ })
+```
+
+接着在这个目录下，新建 user 目录,新建 index.js
+
+```js
+'use strict'
+import { post } from '../index'
+
+//判断用户登录
+export const login = (requestParams) => post('/api/user/login', requestParams)
+```
+
+这样前后端基本就打通了，接下来就是大家熟悉的联调，看接口问题还是前端传的参数有问题环节。
 
 ## 最后附上项目地址
 
