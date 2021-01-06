@@ -2,20 +2,20 @@
 
 ### 水平居中
 
-* 行内元素：text-align:center; 
-* flex 布局：display:flex; justify-content:center; 
-* 常用(前提：已设置 width 值)：margin-left:auto; margin-right:auto; margin:0 auto; 
-* 不定宽块状元素水平居中: 改变块状元素的 dispaly 属性为 inline， 然后给父级设置 text-aline：center 来实现水平居中， 这种方法的缺点是不能再给元素设置宽高了
+- 行内元素：text-align:center;
+- flex 布局：display:flex; justify-content:center;
+- 常用(前提：已设置 width 值)：margin-left:auto; margin-right:auto; margin:0 auto;
+- 不定宽块状元素水平居中: 改变块状元素的 dispaly 属性为 inline， 然后给父级设置 text-aline：center 来实现水平居中， 这种方法的缺点是不能再给元素设置宽高了
 
 ### 垂直居中
 
-* height line-height
-* table-cell
-* display:flex; align-items:center
+- height line-height
+- table-cell
+- display:flex; align-items:center
 
-* 父元素相对定位，子元素绝对定位，然后加负外边距
+- 父元素相对定位，子元素绝对定位，然后加负外边距
 
-``` 
+```
 
 //html
 <div class="main">
@@ -40,9 +40,9 @@
 
 ```
 
-* 父元素相对定位，子元素绝对定位加 margin:auto
+- 父元素相对定位，子元素绝对定位加 margin:auto
 
-``` 
+```
 
 //html
 <div class="main">
@@ -72,9 +72,9 @@
 
 ### 垂直水平居中
 
-* 定位+margin:auto
+- 定位+margin:auto
 
-``` CSS
+```CSS
 .container {
     position: relative;
     width: 300px;
@@ -95,127 +95,127 @@
 }
 ```
 
-* 定位+margin-left+margin-top
+- 定位+margin-left+margin-top
 
-``` css
+```css
 .container {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    background: yellow;
+  position: relative;
+  width: 300px;
+  height: 300px;
+  background: yellow;
 }
 
 .box {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -50px;
-    margin-top: -50px;
-    width: 100px;
-    height: 100px;
-    background: red;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -50px;
+  margin-top: -50px;
+  width: 100px;
+  height: 100px;
+  background: red;
 }
 ```
 
-* 定位+transform
+- 定位+transform
 
-``` css
+```css
 .container {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    background: yellow;
+  position: relative;
+  width: 300px;
+  height: 300px;
+  background: yellow;
 }
 
 .box {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 100px;
-    height: 100px;
-    background: red;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  background: red;
 }
 ```
 
 这种兼容性不好，只支持 IE9+的浏览器
 
-* flex:display: flex; justify-content:center; align-items:center; 
+- flex:display: flex; justify-content:center; align-items:center;
 
-``` css
+```css
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 300px;
-    height: 300px;
-    background: yellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 300px;
+  background: yellow;
 }
 
 .box {
-    width: 100px;
-    height: 100px;
-    background: red;
+  width: 100px;
+  height: 100px;
+  background: red;
 }
 ```
 
-* 移动端首选 flex+margin:auto
+- 移动端首选 flex+margin:auto
 
-``` css
+```css
 .container {
-    display: flex;
-    width: 300px;
-    height: 300px;
-    background: yellow;
+  display: flex;
+  width: 300px;
+  height: 300px;
+  background: yellow;
 }
 
 .box {
-    margin: auto;
-    width: 100px;
-    height: 100px;
-    background: red;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  background: red;
 }
 ```
 
 移动端首选
 
-* 形成 table-cell 子元素设置 display：inline-block
+- 形成 table-cell 子元素设置 display：inline-block
 
-``` css
+```css
 .container {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-    width: 300px;
-    height: 300px;
-    background: yellow;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  width: 300px;
+  height: 300px;
+  background: yellow;
 }
 
 .box {
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-    background: red;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background: red;
 }
 ```
 
-* line-height+text-align:center+display:inline
+- line-height+text-align:center+display:inline
 
-``` css
+```css
 .container {
-    display: inline;
-    line-height: 300px;
-    text-align: center;
-    width: 300px;
-    height: 300px;
-    background: yellow;
+  display: inline;
+  line-height: 300px;
+  text-align: center;
+  width: 300px;
+  height: 300px;
+  background: yellow;
 }
 
 .box {
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-    background: red;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background: red;
 }
 ```
 
@@ -247,14 +247,14 @@ flex 布局的默认值是 `0 1 auto`
 
 ### 默认创建层叠上下文
 
-* 文档根元素（<html>）；
-* position 值为 absolute（绝对定位）或 relative（相对定位）且 z-index 值不为 auto 的元素；
-* position 值为 fixed（固定定位）或 sticky（粘滞定位）的元素（沾滞定位适配所有移动设备上的浏览器，但老的桌面浏览器不支持）；
-* flex (flexbox) 容器的子元素，且 z-index 值不为 auto；
-* grid (grid) 容器的子元素，且 z-index 值不为 auto；
-* opacity 属性值小于 1 的元素（参见 the specification for opacity）；
-* mix-blend-mode 属性值不为 normal 的元素；
-* 以下任意属性值不为 none 的元素：
+- 文档根元素（<html>）；
+- position 值为 absolute（绝对定位）或 relative（相对定位）且 z-index 值不为 auto 的元素；
+- position 值为 fixed（固定定位）或 sticky（粘滞定位）的元素（沾滞定位适配所有移动设备上的浏览器，但老的桌面浏览器不支持）；
+- flex (flexbox) 容器的子元素，且 z-index 值不为 auto；
+- grid (grid) 容器的子元素，且 z-index 值不为 auto；
+- opacity 属性值小于 1 的元素（参见 the specification for opacity）；
+- mix-blend-mode 属性值不为 normal 的元素；
+- 以下任意属性值不为 none 的元素：
 
 1. transform
 2. filter
@@ -268,9 +268,9 @@ flex 布局的默认值是 `0 1 auto`
 
 在层叠上下文中，子元素同样也按照上面解释的规则进行层叠。 重要的是，其子级层叠上下文的 z-index 值只在父级中才有意义。子级层叠上下文被自动视为父级层叠上下文的一个独立单元。
 
-## vue引入css文件
+## vue 引入 css 文件
 
-``` 
+```
 
 <style lang="scss">
 @import "../scss/base/base.scss";
@@ -310,9 +310,9 @@ $menuActiveTextColor: #FFFFFF;
 $vwBase: 750; // 设计稿宽750px
 ```
 
-## vue的template不能加class类选择器和其他绑定事件之类，也就是不把它当场是一个元素
+## vue 的 template 不能加 class 类选择器和其他绑定事件之类，也就是不把它当场是一个元素
 
-## elementui 的 input输入框的 icon图标可以通过font-size 控制大小
+## elementui 的 input 输入框的 icon 图标可以通过 font-size 控制大小
 
 ## 文字省略号
 
@@ -320,32 +320,32 @@ https://blog.csdn.net/zhumengzj/article/details/80801556
 
 ## 如何让固定高度的页头页尾在中间层太短的时候，页头页尾也要一个在头部，一个在尾部
 
-``` html
+```html
 <div class="container">
-    <div class="header"></div>
-    <div class="content"></div>
-    <div class="footer"></div>
+  <div class="header"></div>
+  <div class="content"></div>
+  <div class="footer"></div>
 </div>
 ```
 
-通过flex布局，纵列布局可以实现，整个container要占满屏幕，然后剩下的给content自适应
+通过 flex 布局，纵列布局可以实现，整个 container 要占满屏幕，然后剩下的给 content 自适应
 
-``` css
+```css
 .container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; //设置最小高度
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; //设置最小高度
 }
 
 //假设页头页尾已经固定高度
 .content {
-    flex: 1 0 auto;
+  flex: 1 0 auto;
 }
 ```
 
-## CSS表格如何适应屏幕宽度, 不会出现横向滚动条
+## CSS 表格如何适应屏幕宽度, 不会出现横向滚动条
 
-``` 
+```
 
 table{
     width:100%;
@@ -354,16 +354,16 @@ table{
 
 ```
 
-## CSS3硬件加速
+## CSS3 硬件加速
 
 https://www.cnblogs.com/kunmomo/p/13691633.html
 
-``` 
+```
 x,y坐标要写具体的位置，不能是百分比这种，触发不了硬件加速
 transform:translate(x,y)
 ```
 
-## CSS自动添加兼容性前缀
+## CSS 自动添加兼容性前缀
 
 https://www.jianshu.com/p/feafeb24ea1c?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation
 
@@ -371,19 +371,19 @@ https://www.jianshu.com/p/feafeb24ea1c?utm_campaign=maleskine&utm_content=note&u
 
 https://juejin.cn/post/6903774214780616718
 
-elementUI也有提供懒加载的组件
+elementUI 也有提供懒加载的组件
 
 ## 块级元素和行内元素的性质
 
-* 块级元素：自身占一行，能设置宽高，如果不设置宽度，那么宽度将默认变为父级的 100%
+- 块级元素：自身占一行，能设置宽高，如果不设置宽度，那么宽度将默认变为父级的 100%
 
-* 行级元素：与其他行内元素并排，不能设置宽高，默认宽度就是文字的宽度
+- 行级元素：与其他行内元素并排，不能设置宽高，默认宽度就是文字的宽度
 
 ### CSS 中让元素脱离文档流的手段
 
-* 浮动
-* 绝对定位
-* 固定定位
+- 浮动
+- 绝对定位
+- 固定定位
 
 ### 为什么图片既具有行内元素的特性，又能像块级元素一样设置宽高
 
@@ -431,10 +431,41 @@ https://www.cnblogs.com/ypppt/p/13149924.html
 
 ## 脱离文档流
 
->float方式： 节点使用float脱流时，会让其跳出正常文档流，其他节点会忽略该节点并填补其原先空间。但是该节点文本可不参与这个脱流效果，却会认同该节点所占据的空间并围绕它布局，这个就是常说的文字环绕效果的原理。
+> float 方式： 节点使用 float 脱流时，会让其跳出正常文档流，其他节点会忽略该节点并填补其原先空间。但是该节点文本可不参与这个脱流效果，却会认同该节点所占据的空间并围绕它布局，这个就是常说的文字环绕效果的原理。
 
 一句话概括：节点参与浮动布局后，自身脱流但其文本不脱流
 
->position方式：节点使用position脱流时(只有absolute和fixed)，会让其及其文本一起跳出正常文档流，其他节点会忽略该节点并填补其原先空间。absolute绝对定位是相对往上遍历第一个包含position:relative的祖先节点定位，若无此节点则相对`<body>`定位；fixed固定定位是相对浏览器窗口定位。
+> position 方式：节点使用 position 脱流时(只有 absolute 和 fixed)，会让其及其文本一起跳出正常文档流，其他节点会忽略该节点并填补其原先空间。absolute 绝对定位是相对往上遍历第一个包含 position:relative 的祖先节点定位，若无此节点则相对`<body>`定位；fixed 固定定位是相对浏览器窗口定位。
 
 一句话概括：节点参与定位布局后，自身及其文本一起脱流。
+
+## 移动端适配中出现的 CSS 问题
+
+`Android4.x` 的系统浏览器用的是旧版本的 `chromium`.然后当在伪元素 `before` 和 `after` 里面使用动画的时候，会引起 `webview` 奔溃
+
+```css
+@-webkit-keyframes crashChrome {
+  0% {
+    -webkit-transform: translateX(0rem);
+  }
+}
+
+.anim:before {
+  content: '';
+  width: 3rem;
+  height: 3rem;
+  border-radius: 3rem;
+  position: absolute;
+  left: 5rem;
+  top: 5rem;
+  background-color: #06839f;
+
+  -webkit-animation: crashChrome;
+}
+```
+
+```html
+<div class="anim"></div>
+```
+
+解决方案：使用 content 为空的 div 来代替伪元素
