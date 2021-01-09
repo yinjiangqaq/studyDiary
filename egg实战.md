@@ -102,108 +102,108 @@ npm i vue-template-compiler --save-dev
 ```js
 /* eslint valid-jsdoc: "off" */
 
-'use strict'
-const fs = require('fs')
-const path = require('path')
+'use strict';
+const fs = require('fs');
+const path = require('path');
 
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
 module.exports = (appInfo) => {
- /**
-  * built-in config
-  * @type {Egg.EggAppConfig}
-  **/
- const config = (exports = {})
+  /**
+   * built-in config
+   * @type {Egg.EggAppConfig}
+   **/
+  const config = (exports = {});
 
- // use for cookie sign key, should change to your own and keep security
- config.keys = appInfo.name + '_1608725246223_8546'
+  // use for cookie sign key, should change to your own and keep security
+  config.keys = appInfo.name + '_1608725246223_8546';
 
- // add your middleware config here
- //全局配置的middleware,也就是每次router映射到相应的controller都会经过的middleware
- config.middleware = []
+  // add your middleware config here
+  //全局配置的middleware,也就是每次router映射到相应的controller都会经过的middleware
+  config.middleware = [];
 
- // add your user config here
- const userConfig = {
-  // myAppName: 'egg',
- }
- // config.mysql = {
- //   // 单数据库信息配置
- //    //直接在model文件夹下面写相应的表就行了
- //   client: {
- //     // host
- //     host: 'localhost',
- //     // 端口号
- //     port: '3306',
- //     // 用户名
- //     user: 'root',
- //     // 密码
- //     password: 'myshard',
- //     // 数据库名
- //     database: 'eggTest',
- //   },
- //   // 是否加载到 app 上，默认开启
- //   app: true,
- //   // 是否加载到 agent 上，默认关闭
- //   agent: false,
- // };
+  // add your user config here
+  const userConfig = {
+    // myAppName: 'egg',
+  };
+  // config.mysql = {
+  //   // 单数据库信息配置
+  //    //直接在model文件夹下面写相应的表就行了
+  //   client: {
+  //     // host
+  //     host: 'localhost',
+  //     // 端口号
+  //     port: '3306',
+  //     // 用户名
+  //     user: 'root',
+  //     // 密码
+  //     password: 'myshard',
+  //     // 数据库名
+  //     database: 'eggTest',
+  //   },
+  //   // 是否加载到 app 上，默认开启
+  //   app: true,
+  //   // 是否加载到 agent 上，默认关闭
+  //   agent: false,
+  // };
 
- config.sequelize = {
-  dialectOptions: {
-   connectTimeout: 60000,
-   requestTimeout: 999999,
-  },
-  datasources: [
-   //多数据库配置
-   {
-    delegate: 'dbEggTest', // load all models to app.adminModel and ctx.adminModel
-    baseDir: 'model/dbEggTest', // load models from `app/admin_model/*.js`
-    dialect: 'mysql',
-    database: 'eggTest',
-    host: 'localhost',
-    port: 3306,
-    username: 'root',
-    password: 'myshard',
-    dbtype: 'myshard',
-    define: {
-     timestamps: false,
-     freezeTableName: true,
+  config.sequelize = {
+    dialectOptions: {
+      connectTimeout: 60000,
+      requestTimeout: 999999,
     },
-   },
-  ],
- }
+    datasources: [
+      //多数据库配置
+      {
+        delegate: 'dbEggTest', // load all models to app.adminModel and ctx.adminModel
+        baseDir: 'model/dbEggTest', // load models from `app/admin_model/*.js`
+        dialect: 'mysql',
+        database: 'eggTest',
+        host: 'localhost',
+        port: 3306,
+        username: 'root',
+        password: 'myshard',
+        dbtype: 'myshard',
+        define: {
+          timestamps: false,
+          freezeTableName: true,
+        },
+      },
+    ],
+  };
 
- // 跨域配置
- // config.cors = {
- //   origin: ['*'],
- //   allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
- //   credentials: true,
- // };
- config.vuessr = {
-  layout: path.join(appInfo.baseDir, 'app/web/view/layout.html'),
-  renderOptions: {
-   basedir: path.join(appInfo.baseDir, 'app/view'),
-  },
-  afterRender(html) {
-   return html.replace(/__BASE_URL__/g, '')
-  },
- }
- config.security = {
-  // csrf: false,
-  csrf: {
-   enable: false, // 前后端分离，post请求不方便携带_csrf
-   ignoreJSON: true,
-   headerName: 'authorization',
-  },
-  methodnoallow: {
-   enable: false,
-  },
- }
- return {
-  ...config,
-  ...userConfig,
- }
-}
+  // 跨域配置
+  // config.cors = {
+  //   origin: ['*'],
+  //   allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
+  //   credentials: true,
+  // };
+  config.vuessr = {
+    layout: path.join(appInfo.baseDir, 'app/web/view/layout.html'),
+    renderOptions: {
+      basedir: path.join(appInfo.baseDir, 'app/view'),
+    },
+    afterRender(html) {
+      return html.replace(/__BASE_URL__/g, '');
+    },
+  };
+  config.security = {
+    // csrf: false,
+    csrf: {
+      enable: false, // 前后端分离，post请求不方便携带_csrf
+      ignoreJSON: true,
+      headerName: 'authorization',
+    },
+    methodnoallow: {
+      enable: false,
+    },
+  };
+  return {
+    ...config,
+    ...userConfig,
+  };
+};
 ```
 
 - 测试环境配置 ( `config.test.js` )默认配置相同的部分，会被测试环境配置文件覆盖
@@ -220,53 +220,53 @@ module.exports = () => {
 
 ```js
 exports.webpack = {
- enable: true,
- package: 'egg-webpack',
-}
+  enable: true,
+  package: 'egg-webpack',
+};
 
 exports.webpackvue = {
- enable: true,
- package: 'egg-webpack-vue',
-}
+  enable: true,
+  package: 'egg-webpack-vue',
+};
 ```
 
 - 添加 `${app_root}/config/plugin.js` 配置
 
 ```js
-'use strict'
+'use strict';
 
 /** @type Egg.EggPlugin */
-'use strict'
+'use strict';
 
 exports.validate = {
- enable: true,
- package: 'egg-validate',
-}
+  enable: true,
+  package: 'egg-validate',
+};
 // 跨域
 exports.cors = {
- enable: true,
- package: 'egg-cors',
-}
+  enable: true,
+  package: 'egg-cors',
+};
 // mysql
 
 // 上传
 exports.multipart = {
- enable: true,
-}
+  enable: true,
+};
 //打开服务端ssr
 exports.vuessr = {
- enable: true,
- package: 'egg-view-vue-ssr',
-}
+  enable: true,
+  package: 'egg-view-vue-ssr',
+};
 exports.sequelize = {
- enable: true,
- package: 'egg-sequelize',
-}
+  enable: true,
+  package: 'egg-sequelize',
+};
 //使用router.namespace的插件，方便路由管理
 exports.routerPlus = {
- enable: true,
- package: 'egg-router-plus',
-}
+  enable: true,
+  package: 'egg-router-plus',
+};
 ```
 
 - 添加` ${app_root}/.babelrc` 文件
@@ -297,8 +297,8 @@ npm i babel-preset-env babel-plugin-syntax-dynamic-import babel-plugin-transform
 
 ```js
 module.exports = {
- plugins: [require('autoprefixer')],
-}
+  plugins: [require('autoprefixer')],
+};
 ```
 
 - 安装 autoprefixer 依赖
@@ -338,12 +338,12 @@ package-lock.json
 
 ```js
 module.exports = {
- egg: true,
- framework: 'vue', // 使用 easywebpack-vue 构建解决方案
- entry: {
-  'home/index': 'app/web/page/home/index.js',
- },
-}
+  egg: true,
+  framework: 'vue', // 使用 easywebpack-vue 构建解决方案
+  entry: {
+    'home/index': 'app/web/page/home/index.js',
+  },
+};
 ```
 
 - 我的配置
@@ -352,30 +352,37 @@ module.exports = {
 /**
  * 文档链接：https://www.yuque.com/easy-team/easywebpack/build
  */
-const alias = require('./webpack/alias')
+const alias = require('./webpack/alias');
 
 module.exports = {
- egg: true,
- framework: 'vue',
- resolve: {
-  alias,
- },
- entry: {
-  app: 'app/web/page/app/index.js',
- },
- devtool: 'source-map',
- deploy: {
-  installNode: false,
-  installDeps: false,
-  nodejs: false, // 是否把 node 打进 node_modules, 默认 false
-  filename: 'dist',
-  source: ['app', 'config', 'public', 'app.js', 'favicon.ico', 'package.json'],
-  target: './',
-  done: async function (filepath) {
-   console.log('>>filepath', filepath)
+  egg: true,
+  framework: 'vue',
+  resolve: {
+    alias,
   },
- },
-}
+  entry: {
+    app: 'app/web/page/app/index.js',
+  },
+  devtool: 'source-map',
+  deploy: {
+    installNode: false,
+    installDeps: false,
+    nodejs: false, // 是否把 node 打进 node_modules, 默认 false
+    filename: 'dist',
+    source: [
+      'app',
+      'config',
+      'public',
+      'app.js',
+      'favicon.ico',
+      'package.json',
+    ],
+    target: './',
+    done: async function (filepath) {
+      console.log('>>filepath', filepath);
+    },
+  },
+};
 ```
 
 ### 前端代码
@@ -385,66 +392,66 @@ module.exports = {
 - 编写 vue 服务端公共入口 `${app_root}/app/web/framework/vue/entry/server.js`
 
 ```js
-import Vue from 'vue'
+import Vue from 'vue';
 export default function render(options) {
- if (options.store && options.router) {
-  return (context) => {
-   options.router.push(context.state.url)
-   const matchedComponents = options.router.getMatchedComponents()
-   if (!matchedComponents) {
-    return Promise.reject({ code: '404' })
-   }
-   return Promise.all(
-    matchedComponents.map((component) => {
-     if (component.preFetch) {
-      return component.preFetch(options.store)
-     }
-     return null
-    })
-   ).then(() => {
-    context.state = options.store.state
-    return new Vue(options)
-   })
+  if (options.store && options.router) {
+    return (context) => {
+      options.router.push(context.state.url);
+      const matchedComponents = options.router.getMatchedComponents();
+      if (!matchedComponents) {
+        return Promise.reject({ code: '404' });
+      }
+      return Promise.all(
+        matchedComponents.map((component) => {
+          if (component.preFetch) {
+            return component.preFetch(options.store);
+          }
+          return null;
+        })
+      ).then(() => {
+        context.state = options.store.state;
+        return new Vue(options);
+      });
+    };
   }
- }
- return (context) => {
-  const VueApp = Vue.extend(options)
-  const app = new VueApp({ data: context.state })
-  return new Promise((resolve) => {
-   resolve(app)
-  })
- }
+  return (context) => {
+    const VueApp = Vue.extend(options);
+    const app = new VueApp({ data: context.state });
+    return new Promise((resolve) => {
+      resolve(app);
+    });
+  };
 }
 ```
 
 - 编写 vue 客户端公共入口 `${app_root}/app/web/framework/vue/entry/client.js`
 
 ```js
-import Vue from 'vue'
+import Vue from 'vue';
 export default function (options) {
- Vue.prototype.$http = require('axios')
- if (options.store) {
-  options.store.replaceState(window.__INITIAL_STATE__ || {})
- } else if (window.__INITIAL_STATE__) {
-  options.data = Object.assign(
-   window.__INITIAL_STATE__,
-   options.data && options.data()
-  )
- }
- const app = new Vue(options)
- app.$mount('#app')
+  Vue.prototype.$http = require('axios');
+  if (options.store) {
+    options.store.replaceState(window.__INITIAL_STATE__ || {});
+  } else if (window.__INITIAL_STATE__) {
+    options.data = Object.assign(
+      window.__INITIAL_STATE__,
+      options.data && options.data()
+    );
+  }
+  const app = new Vue(options);
+  app.$mount('#app');
 }
 ```
 
 - 新建`${app_root}/app/web/page/home/home.js`页面文件
 
 ```js
-import Home from './home.vue'
-import serverRender from '~/app/web/framework/vue/entry/server.js'
-import clientRender from '~/app/web/framework/vue/entry/client.js'
+import Home from './home.vue';
+import serverRender from '~/app/web/framework/vue/entry/server.js';
+import clientRender from '~/app/web/framework/vue/entry/client.js';
 export default EASY_ENV_IS_NODE
- ? serverRender({ ...Home })
- : clientRender({ ...Home })
+  ? serverRender({ ...Home })
+  : clientRender({ ...Home });
 ```
 
 #### 我的项目入口配置方式
@@ -454,25 +461,25 @@ export default EASY_ENV_IS_NODE
 我们新建 `${app_root}/app/web/page/index.js`
 
 ```js
-import Vue from 'vue'
-import store from '@store'
-import '@assets/css/global.css'
-import 'element-ui/lib/theme-chalk/index.css'
-import router from '@router'
-import App from './App.vue'
-import ElementUI from 'element-ui'
-Vue.use(ElementUI)
+import Vue from 'vue';
+import store from '@store';
+import '@assets/css/global.css';
+import 'element-ui/lib/theme-chalk/index.css';
+import router from '@router';
+import App from './App.vue';
+import ElementUI from 'element-ui';
+Vue.use(ElementUI);
 
 const clientRender = () => {
- new Vue({
-  el: '#app',
-  store,
-  router,
-  render: (h) => h(App),
- })
-}
+  new Vue({
+    el: '#app',
+    store,
+    router,
+    render: (h) => h(App),
+  });
+};
 
-export default clientRender()
+export default clientRender();
 ```
 
 然后修改`webpack.config.js`的`entry`
@@ -491,82 +498,82 @@ export default clientRender()
 
 ```js
 module.exports = (app) => {
- return class HomeController extends app.Controller {
-  async server() {
-   const { ctx } = this
-   // home/index.js 对应 webpack entry 的 home/index, 构建后文件存在 app/view 目录
-   await ctx.render('home/index.js', {
-    message: 'egg vue server side render',
-   })
-  }
+  return class HomeController extends app.Controller {
+    async server() {
+      const { ctx } = this;
+      // home/index.js 对应 webpack entry 的 home/index, 构建后文件存在 app/view 目录
+      await ctx.render('home/index.js', {
+        message: 'egg vue server side render',
+      });
+    }
 
-  async client() {
-   const { ctx } = this
-   // renderClient 前端渲染，Node层只做 layout.html和资源依赖组装，渲染交给前端渲染。与服务端渲染的差别你可以通过查看运行后页面源代码即可明白两者之间的差异
-   await ctx.renderClient('home/index.js', {
-    message: 'egg vue client render render',
-   })
-  }
- }
-}
+    async client() {
+      const { ctx } = this;
+      // renderClient 前端渲染，Node层只做 layout.html和资源依赖组装，渲染交给前端渲染。与服务端渲染的差别你可以通过查看运行后页面源代码即可明白两者之间的差异
+      await ctx.renderClient('home/index.js', {
+        message: 'egg vue client render render',
+      });
+    }
+  };
+};
 ```
 
 我的项目的配置，对应的 node 端配置(详细参考文末 github 项目地址)
 
 ```js
 //${app}/controller/index.js
-'use strict'
+'use strict';
 
-const Controller = require('egg').Controller
-const path = require('path')
+const Controller = require('egg').Controller;
+const path = require('path');
 class AppController extends Controller {
- async render(ctx) {
-  //客户端渲染
-  const { app } = this
-  const { mode = 'csr' } = ctx.query
-  if (mode === 'csr') {
-   this.ctx.logger.info(`AppController, ctx.url is ${this.ctx.request.url}`)
-   // renderClient 前端渲染，Node层只做 layout.html和资源依赖组装，渲染交给前端渲染。与服务端渲染的差别你可以通过查看运行后页面源代码即可明白两者之间的差异
-   // app.js 对应 webpack entry 的 app, 构建后文件存在 app/view 目录
-   await this.ctx.renderClient(
-    'app.js',
-    {
-     url: this.ctx.url,
-     env: this.ctx.app.config.env,
-    },
-    { layout: path.join(app.baseDir, 'app/web/view/layout.html') }
-   )
-  } else {
-   await this.ctx.render('app.js', { url: this.ctx.url })
+  async render(ctx) {
+    //客户端渲染
+    const { app } = this;
+    const { mode = 'csr' } = ctx.query;
+    if (mode === 'csr') {
+      this.ctx.logger.info(`AppController, ctx.url is ${this.ctx.request.url}`);
+      // renderClient 前端渲染，Node层只做 layout.html和资源依赖组装，渲染交给前端渲染。与服务端渲染的差别你可以通过查看运行后页面源代码即可明白两者之间的差异
+      // app.js 对应 webpack entry 的 app, 构建后文件存在 app/view 目录
+      await this.ctx.renderClient(
+        'app.js',
+        {
+          url: this.ctx.url,
+          env: this.ctx.app.config.env,
+        },
+        { layout: path.join(app.baseDir, 'app/web/view/layout.html') }
+      );
+    } else {
+      await this.ctx.render('app.js', { url: this.ctx.url });
+    }
   }
- }
 }
 
-module.exports = AppController
+module.exports = AppController;
 ```
 
 - 添加路由配置
 
 ```js
-app.get('/', app.controller.home.server)
-app.get('/client', app.controller.home.client)
+app.get('/', app.controller.home.server);
+app.get('/client', app.controller.home.client);
 ```
 
 - 我的目的路由配置
 
 ```js
 //${app}/router/index.js
-;('use strict')
+('use strict');
 
 /**
  * @param {Egg.Application} app - egg application
  */
 module.exports = (app) => {
- const { router, controller } = app
+  const { router, controller } = app;
 
- //除了api之外的路由，跳到index controller，根据传递的参数，看是服务端渲染还是客户端渲染
- router.get(/^(?!\/api).*/, controller.index.render)
-}
+  //除了api之外的路由，跳到index controller，根据传递的参数，看是服务端渲染还是客户端渲染
+  router.get(/^(?!\/api).*/, controller.index.render);
+};
 ```
 
 ### 本地运行
@@ -590,31 +597,31 @@ npm run dev 做的三件事:
 用户的登录，我们首先新建项目目录 `app/model/dbEggTest`,然后新建 文件 user.js
 
 ```js
-'use strict'
+'use strict';
 module.exports = (app) => {
- const { STRING, BIGINT, INTEGER } = app.Sequelize
- const user = app.dbEggTest.define(
-  'user',
-  {
-   id: {
-    type: INTEGER(11),
-    primaryKey: true,
-   },
-   username: STRING(100),
-   password: STRING(100),
-   email: STRING(254),
-   createTime: INTEGER(11),
-   phone: STRING(20),
-  },
-  {
-   freezeTableName: true,
-   tableName: 'user',
-   timestamps: false,
-   underscored: true,
-  }
- )
- return user
-}
+  const { STRING, BIGINT, INTEGER } = app.Sequelize;
+  const user = app.dbEggTest.define(
+    'user',
+    {
+      id: {
+        type: INTEGER(11),
+        primaryKey: true,
+      },
+      username: STRING(100),
+      password: STRING(100),
+      email: STRING(254),
+      createTime: INTEGER(11),
+      phone: STRING(20),
+    },
+    {
+      freezeTableName: true,
+      tableName: 'user',
+      timestamps: false,
+      underscored: true,
+    }
+  );
+  return user;
+};
 
 /**
  * 
@@ -646,73 +653,73 @@ controller 和 service 具体的区别可以看 egg.js 的官方文档,简单点
 新建目录 `app/controller/user`新建文件 `index.js`
 
 ```js
-'use strict'
+'use strict';
 
-const controller = require('egg').Controller
+const controller = require('egg').Controller;
 
 class UserController extends controller {
- /**
-  * 接口描述
-  * 用户登录
-  * 请求方式：post
-  * 参数：{
-  * account：string
-  *
-  * password: string
-  * }
-  */
+  /**
+   * 接口描述
+   * 用户登录
+   * 请求方式：post
+   * 参数：{
+   * account：string
+   *
+   * password: string
+   * }
+   */
 
- async login() {
-  const { ctx, app } = this
-  const query = ctx.request.body
-  //this.logger.info('[UserController]')
-  const option = {
-   account: query.account,
-   password: query.password,
+  async login() {
+    const { ctx, app } = this;
+    const query = ctx.request.body;
+    //this.logger.info('[UserController]')
+    const option = {
+      account: query.account,
+      password: query.password,
+    };
+    if (!query.account) {
+      app.throwError(400, '账号不能为空');
+    }
+    if (!query.password) {
+      app.throwError(400, '密码不能为空');
+    }
+    const user = await ctx.service.user.index.get(option);
+    if (!user) {
+      return ctx.fail({ msg: '账号密码错误' });
+    } else {
+      //封装过的context上下文，具体看github项目目录extend
+      return ctx.success({ msg: ' 登录成功 ' });
+    }
   }
-  if (!query.account) {
-   app.throwError(400, '账号不能为空')
-  }
-  if (!query.password) {
-   app.throwError(400, '密码不能为空')
-  }
-  const user = await ctx.service.user.index.get(option)
-  if (!user) {
-   return ctx.fail({ msg: '账号密码错误' })
-  } else {
-   //封装过的context上下文，具体看github项目目录extend
-   return ctx.success({ msg: ' 登录成功 ' })
-  }
- }
 }
 
-module.exports = UserController
+module.exports = UserController;
 ```
 
 新建目录 `app/service/user` 新建文件`index.js`
 
 ```js
-'use strict'
+'use strict';
 
-const service = require('egg').Service
+const service = require('egg').Service;
 
 class UserService extends service {
- //查询用户是否存在
- async get(params) {
-  const { app } = this
-  //User要大写
-  const user = await app.dbEggTest.User.findAll({
-   where: {
-    username: params.account,
-    password: params.password,
-   },
-  })
+  //查询用户是否存在
+  async get(params) {
+    const { app } = this;
+    //User要大写
+    const user = await app.dbEggTest.User.findAll({
+      where: {
+        username: params.account,
+        password: params.password,
+      },
+    });
 
-  return !!user.length
- }
+    return !!user.length;
+  }
 }
 //写完要暴露出去
-module.exports = UserService
+module.exports = UserService;
 ```
 
 ### 后端路由配置
@@ -720,13 +727,13 @@ module.exports = UserService
 新建 `app/router/user` 目录，新建文件`index.js`
 
 ```js
-'use strict'
+'use strict';
 module.exports = (app) => {
- const { router, controller } = app
- //这里router.namespace 需要的插件是 routerPlus
- const subRouter = router.namespace('/api/user')
- subRouter.post('/login', controller.user.index.login)
-}
+  const { router, controller } = app;
+  //这里router.namespace 需要的插件是 routerPlus
+  const subRouter = router.namespace('/api/user');
+  subRouter.post('/login', controller.user.index.login);
+};
 ```
 
 ## 前端配置登录界面
@@ -736,148 +743,152 @@ module.exports = (app) => {
 ```js
 //route.js
 export default [
- {
-  name: 'home',
-  path: '/',
-  redirect: '/login',
- },
- {
-  name: 'login',
-  path: '/login',
-  component: () => import('@views/login.vue'),
- },
- {
-  name: 'project',
-  path: '/project',
-  component: () => import('@views/project.vue'),
- },
-]
+  {
+    name: 'home',
+    path: '/',
+    redirect: '/login',
+  },
+  {
+    name: 'login',
+    path: '/login',
+    component: () => import('@views/login.vue'),
+  },
+  {
+    name: 'project',
+    path: '/project',
+    component: () => import('@views/project.vue'),
+  },
+];
 ```
 
 ```vue
 //login.vue
 <template>
- <div class="login-wrap">
-  <div class="login-mask"></div>
-  <div class="ms-login">
-   <div class="ms-title">后台管理系统</div>
-   <el-form
-    :model="ruleForm"
-    :rules="rules"
-    ref="ruleForm"
-    label-width="0px"
-    class="ms-content"
-   >
-    <el-form-item prop="username">
-     <el-input v-model="ruleForm.username" placeholder="username">
-      <el-button slot="prepend" icon="el-icon-user"></el-button>
-     </el-input>
-    </el-form-item>
-    <el-form-item prop="password">
-     <el-input
-      type="password"
-      placeholder="password"
-      v-model="ruleForm.password"
-      @keyup.enter.native="submitForm('ruleForm')"
-     >
-      <el-button slot="prepend" icon="el-icon-lock"></el-button>
-     </el-input>
-    </el-form-item>
-    <div class="login-btn">
-     <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+  <div class="login-wrap">
+    <div class="login-mask"></div>
+    <div class="ms-login">
+      <div class="ms-title">后台管理系统</div>
+      <el-form
+        :model="ruleForm"
+        :rules="rules"
+        ref="ruleForm"
+        label-width="0px"
+        class="ms-content"
+      >
+        <el-form-item prop="username">
+          <el-input v-model="ruleForm.username" placeholder="username">
+            <el-button slot="prepend" icon="el-icon-user"></el-button>
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input
+            type="password"
+            placeholder="password"
+            v-model="ruleForm.password"
+            @keyup.enter.native="submitForm('ruleForm')"
+          >
+            <el-button slot="prepend" icon="el-icon-lock"></el-button>
+          </el-input>
+        </el-form-item>
+        <div class="login-btn">
+          <el-button type="primary" @click="submitForm('ruleForm')"
+            >登录</el-button
+          >
+        </div>
+      </el-form>
     </div>
-   </el-form>
   </div>
- </div>
 </template>
 
 <script>
-import { login } from '../services/user'
+import { login } from '../services/user';
 export default {
- data: function () {
-  return {
-   ruleForm: {
-    username: 'admin',
-    password: 'admin',
-   },
-   rules: {
-    username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-    password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-   },
-  }
- },
- created() {},
- methods: {
-  submitForm(formName) {
-   this.$refs[formName].validate((valid) => {
-    if (valid) {
-     login({
-      account: this.ruleForm.username,
-      password: this.ruleForm.password,
-     }).then((res) => {
-      console.log(res)
-      if (res.data.code === 0) {
-       this.$router.push('/project')
-      }
-     })
-    } else {
-     return false
-    }
-   })
+  data: function () {
+    return {
+      ruleForm: {
+        username: 'admin',
+        password: 'admin',
+      },
+      rules: {
+        username: [
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+        ],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+      },
+    };
   },
- },
-}
+  created() {},
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          login({
+            account: this.ruleForm.username,
+            password: this.ruleForm.password,
+          }).then((res) => {
+            console.log(res);
+            if (res.data.code === 0) {
+              this.$router.push('/project');
+            }
+          });
+        } else {
+          return false;
+        }
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
 .login-wrap {
- position: relative;
- width: 100%;
- height: 100%;
- background-image: url('../assets/imgs/IU.jpeg');
- background-size: 100%;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/imgs/IU.jpeg');
+  background-size: 100%;
 }
 .login-mask {
- position: absolute;
- width: 100%;
- height: 100%;
- top: 0;
- left: 0;
- background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 .ms-title {
- width: 100%;
- line-height: 50px;
- text-align: center;
- font-size: 20px;
- color: #fff;
- border-bottom: 1px solid #ddd;
+  width: 100%;
+  line-height: 50px;
+  text-align: center;
+  font-size: 20px;
+  color: #fff;
+  border-bottom: 1px solid #ddd;
 }
 .ms-login {
- position: absolute;
- left: 50%;
- top: 50%;
- width: 350px;
- margin: -190px 0 0 -175px;
- border-radius: 5px;
- background: rgba(255, 255, 255, 0.3);
- overflow: hidden;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 350px;
+  margin: -190px 0 0 -175px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.3);
+  overflow: hidden;
 }
 .ms-content {
- padding: 30px 30px;
+  padding: 30px 30px;
 }
 .login-btn {
- text-align: center;
+  text-align: center;
 }
 .login-btn button {
- width: 100%;
- height: 36px;
- margin-bottom: 10px;
+  width: 100%;
+  height: 36px;
+  margin-bottom: 10px;
 }
 .login-tips {
- font-size: 12px;
- line-height: 30px;
- color: #fff;
+  font-size: 12px;
+  line-height: 30px;
+  color: #fff;
 }
 </style>
 ```
@@ -885,98 +896,98 @@ export default {
 ```vue
 //project.vue
 <template>
- <div class="container">项目首页</div>
+  <div class="container">项目首页</div>
 </template>
 ```
 
 然后新建 `app/web/page/app/services`目录,配置一些公共服务，新建 index.js
 
 ```js
-import xhr from 'axios'
+import xhr from 'axios';
 
-xhr.defaults.baseURL = process.env.NODE_ENV === 'development' ? '/' : `/` //还没配置生产环境的baseUrl
-xhr.defaults.withCredentials = true // 允许携带cookie
+xhr.defaults.baseURL = process.env.NODE_ENV === 'development' ? '/' : `/`; //还没配置生产环境的baseUrl
+xhr.defaults.withCredentials = true; // 允许携带cookie
 // 公共get
 export const get = (url, params = {}, config = {}) =>
- xhr({
-  url,
-  params,
-  method: 'get',
-  ...config,
- }).catch((err) => {
-  console.log(
-   `${err.status || ''}：${err.statusText || ''} ${err.message || ''}`
-  )
-  return Promise.reject(err)
- })
+  xhr({
+    url,
+    params,
+    method: 'get',
+    ...config,
+  }).catch((err) => {
+    console.log(
+      `${err.status || ''}：${err.statusText || ''} ${err.message || ''}`
+    );
+    return Promise.reject(err);
+  });
 
 // 公共post
 export const post = (url, data = {}, config = {}) =>
- xhr({
-  url,
-  data: data || {},
-  method: 'post',
-  ...config,
- }).catch((err) => {
-  console.log(
-   `${err.status || ''}：${err.statusText || ''} ${err.message || ''}`
-  )
-  return Promise.reject(err)
- })
+  xhr({
+    url,
+    data: data || {},
+    method: 'post',
+    ...config,
+  }).catch((err) => {
+    console.log(
+      `${err.status || ''}：${err.statusText || ''} ${err.message || ''}`
+    );
+    return Promise.reject(err);
+  });
 
 export const jsonPost = (url, data = {}, config = {}) =>
- xhr({
-  url,
-  data: data || {},
-  method: 'post',
-  headers: {
-   'Content-Type': 'application/json; charset=UTF-8',
-  },
-  transformRequest: (val) => JSON.stringify(val),
-  ...config,
- }).catch((err) => {
-  console.log(
-   `${err.status || ''}：${err.statusText || ''} ${err.message || ''}`
-  )
-  return Promise.reject(err)
- })
+  xhr({
+    url,
+    data: data || {},
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    transformRequest: (val) => JSON.stringify(val),
+    ...config,
+  }).catch((err) => {
+    console.log(
+      `${err.status || ''}：${err.statusText || ''} ${err.message || ''}`
+    );
+    return Promise.reject(err);
+  });
 
 // 公共put
 export const put = (url, data = {}, config = {}) =>
- xhr({
-  url,
-  data: data || {},
-  method: 'put',
-  ...config,
- }).catch((err) => {
-  console.log(
-   `${err.status || ''}：${err.statusText || ''} ${err.message || ''}`
-  )
-  return Promise.reject(err)
- })
+  xhr({
+    url,
+    data: data || {},
+    method: 'put',
+    ...config,
+  }).catch((err) => {
+    console.log(
+      `${err.status || ''}：${err.statusText || ''} ${err.message || ''}`
+    );
+    return Promise.reject(err);
+  });
 
 // 公共delete
 export const del = (url, params = {}) =>
- xhr({
-  url,
-  params,
-  method: 'delete',
- }).catch((err) => {
-  console.log(
-   `${err.status || ''}：${err.statusText || ''} ${err.message || ''}`
-  )
-  return Promise.reject(err)
- })
+  xhr({
+    url,
+    params,
+    method: 'delete',
+  }).catch((err) => {
+    console.log(
+      `${err.status || ''}：${err.statusText || ''} ${err.message || ''}`
+    );
+    return Promise.reject(err);
+  });
 ```
 
 接着在这个目录下，新建 user 目录,新建 index.js
 
 ```js
-'use strict'
-import { post } from '../index'
+'use strict';
+import { post } from '../index';
 
 //判断用户登录
-export const login = (requestParams) => post('/api/user/login', requestParams)
+export const login = (requestParams) => post('/api/user/login', requestParams);
 ```
 
 这样前后端基本就打通了，接下来就是大家熟悉的联调，看接口问题还是前端传的参数有问题环节。
@@ -984,3 +995,24 @@ export const login = (requestParams) => post('/api/user/login', requestParams)
 ## 最后附上项目地址
 
 https://github.com/yinjiangqaq/eggExample
+
+## 真的最后了
+
+起完这个项目架构之后，然后你再试试用 easywebpack-cli 这个脚手架起。会帮你做完前面大部分的事情，当然有人会问，为什么不一开始就说用 easywebpack 起。 用 easywebpack 起，我就扯不了这么多了
+```
+npm i easywebpack-cli -g
+
+
+如果在vscode，输入easy init 报错说该powershell不支持脚本
+
+首先确保你现在的vscode是有管理员权限的
+然后输入
+
+get-ExecutionPolicy
+
+get-ExecutionPolicy
+
+//最后
+easy init //初始化项目
+
+```
