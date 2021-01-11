@@ -470,3 +470,294 @@ https://www.cnblogs.com/ypppt/p/13149924.html
 
 解决方案：使用 content 为空的 div 来代替伪元素
 
+## js 动画和 CSS 动画的区别
+
+### js 动画(逐帧动画)
+
+首先，在 js 动画是逐帧动画，是在时间帧上逐帧绘制帧内容，由于是一帧一帧的话，所以他的可操作性很高，几乎可以完成任何你想要的动画形式。但是由于逐帧动画的帧序列内容不一样，会增加制作负担，且资源占有比较大。但它的优势也很明显：因为它相似与电影播放模式，很适合于表演很细腻的动画，如 3D 效果、人物或动物急剧转身等等效果。但是，如果帧率过低的话，会帧与帧之间的过渡很可能会不自然、不连贯。
+
+js 是单线程的脚本语言，当 js 在浏览器主线程运行时，主线程还有其他需要运行的 js 脚本、样式、计算、布局、交互等一系列任务，对其干扰线程可能出现阻塞，造成丢帧的情况。
+
+其次，js 在做动画的时候，其复杂度是高于 css3 的，需要考虑一些计算，操作等方便问题。
+
+但是正是由于 js 对动画的操作复杂度比较高，能对动画有一个**比较好的控制**，如开始、暂定、回放、终止、取帧等，可以很精确的做到。因此可以 js 可以通过操作 DOM 和 BOM 来做一些酷炫的动态效果，以及爆炸特效，且兼容性比较好。
+
+### css 动画(补帧动画)
+
+制作方法简单方便。只需确定第一帧和最后一帧的关键位置即可，两个关键帧之间帧的内容由 `Flash` 自动生成，不需要人为处理。当然也可以多次添加关键帧的位置。而且 CSS 动画可以开启硬件加速，用 GPU 来渲染，而不是 CPU(但是只限制在部分的效果)。
+
+transition 属性用的是首尾两帧，animation 用的是关键帧
+
+具体二者的区别可以看下面这篇
+https://blog.csdn.net/CCCCt1/article/details/82743631?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param
+
+### transition 栗子 opacity: 0 和 1
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>动态按钮用transition来过渡</title>
+    <style>
+      .button {
+        border: none;
+        background-color: red;
+        color: white;
+        padding: 15px 20px;
+        font-size: 15px;
+        cursor: pointer;
+        border-radius: 5px;
+        width: 150px;
+      }
+
+      .button span {
+        position: relative;
+        display: inline-block;
+        transition: 0.5s;
+      }
+
+      .button span::after {
+        content: '»';
+        opacity: 0;
+        right: -20px;
+        position: absolute;
+      }
+
+      .button:hover span {
+        padding-right: 25px;
+      }
+
+      .button:hover span:after {
+        opacity: 1;
+        right: 0;
+        transition: 0.5s;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button class="button"><span>我是按钮</span></button>
+  </body>
+</html>
+```
+
+### animation 栗子
+
+- 动画是一帧一帧的绘制的
+- 可绘制复杂动画
+- 需要配合@keyframes 来使用
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>变色</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        background: red;
+        animation: myfirst 3s;
+      }
+
+      @keyframes myfirst {
+        0% {
+          background: red;
+        }
+
+        25% {
+          background: yellow;
+        }
+
+        50% {
+          background: blue;
+        }
+
+        100% {
+          background: green;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div></div>
+  </body>
+</html>
+
+​ ​
+```
+
+因为只设置几个关键帧的位置，所以在进行动画控制的时候时比较弱的。不能够在半路暂停动画，或者在动画过程中不能对其进行一些操作等。
+
+css3 在实现一些简单的滑动，翻转等特效的时候会很方便，但是想要做到一些酷炫的效果的时候，其操作往往可能会比 js 操作有更多的冗余。
+
+css3 在做动画的时候，浏览器可以对其进行一些优化，会比 js 使用更少的占用 cpu 资源，但是效果足够流畅。
+
+## 从打字机效果的 N 种实现看 JS 定时器机制和前端动画效果
+
+在 Web 应用中，实现动画效果的方法比较多，`JavaScript` 中可以通过定时器 `setTimeout` 来实现，css3 可以使用 `transition` 和 `animation` 来实现，html5 中的 `canvas` 也可以实现。除此之外，html5 还提供一个专门用于请求动画的 API，即 `requestAnimationFrame（rAF）`，顾名思义就是 “请求动画帧”
+
+### setTimeout() 记得定时器要清除
+
+`setTimeout` 版本的实现很简单，只需把要展示的文本进行切割，使用定时器不断向 `DOM` 元素里追加文字即可，同时，使用`::after` 伪元素在 DOM 元素后面产生光标闪烁的效果。代码和效果图如下：
+
+```
+<!-- 样式 -->
+<style type="text/css">
+  /* 设置容器样式 */
+  #content {
+    height: 400px;
+    padding: 10px;
+    font-size: 28px;
+    border-radius: 20px;
+    background-color: antiquewhite;
+  }
+  /* 产生光标闪烁的效果 */
+  #content::after{
+      content: '|';
+      color:darkgray;
+      animation: blink 1s infinite;
+  }
+  @keyframes blink{
+      from{
+          opacity: 0;
+      }
+      to{
+          opacity: 1;
+      }
+  }
+</style>
+
+<body>
+  <div id='content'></div>
+  <script>
+    (function () {
+    // 获取容器
+    const container = document.getElementById('content')
+    // 把需要展示的全部文字进行切割
+    const data = '最简单的打字机效果实现'.split('')
+    // 需要追加到容器中的文字下标
+    let index = 0
+    function writing() {
+      if (index < data.length) {
+        // 追加文字
+        container.innerHTML += data[index ++]
+        let timer = setTimeout(writing, 200)
+        console.log(timer) // 这里会依次打印 1 2 3 4 5 6 7 8 9 10
+      }
+    }
+    writing()
+  })();
+  </script>
+</body>
+```
+
+### setInterval() 同样记得清除定时器
+
+实现原理跟 setTimeout 差不多，可以当成上面的 setTimeout 是 setInterval 的实现方法
+
+```
+(function () {
+  // 获取容器
+  const container = document.getElementById('content')
+  // 把需要展示的全部文字进行切割
+  const data = '最简单的打字机效果实现'.split('')
+  // 需要追加到容器中的文字下标
+  let index = 0
+  let timer = null
+  function writing() {
+    if (index < data.length) {
+      // 追加文字
+      container.innerHTML += data[index ++]
+      // 没错，也可以通过，clearTimeout取消setInterval的执行
+      // index === 4 && clearTimeout(timer)
+    } else {
+      clearInterval(timer)
+    }
+    console.log(timer) // 这里会打印出 1 1 1 1 1 ...
+  }
+  // 使用 setInterval 时，结束后不要忘记进行 clearInterval
+  timer = setInterval(writing, 200)
+})();
+
+```
+
+### requestAnimationFrame()
+
+在动画的实现上，`requestAnimationFrame` 比起 `setTimeout` 和 `setInterval` 来无疑更具优势。我们先看看打字机效果的 `requestAnimationFrame` 实现：
+
+```js
+(function () {
+  const container = document.getElementById('content');
+  const data = '与 setTimeout 相比，requestAnimationFrame 最大的优势是 由系统来决定回调函数的执行时机。具体一点讲就是，系统每次绘制之前会主动调用 requestAnimationFrame 中的回调函数，如果系统绘制率是 60Hz，那么回调函数就每16.7ms 被执行一次，如果绘制频率是75Hz，那么这个间隔时间就变成了 1000/75=13.3ms。换句话说就是，requestAnimationFrame 的执行步伐跟着系统的绘制频率走。它能保证回调函数在屏幕每一次的绘制间隔中只被执行一次，这样就不会引起丢帧现象，也不会导致动画出现卡顿的问题。'.split(
+    ''
+  );
+  let index = 0;
+  function writing() {
+    if (index < data.length) {
+      container.innerHTML += data[index++];
+      requestAnimationFrame(writing);
+    }
+  }
+  writing();
+})();
+```
+
+与 `setTimeout` 相比，`requestAnimationFrame` 最大的优势是由**系统来决定回调函数的执行时机**。具体一点讲，如果屏幕刷新率是 60Hz,那么回调函数就每 16.7ms 被执行一次，如果刷新率是 75Hz，那么这个时间间隔就变成了 1000/75=13.3ms，换句话说就是，requestAnimationFrame 的步伐跟着系统的刷新步伐走。**它能保证回调函数在屏幕每一次的刷新间隔中只被执行一次，这样就不会引起丢帧现象，也不会导致动画出现卡顿的问题**。
+
+联系 setTimeout 的概念，**一定时间后**执行对应的回调。可能前面有阻塞导致不一定在原定的时间点执行。所以会出现卡帧现象
+
+### CSS3
+
+除了以上三种 JS 方法之外，其实只用 CSS 我们也可以实现打字机效果。大概思路是借助 CSS3 的@keyframes 来不断改变包含文字的容器的宽度，超出容器部分的文字隐藏不展示。
+
+```
+<style>
+  div {
+    font-size: 20px;
+    /* 初始宽度为0 */
+    width: 0;
+    height: 30px;
+    border-right: 1px solid darkgray;
+    /*
+    Steps(<number_of_steps>，<direction>)
+    steps接收两个参数：第一个参数指定动画分割的段数；第二个参数可选，接受 start和 end两个值，指定在每个间隔的起点或是终点发生阶跃变化，默认为 end。
+    */
+    animation: write 4s steps(14) forwards,
+      blink 0.5s steps(1) infinite;
+      overflow: hidden;
+  }
+
+  @keyframes write {
+    0% {
+      width: 0;
+    }
+
+    100% {
+      width: 280px;
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      /* transparent是全透明黑色(black)的速记法，即一个类似rgba(0,0,0,0)这样的值。 */
+      border-color: transparent; /* #00000000 */
+    }
+  }
+</style>
+
+<body>
+  <div>
+    大江东去浪淘尽，千古风流人物
+  </div>
+</body>
+```
+
+### 参考
+
+https://segmentfault.com/a/1190000038915675
