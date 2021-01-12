@@ -101,3 +101,8 @@ git push origin :old_branch //删除远程老分支
 git push -u origin new_branch  or git push --set-upstream origin new_branch //把本地新改名的分支推到远程
 
 ```
+
+## git本地合并代码有冲突(还没提交到远程)怎么撤销合并
+```
+$ git merge --abort
+```

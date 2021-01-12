@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>水平垂直居中</title>
+    <style>
+      .center-layout {
+        position: relative;
+        height: 400px;
+        width: 400px;
+        background-color: yellow;
+      }
+      .center-layout div {
+        position: absolute;
+        height: 100px;
+        width: 100px;
+        /* 偏移父元素的一半 */
+        top: 50%;
+        left: 50%;
+        /* 向左向上偏移 子元素宽高的一半,一种使用margin来偏移，一种使用CSS3的transform来偏移 */
+        /* margin: -50px 0 0 -50px; */
+        transform: translate(-50%, -50%);
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center-layout">
+      <div></div>
+    </div>
+  </body>
+</html>
