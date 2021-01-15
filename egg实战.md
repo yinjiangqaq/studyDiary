@@ -538,6 +538,7 @@ class AppController extends Controller {
       await this.ctx.renderClient(
         'app.js',
         {
+          //这一部分是注入到前端页面的全局变量中，前端可以通过window.__INITIAL_STATE__访问得到
           url: this.ctx.url,
           env: this.ctx.app.config.env,
         },
@@ -644,8 +645,9 @@ COMMENT='eggTest用户信息';
  */
 ```
 
-然后我们需要上 MySQL，我这边推荐使用 `DBeaver` 客户端，在起项目的时候，我们已经新建了名为`eggTest`的数据库。接下来我们需要建一个 user 表，具体的 SQL 语句上面已经写好了,照着复制粘贴就行了。
+然后我们需要上 MySQL，我这边推荐使用 `DBeaver` 客户端，在起项目的时候，我们已经新建了名为`eggTest`的数据库。接下来我们需要建一个 user 表，具体的 SQL 语句上面已经写好了,照着复制粘贴就行了。只需要打开 `Dbeaver` 的 `SQL console`，就可以针对我们选中的表做对应的 SQL 操作
 
+![dbeaver.png](./assets/imgs/dbeaver.png)
 ### 写接口 controller 还有 service
 
 controller 和 service 具体的区别可以看 egg.js 的官方文档,简单点说就是，controller 是接口，而具体涉及到操作表的事情交给 service 来做，所以 service 层相对来更加抽象，更加可复用一点。
@@ -999,6 +1001,7 @@ https://github.com/yinjiangqaq/eggExample
 ## 真的最后了
 
 起完这个项目架构之后，然后你再试试用 easywebpack-cli 这个脚手架起。会帮你做完前面大部分的事情，当然有人会问，为什么不一开始就说用 easywebpack 起。 用 easywebpack 起，我就扯不了这么多了
+
 ```
 npm i easywebpack-cli -g
 
