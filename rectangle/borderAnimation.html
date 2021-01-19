@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>边框动画效果</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+      }
+
+      :root {
+        /* CSS3里面的变量 */
+        --borderColor: #03a9f3;
+      }
+
+      div {
+        position: relative;
+        height: 60px;
+        width: 140px;
+        margin: auto;
+        border: 1px solid var(--borderColor);
+        cursor: pointer;
+      }
+      div::before {
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        content: '';
+        top: -5px;
+        left: -5px;
+        border-top: 1px solid var(--borderColor);
+        border-left: 1px solid var(--borderColor);
+        transition: 0.3s ease-in-out;
+      }
+      div::after {
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        content: '';
+        bottom: -5px;
+        right: -5px;
+        border-bottom: 1px solid var(--borderColor);
+        border-right: 1px solid var(--borderColor);
+        transition: 0.3s ease-in-out;
+      }
+      div:hover::before {
+        height: calc(100% + 9px);
+        width: calc(100% + 9px);
+      }
+      div:hover::after {
+        height: calc(100% + 9px);
+        width: calc(100% + 9px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="border-radius"></div>
+  </body>
+</html>
