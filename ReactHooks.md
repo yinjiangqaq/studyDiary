@@ -334,3 +334,34 @@ export default function () {
   );
 }
 ```
+
+## antd 中，form 表单的 input 组件如果改造了，像在 input 组件里面加按钮，怎么解决 form 实例读不到 input 输入的值，最终那个字段一直是 undefined
+
+这种情况，需要在外层加一个 row 和 col,才能让 antd 识别到这个字段，并且读到 input 中的值
+
+```
+
+     <Form.Item
+            name="verifycode"
+            rules={[
+              {
+                required: true,
+                message: '请输入邮箱验证码',
+              },
+            ]}
+          >
+            <Row>
+              <Col style={{ width: `100%` }}>
+                <Input placeholder="请输入邮箱验证码" size="large" />
+                <Button
+                  type="default"
+                  disabled={!checkEmail}
+                  className="verifyCodeButton"
+                  onClick={getVerifyCode}
+                >
+                  获取邮箱验证码
+                </Button>
+              </Col>
+            </Row>
+          </Form.Item>
+```
