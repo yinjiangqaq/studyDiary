@@ -102,7 +102,7 @@ function useFriendStatusBoolean(friendID) {
   function handleStatusChange(status) {
     setIsOnline(status.isOnline);
   }
-
+  //首次渲染进行的
   useEffect(() => {
     ChatAPI.subscribeToFriendStatus(friendID, handleStatusChange);
     return () => {
@@ -224,6 +224,43 @@ redux 规定：**一个 state 对应一个 view**，只要 state 相同，view �
 - reducer
 
   当 `dispatch` 之后，getState 的状态发生了改变， `Reducer` 就是用来**修改状态**的。**Reducer 是一个函数，它接受 Action 和当前 State 作为参数，返回一个新的 State。**
+
+### 如何做 store 的全局绑定
+
+首先我们能想到的是在根文件 index.js 中 createStore()创建一个 store 对象，然后绑定在全局上下文里面。
+
+具体如何实现呢
+
+```js
+//./index.js
+// import React from 'react';
+import ReactDOM from "react-dom";
+import App from "./App";
+import React from "react";
+import makeStore from "./store/index";
+import { StoreContext } from "redux-react-hook"; //为了全局保存store
+
+const store = makeStore(); //创建store对象，然后StoreContext全局保存
+ReactDOM.render(
+  <StoreContext.Provider value={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </StoreContext.Provider>,
+  document.getElementById("root")
+);
+```
+
+其他组件如何获取到全局的 store 对象呢
+
+```js
+//baseHeader.js
+import React, { useEffect, useCallback, useContext, useState } from "react";
+
+import { useDispatch, useMappedState, StoreContext } from "redux-react-hook";
+
+const store = useContext(StoreContext); //拿到全局的store
+```
 
 ### redux 总结
 
