@@ -108,7 +108,7 @@ function useFriendStatusBoolean(friendID) {
     return () => {
       ChatAPI.unsubscribeFromFriendStatus(friendID, handleStatusChange);
     };
-  });
+  }, []);//后面加[]只是为了执行一次
 
   return isOnline; //返回是否在线的boolean值
 }

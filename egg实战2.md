@@ -77,31 +77,31 @@
 然后因为项目结构重构导致的文件路径更改，所以我们的 alias.js 文件也要做相应的更改
 
 ```js
-'use strict';
+"use strict";
 
-const path = require('path');
-const fs = require('fs');
+const path = require("path");
+const fs = require("fs");
 const rootPath = fs.realpathSync(process.cwd()); //项目的根目录
 const resolve = (relativePath) => path.resolve(rootPath, relativePath);
-const commonPath = resolve('app/web/common'); //公共目录
+const commonPath = resolve("app/web/common"); //公共目录
 // const projectPath = resolve('app/web/page/app'); //旧版本单页面的 子项目，前端项目的根目录
-const projectPath = resolve('app/web'); //子项目，前端项目的根目录
-const pcPath = resolve('app/web/page/pc'); // PC项目根目录
-const h5Path = resolve('app/web/page/h5'); // h5项目根目录
+const projectPath = resolve("app/web"); //子项目，前端项目的根目录
+const pcPath = resolve("app/web/page/pc"); // PC项目根目录
+const h5Path = resolve("app/web/page/h5"); // h5项目根目录
 
 module.exports = {
   COMMON: commonPath,
-  '@': projectPath, // 子项目根目录
+  "@": projectPath, // 子项目根目录
 
   /**废弃的旧版本的单页面的一些通用路径 */
   // '@router': path.resolve(projectPath, 'router'), // 子项目组件库
   //'@store': path.resolve(projectPath, 'store'), // 子项目vuex,双端的状态应该各自维护一份
   // "@views": path.resolve(projectPath, "views"), // 子项目页面
-  '@assets': path.resolve(projectPath, 'assets'), //子项目公共资源,双端公用的一些公共资源
-  '@services': path.resolve(projectPath, 'services'), // 子项目接口api库,因为请求的逻辑是双端共用的
+  "@assets": path.resolve(projectPath, "assets"), //子项目公共资源,双端公用的一些公共资源
+  "@services": path.resolve(projectPath, "services"), // 子项目接口api库,因为请求的逻辑是双端共用的
 
-  '@pc': pcPath, //PC项目根目录
-  '@h5': h5Path, //h5项目根目录
+  "@pc": pcPath, //PC项目根目录
+  "@h5": h5Path, //h5项目根目录
 };
 ```
 
@@ -114,46 +114,46 @@ module.exports = {
 在`controller/index.js`
 
 ```js
-'use strict';
+"use strict";
 
-const Controller = require('egg').Controller;
-const path = require('path');
+const Controller = require("egg").Controller;
+const path = require("path");
 class AppController extends Controller {
   async render(ctx) {
     //客户端渲染
     const { app } = this;
-    const { mode = 'csr' } = ctx.query;
-    if (mode === 'csr') {
+    const { mode = "csr" } = ctx.query;
+    if (mode === "csr") {
       this.ctx.logger.info(`AppController, ctx.url is ${this.ctx.request.url}`);
       // renderClient 前端渲染，Node层只做 layout.html和资源依赖组装，渲染交给前端渲染。与服务端渲染的差别你可以通过查看运行后页面源代码即可明白两者之间的差异
       // app.js 对应 webpack entry 的 app, 构建后文件存在 app/view 目录
 
       //在流量进入node层之后，根据请求头的user-agent，来区分设备类型，然后进入渲染不同的入口文件
       const device = this.ctx.helper.checkDevice(
-        ctx.request.headers['user-agent']
+        ctx.request.headers["user-agent"]
       );
       if (device.isPhone || device.isAndroid || device.isTablet) {
         await this.ctx.renderClient(
-          'h5.js',
+          "h5.js",
           {
             url: this.ctx.url,
             env: this.ctx.app.config.env,
           },
-          { layout: path.join(app.baseDir, 'app/web/view/layout.html') }
+          { layout: path.join(app.baseDir, "app/web/view/layout.html") }
         );
       } else {
         await this.ctx.renderClient(
-          'pc.js',
+          "pc.js",
           {
             url: this.ctx.url,
             env: this.ctx.app.config.env,
           },
-          { layout: path.join(app.baseDir, 'app/web/view/layout.html') }
+          { layout: path.join(app.baseDir, "app/web/view/layout.html") }
         );
       }
     } else {
       //服务端渲染
-      await this.ctx.render('app.js', { url: this.ctx.url });
+      await this.ctx.render("app.js", { url: this.ctx.url });
     }
   }
 }
@@ -164,7 +164,7 @@ module.exports = AppController;
 至于`checkDevice`的方法，我们的定义在 `extend/helper.js`
 
 ```js
-'use strict';
+"use strict";
 
 module.exports = {
   /**
@@ -195,3 +195,32 @@ module.exports = {
 ## 运行项目
 
 同样是 `npm run dev` 运行项目。用谷歌浏览器，切换不同的终端，我们会发现，浏览器加载的是不同的入口文件，PC 端加载 pc.js，移动端加载 h5.js。这样大概的项目移动端适配就完成了
+
+## 后续问题
+
+1. 如果 egg 服务端有需要发请求给额外的服务的话，一般是在服务端采用 curl 的方式:
+
+```js
+async showapi() {
+    const { ctx } = this;
+    // 获取post 请求参数
+    let count = ctx.request.body.count;
+    const url = 'https://route.showapi.com/1211-1';
+    const result = await ctx.curl(url,{
+      method: 'POST', // 设置请求方式 默认是GET
+      dataType: 'json',
+      contentType: 'json', // 默认是 form,把传过去的内容转化为json
+      data: {
+        count: count,
+        showapi_appid: '3****1',
+        showapi_sign: 'a**********************4'
+      }
+    });
+    ctx.body = {
+      result: result
+    }
+  };
+
+  //router.js
+  router.post('/httpclient/showapi', controller.httpClient.showapi);
+```
