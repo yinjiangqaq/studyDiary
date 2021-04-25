@@ -268,6 +268,49 @@ flex 布局的默认值是 `0 1 auto`
 
 在层叠上下文中，子元素同样也按照上面解释的规则进行层叠。 重要的是，其子级层叠上下文的 z-index 值只在父级中才有意义。子级层叠上下文被自动视为父级层叠上下文的一个独立单元。
 
+### position:fixed
+
+position:fixed 是对于浏览器窗口定位的，要实现相当于父元素定位，可以这样：
+
+不设置 fixed 元素的 top，bottom，left，right，只设置 **margin 来实现**。
+
+这种方法本质上 fixed 元素还是相当于**窗口定位的**，实现效果上是相对于父元素定位。
+
+此外，position:fixed 元素会受到父元素的影响，而出现不能以窗口进行定位：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>测试fixed</title>
+    <style>
+      .parent {
+        position: relative;
+        height: 300px;
+        width: 300px;
+        background: greenyellow;
+      }
+      .son {
+        position: fixed;
+        height: 100px;
+        width: 100px;
+        margin-left: 10px;
+        /* 看起来像是相对于父元素定位，但是实质上还是相对于视图窗口定位 */
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent">
+      <div class="son"></div>
+    </div>
+  </body>
+</html>
+```
+
 ## vue 引入 css 文件
 
 ```
@@ -451,7 +494,7 @@ https://www.cnblogs.com/ypppt/p/13149924.html
 }
 
 .anim:before {
-  content: '';
+  content: "";
   width: 3rem;
   height: 3rem;
   border-radius: 3rem;
@@ -520,7 +563,7 @@ https://blog.csdn.net/CCCCt1/article/details/82743631?utm_medium=distribute.pc_r
       }
 
       .button span::after {
-        content: '»';
+        content: "»";
         opacity: 0;
         right: -20px;
         position: absolute;
@@ -693,9 +736,9 @@ css3 在做动画的时候，浏览器可以对其进行一些优化，会比 js
 
 ```js
 (function () {
-  const container = document.getElementById('content');
-  const data = '与 setTimeout 相比，requestAnimationFrame 最大的优势是 由系统来决定回调函数的执行时机。具体一点讲就是，系统每次绘制之前会主动调用 requestAnimationFrame 中的回调函数，如果系统绘制率是 60Hz，那么回调函数就每16.7ms 被执行一次，如果绘制频率是75Hz，那么这个间隔时间就变成了 1000/75=13.3ms。换句话说就是，requestAnimationFrame 的执行步伐跟着系统的绘制频率走。它能保证回调函数在屏幕每一次的绘制间隔中只被执行一次，这样就不会引起丢帧现象，也不会导致动画出现卡顿的问题。'.split(
-    ''
+  const container = document.getElementById("content");
+  const data = "与 setTimeout 相比，requestAnimationFrame 最大的优势是 由系统来决定回调函数的执行时机。具体一点讲就是，系统每次绘制之前会主动调用 requestAnimationFrame 中的回调函数，如果系统绘制率是 60Hz，那么回调函数就每16.7ms 被执行一次，如果绘制频率是75Hz，那么这个间隔时间就变成了 1000/75=13.3ms。换句话说就是，requestAnimationFrame 的执行步伐跟着系统的绘制频率走。它能保证回调函数在屏幕每一次的绘制间隔中只被执行一次，这样就不会引起丢帧现象，也不会导致动画出现卡顿的问题。".split(
+    ""
   );
   let index = 0;
   function writing() {
@@ -765,8 +808,8 @@ https://segmentfault.com/a/1190000038915675
 ## 如何解决滚动条占用位置，导致页面经常抖动的问题
 
 ```css
-{
+ {
   /* 计算属性 100vw是视窗宽度，100%是内容宽度,剩下的给padding-right */
- padding-right: calc(100vw-100%)
+  padding-right: calc(100vw-100%);
 }
 ```
