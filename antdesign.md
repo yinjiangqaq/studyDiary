@@ -60,11 +60,16 @@ const onFinish = (values) => {
   //需要重新复制一个对象
   let inputValues = { ...values };
   if (!!!values.time) {
-    inputValues.time = [0, 9999999999];
+    inputValues.time = [0, 9999999999]; //赋值了新的引用,避免操作之前的值
   } else {
     inputValues.time = [0, 9999999999];
     inputValues.time[0] = parseInt(+values.time[0] / 1000);
     inputValues.time[1] = parseInt(+values.time[1] / 1000);
+    //也可以如下写法，重新更改新对象的引用,不操作老对象的引用
+    // inputValues.time = [
+    //   parseInt(+values.time[0] / 1000),
+    //   parseInt(+values.time[1] / 1000),
+    // ];
   }
 
   console.log("Success:", inputValues);
