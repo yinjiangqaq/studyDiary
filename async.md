@@ -393,6 +393,7 @@ class myPromise {
       }
 
       if (this.status === REJECTED) {
+          //setTimeout的异步操作，导致我们可以拿到 promise2
         setTimeout(() => {
           try {
             let x = onRejected(this.reason);
