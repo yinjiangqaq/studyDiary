@@ -219,7 +219,7 @@
 }
 ```
 
-## flex 各个属性
+## flex 各个属性 （flex 布局永遠嘀神）
 
 https://segmentfault.com/a/1190000017362497
 
@@ -812,4 +812,83 @@ https://segmentfault.com/a/1190000038915675
   /* 计算属性 100vw是视窗宽度，100%是内容宽度,剩下的给padding-right */
   padding-right: calc(100vw-100%);
 }
+```
+
+
+## sass 中的 & 符号什么是意思
+
+& 符号代表的是上一级的选择器，举个例子
+
+```
+.el-row{
+  margin-bottom: 20px;
+  & > div:nth-child(1){
+    margin-top:20px;//这里的& 代表的是.el-row这个选择器，整个的意思是在类名为.el-row元素下的第一个div元素。
+  }
+}
+
+```
+
+## css 中图片占满容器的方法
+
+```
+background: url();
+background-size:cover;
+background-repeat:no-repeat;
+```
+
+## css 中颜色渐变的方式
+```
+linear-gradient(to bottom, #888888 70% , #666666 100%)
+```
+
+## css 中遮罩层的设计
+
+原理是，底层一张背景图片，然后在底层背景图片上再蒙上一层具有背景颜色的遮罩层，但是这个遮罩层 通过 opacity这个属性来设置透明度，实现透明遮罩层的效果。
+
+```
+//底层
+export const LoginTopContainer =styled.div`
+height:${calcVH(506)}vh;
+width:100vw;
+background: url(${loginImg}) no-repeat;
+background-size:cover;
+`
+
+//遮罩层
+export const LoginBottomContainer =styled.div`
+position:absolute;
+height:${calcVH(506)}vh;
+width:100vw;
+opacity:0.95;
+background:linear-gradient(120deg,rgba(133, 96, 169, 0.7),rgba(133, 96, 169, 1)) ;
+`
+
+```
+
+## 原生的input 怎么去掉输入框选中之后的高亮效果
+
+```
+input:focus{ outline: none}
+```
+
+怎么去掉 自动填充
+
+```
+<input autoComplete="off"></input>
+```
+
+## css 实现单行文本省略
+
+```
+text-overflow: ellipsis;
+white-space: no-wrap;
+```
+## css 实现多行文本省略
+
+```
+   display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 ```

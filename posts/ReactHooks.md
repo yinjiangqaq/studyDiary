@@ -429,3 +429,56 @@ export default function () {
             </Row>
           </Form.Item>
 ```
+
+## styled-components 很强大， styled-components创建的组件可以传props
+https://www.cnblogs.com/suihang/p/9971890.html
+
+```ts
+import React, { Component,Fragment} from 'react';
+//引入styled-components
+import styled from 'styled-components'
+
+//props传递参数（根据参数的值设置样式）
+// 有传递值字体会变为红色
+// 无传递值会默认取蓝色
+interface IButtonProps{
+  inputColor: string;
+}
+const Button = styled.button`
+  padding: 0.5em;
+  margin: 0.5em;
+  color: ${ (props:IButtonProps) => props.inputColor || "blue" };
+  background: papayawhip;
+  border: none;
+  border-radius: 3px;
+`
+
+class App extends Component {
+  render() {
+    return (
+    <Fragment>
+        <Button inputColor="red">红牛啊</Button>
+    </Fragment>
+    )
+  }
+}
+export default App;
+```
+
+## useEffect hook 里面的函数参数不能 写async 声明
+至于需要在useEffect 里面执行异步请求的，可以采取如下的方式，通过在里面再包一层立即执行函数，对这个立即执行函数进行异步操作
+```
+//初始化操作
+    useEffect( ()=>{
+      (
+        async ()=>{
+          let token = getToken('token');
+          let res = await baseGet({},'user',{'x-blackcat-token':token})
+          console.log(res)//拿到用户信息
+        }
+      )()
+  
+    // let {id ,...extraDetail}=res
+    // setUserDetail(res)
+  },[])
+```
