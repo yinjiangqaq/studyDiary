@@ -892,3 +892,11 @@ white-space: no-wrap;
   -webkit-line-clamp: 3;
   overflow: hidden;
 ```
+
+## CSS sticky布局
+```
+position: absolute;
+top: 20px;
+//通过滑动，最后会黏在距离顶部20px的地方，也是会脱离文档流的
+```
+

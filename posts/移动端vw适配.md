@@ -111,3 +111,15 @@ https://blog.csdn.net/yutao_1234/article/details/80031655
 ## chrome 字体大小受限于 12PX 的问题
 
 在开发移动端适配的网页过程中，会发现 chrome 显示不了 12px 以下的字体大小。是因为 chrome 浏览器为了文字观感的原因，限制了文字大小不能小于 12px, 小于 12px 的文字不能显示其对应的大小
+
+## 移动端项目经常涉及到的 无限滚动和虚拟列表的实现
+
+https://juejin.cn/post/6844903944297136135#heading-3
+
+
+## javascript中控制滑动的方法
+
+```
+htmlElement.scrollIntoView()
+scrollTo()
+```
