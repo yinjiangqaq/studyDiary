@@ -106,3 +106,140 @@ git push -u origin new_branch  or git push --set-upstream origin new_branch //�
 ```
 $ git merge --abort
 ```
+
+
+## 将远程的分支拉到本地
+
+```
+git fetch origin branch name : local branch name
+
+git checkout local branch name
+```
+
+
+## 怎么查看该分支的来源
+
+```
+git reflog show childBranchName
+```
+
+## 当feature分支落后于master，也就是master分支有更新的commit的时候，怎么让feature分支跟master分支对齐
+
+```
+1. feature $: git merge master
+
+//然后觉得合并的冲突。但是这样有一个缺点，就是会把其他人推到master的commit，也一起带过去，其实这些commit并不是你这个分支的修改，对于你这个分支来说是无效的commit记录。
+
+2. git rebase master （本地的master，注意拉到最新）
+
+```
+
+## git rebase
+> 这是一个拿来合并多次提交记录的命令,可以让我们的提交记录更简洁
+
+### 场景一：合并多次提交记录
+```
+git rebase -i HEAD~4 //合并最近的四次提交记录
+```
+这时候，会自动进入到vi编辑模式
+
+```
+s cacc52da add: qrcode
+s f072ef48 update: indexeddb hack
+s 4e84901a feat: add indexedDB floder
+s 8f33126c feat: add test2.js
+
+# Rebase 5f2452b2..8f33126c onto 5f2452b2 (4 commands)
+#
+# Commands:
+# p, pick = use commit
+# r, reword = use commit, but edit the commit message
+# e, edit = use commit, but stop for amending
+# s, squash = use commit, but meld into previous commit
+# f, fixup = like "squash", but discard this commit's log message
+# x, exec = run command (the rest of the line) using shell
+# d, drop = remove commit
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+```
+
+有几个命令需要注意一下
+```
+p, pick = use commit
+r, reword = use commit, but edit the commit message
+e, edit = use commit, but stop for amending
+s, squash = use commit, but meld into previous commit
+f, fixup = like “squash”, but discard this commit’s log message
+x, exec = run command (the rest of the line) using shell
+d, drop = remove commit
+```
+按照上面的命令来修改你的提交记录
+```
+s cacc52da add: qrcode
+s f072ef48 update: indexeddb hack
+s 4e84901a feat: add indexedDB floder
+p 8f33126c feat: add test2.js
+```
+
+如果保存的时候，你碰到了这个错误：
+```
+error: cannot 'squash' without a previous commit
+```
+
+> 注意不要合并先前提交的东西，也就是已经提交远程分支的纪录。
+
+
+如果你异常退出了 vi 窗口，不要紧张：
+
+```
+git rebase --edit-todo
+```
+
+这时候会一直处在这个编辑的模式里，我们可以回去继续编辑。修改完保存一下
+
+```
+git rebase --continue
+```
+查看结果
+
+```
+git log
+```
+
+### 分支合并
+
+```
+git:(master) git checkout -b feature1 //从master切出来功能分支
+
+//这时候，你的同事完成了一次 hotfix，并合并入了 master 分支，此时 master 已经领先于你的 feature1 分支了,所以可以使用rebase
+
+git:(feature1) git rebase master//切换到功能分支，执行rebase命令
+
+```
+在这里，rebase做的操作是：
+
+首先，git 会把 feature1 分支里面的每个 commit 取消掉；
+
+其次，把上面的操作临时保存成 patch 文件，存在 .git/rebase 目录下；
+
+然后，把 feature1 分支更新到最新的 master 分支；
+
+最后，把上面保存的 patch 文件应用到 feature1 分支上；
+
+在 rebase 的过程中，也许会出现冲突 conflict。在这种情况，git 会停止 rebase 并会让你去解决冲突。在解决完冲突后，用 git add 命令去更新这些内容。
+
+
+```
+git rebase --continue  //注意，你无需执行 git-commit，只要执行 continue,这样 git 会继续应用余下的 patch 补丁文件。
+```
+
+在任何时候，我们都可以用 --abort 参数来终止 rebase 的行动，并且分支会回到 rebase 开始前的状态。
+
+```
+git rebase —abort
+```
