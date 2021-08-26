@@ -211,6 +211,37 @@ git rebase --continue
 git log
 ```
 
+#### 具体的操作步骤
+
+```
+git rebase -i HEAD~5
+```
+
+把最前面的五个commit  合并为一个,sqash是 合并到上一个更改，然后保留commit信息
+,fix 是合并到上一个更改，但是不保留commit信息,pick是保留此次更改
+
+
+所以进行完 git rebase -i HEAD~5 命令之后，会出现。
+```
+pick commit 1
+pick commit 2
+pick commit 3
+pick commit 4
+pick commit 5
+```
+
+这样的操作界面，一般commit 5就是你最新的一个commit，现在你需要把这五个commit合并为一个，你需要向上合并，pick commit 1，然后其他四个commit 的 `pick` 都改为f,不保留 commit信息，向上合并
+```
+pick commit 1
+f commit 2
+f commit 3
+pick commit 4
+f commit 5
+```
+如果最后是这样的话，rebase就会保留两个commit记录，一个是commit 1，合并了2和3的，一个是commit 4 合并了5的
+
+
+
 ### 分支合并
 
 ```
