@@ -238,7 +238,7 @@ f commit 3
 pick commit 4
 f commit 5
 ```
-如果最后是这样的话，rebase就会保留两个commit记录，一个是commit 1，合并了2和3的，一个是commit 4 合并了5的
+如果最后是这样的话，rebase就会保留两个commit记录，一个是commit 1，合并了2和3的，一个是commit 4 合并了5的。 而f 和 s的区别是，f是会丢弃commit记录，而s是会把commit记录合并到上一个更改中。
 
 
 
@@ -274,3 +274,7 @@ git rebase --continue  //注意，你无需执行 git-commit，只要执行 cont
 ```
 git rebase —abort
 ```
+
+## git rebase 成功之后，还没push --force到远程时，如何撤销git rebase。
+
+此时应该执行 `git reflog `命令，然后查看到远程的commit记录，执行`git reset --hard origin commit号`回到执行git rebase之前的位置。
