@@ -567,11 +567,11 @@ useEffect(() => {
 
 ```js
 useEffect(() => {
-  const subscription = props.source.subscribe();
+  const subscription = props.source.subscribe();//这边建立了定时器，订阅事件
   return () => {
-    subscription.unsubscribe();
+    subscription.unsubscribe();//需要return一个函数，取消订阅这个事件，取消订阅这个定时器
   };
-}, [props.source]);
+}, [props.source]);//依赖项
 ```
 
 此时，只有当 props.source 改变后才会重新创建订阅。
