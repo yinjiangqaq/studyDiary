@@ -241,6 +241,12 @@ f commit 5
 如果最后是这样的话，rebase就会保留两个commit记录，一个是commit 1，合并了2和3的，一个是commit 4 合并了5的。 而f 和 s的区别是，f是会丢弃commit记录，而s是会把commit记录合并到上一个更改中。
 
 
+如果在rebase过程中，因为commit记录太多的话，手动把pick改成squash的话，很困难，可以采用 vi 全局配置。
+
+```
+:%s/pick/squash/g（等同于 :g/pick/s//squash/g） 替换每一行中所有 pick 为 squash
+```
+
 
 ### 分支合并
 
