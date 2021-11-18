@@ -284,3 +284,8 @@ git rebase —abort
 ## git rebase 成功之后，还没push --force到远程时，如何撤销git rebase。
 
 此时应该执行 `git reflog `命令，然后查看到远程的commit记录，执行`git reset --hard origin commit号`回到执行git rebase之前的位置。
+
+
+## 本地更改分支名
+
+git 本地分支还没推到远程的时候，但是已经写了一部分代码的了，可以先把更改，commit， 然后把不需要推上远程的代码 git stash ，如果没有，就不用执行这个操作，然后 执行`git branch -m new branch name`，然后 git push 上去。
