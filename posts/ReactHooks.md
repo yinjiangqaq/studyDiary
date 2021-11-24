@@ -813,3 +813,15 @@ FancyInput = forwardRef(FancyInput);
 ### forwardRef
 
 https://juejin.cn/post/6844903734644834312
+
+
+## useState
+
+```
+const [count, setCount] = useState(0);
+
+setCount(count+1);
+//这里声明的count是一个常量，让count+1的操作，我们并不推荐使用 setCount(count++)或者setCount(++count)来更改count。因为这样会更改到count的值。不符合常量的设定
+
+++count是返回 count原先的值，但是count会加一，++count是返回加一之后的count
+```
