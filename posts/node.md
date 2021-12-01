@@ -15,12 +15,12 @@
 
 1. 泛客户端开发
 
-* 小程序
-* Hybrid App 开发
-* React Native (混合开发，输出的是一个 js 文件，需要编译之后才能调用原生之类的组件，效率比较低)
-* flutter 原生 app 开发，编译出来的是原生代码，而且是一套代码解决安卓和 ios 的两端代码
+- 小程序
+- Hybrid App 开发
+- React Native (混合开发，输出的是一个 js 文件，需要编译之后才能调用原生之类的组件，效率比较低)
+- flutter 原生 app 开发，编译出来的是原生代码，而且是一套代码解决安卓和 ios 的两端代码
 
-* electron 桌面应用开发
+- electron 桌面应用开发
 
 2. web 技术
 
@@ -28,11 +28,11 @@
 
 ## node 中台
 
-关于中台这个概念，因为前端工作人员的产出不应该只是造页面，与后端联调，解决性能化等问题，在node.js出来之后，前端人员也可以参与到后端，node层一般认为是中间层，做路由转发，数据处理，但是不亲自参与到读写 `redis db` 。这边的node中台工作流主要是：
+关于中台这个概念，因为前端工作人员的产出不应该只是造页面，与后端联调，解决性能化等问题，在 node.js 出来之后，前端人员也可以参与到后端，node 层一般认为是中间层，做路由转发，数据处理，但是不亲自参与到读写 `redis db` 。这边的 node 中台工作流主要是：
 
-这种模式主要面对那种企业内部，交互压力并不是很大的，因为node作为后台语言并没有Java和c++那么久，还没有那么成熟，所以常规的应用，toC的系统，更多的是采用常规的客户端服务器规格，真正写后台的是Java和C++，node并不参与其中。因为他们更能支撑起高并发等等这些用户量大起来所产生出来的压力。
+这种模式主要面对那种企业内部，交互压力并不是很大的，因为 node 作为后台语言并没有 Java 和 c++那么久，还没有那么成熟，所以常规的应用，toC 的系统，更多的是采用常规的客户端服务器规格，真正写后台的是 Java 和 C++，node 并不参与其中。因为他们更能支撑起高并发等等这些用户量大起来所产生出来的压力。
 
-``` 
+```
 
         ssr(服务端渲染)            联系        读写redis db(自己维护一个表)
 frontEnd<------------->node中台<--------->  java 后台(通过读取你的表，写接口)
@@ -43,55 +43,59 @@ frontEnd<------------->node中台<--------->  java 后台(通过读取你的表�
 
 https://juejin.im/post/6844903808330366989
 
-node.js 多线程：node.js的JavaScript执行引擎是V8，JavaScript是单线程的，但是node.js有除了JavaScript线程之外的一些一些线程
+node.js 多线程：node.js 的 JavaScript 执行引擎是 V8，JavaScript 是单线程的，但是 node.js 有除了 JavaScript 线程之外的一些一些线程
 
-node.js多进程：可以通过master多fork几个worker进程出来，充分地利用计算机多核的特点.然后进程间的通信通过一个agent进程做中间协调，像一个秘书一样
+node.js 多进程：可以通过 master 多 fork 几个 worker 进程出来，充分地利用计算机多核的特点.然后进程间的通信通过一个 agent 进程做中间协调，像一个秘书一样
 
 ## Node.js 框架的 express 与 koa 对比分析
 
 https://juejin.im/entry/6844903573755527176
 
-* 偏向于使用 koa 的原因是 express 对异步的处理没有 koa 那么优雅, 尽管 express 的生态很好
+- 偏向于使用 koa 的原因是 express 对异步的处理没有 koa 那么优雅, 尽管 express 的生态很好
 
-* 中间件执行顺序
+- 中间件执行顺序
 
 **express 中间件是一个接一个的顺序执行 koa 中间件是按照圆圈循环进行，即从外层到内层，又从内层回到外层来结束。**
 
 koa2 的中间件是通过 `async await` 实现的，中间件执行顺序是“洋葱圈”模型。
 
-``` js
-var koa = reuqire('koa');
-var app = koa()
+```js
+var koa = reuqire("koa");
+var app = koa();
 
 //这个里的function* 都可以换成 async await
 app.use(function* responseTime(next) {
-    var start = new Date //1
-    yield next; //2
-    var ms = new Date - start //12
-    this.set('X-Response-Time', ms + 'ms') //13
-
-})
+  var start = new Date(); //1
+  yield next; //2
+  var ms = new Date() - start; //12
+  this.set("X-Response-Time", ms + "ms"); //13
+});
 
 app.use(function* logger(next) {
-    var start = new Date //3
-    yield next //4
-    var used = new Date - start //10
-    console.log('%s %s %s %sms', this.method, this.originalUrl, this.status, used) //11
-})
+  var start = new Date(); //3
+  yield next; //4
+  var used = new Date() - start; //10
+  console.log(
+    "%s %s %s %sms",
+    this.method,
+    this.originalUrl,
+    this.status,
+    used
+  ); //11
+});
 
 app.use(function* contentLength(next) {
-    yield next //5
-    if (!this.body) return; //9
-    this.set('Content-Length', this.body.length)
-
-})
+  yield next; //5
+  if (!this.body) return; //9
+  this.set("Content-Length", this.body.length);
+});
 app.use(function* body(next) {
-    yield next; //6
-    if (this.path !== '/') return; //7
-    this.body = 'Hello World' //8
-})
+  yield next; //6
+  if (this.path !== "/") return; //7
+  this.body = "Hello World"; //8
+});
 
-app.listen(3000)
+app.listen(3000);
 ```
 
 所有的请求经过一个中间件的时候都会执行两次，对比 Express 形式的中间件，**Koa 的模型可以非常方便的实现后置处理逻辑**，对比 Koa 和 Express 的 Compress 中间件就可以明显的感受到 Koa 中间件模型的优势。
@@ -103,30 +107,30 @@ app.listen(3000)
 遇到 http 请求，根据 path 和 method 判断触发哪些中间件
 实现 next 机制，即上一个中间件会通过 next 触发下一个中间件
 
-* context
+- context
 
 和 Express 只有 Request 和 Response 两个对象不同，Koa 增加了一个 Context 的对象，作为这次请求的上下文对象（在 Koa 1 中为中间件的 this，在 Koa 2 中作为中间件的第一个参数传入）。我们可以将一次请求相关的上下文都挂载到这个对象上。类似 traceId 这种需要贯穿整个请求（在后续任何一个地方进行其他调用都需要用到）的属性就可以挂载上去。相较于 request 和 response 而言更加符合语义。
 
-* 异常处理
+- 异常处理
 
 通过同步方式编写异步代码带来的另外一个非常大的好处就是异常处理非常自然，使用 `try catch` 就可以将按照规范编写的代码中的所有错误都捕获到。这样我们可以很便捷的编写一个自定义的错误处理中间件。
 
-``` js
+```js
 async function onerror(ctx, next) {
-    try {
-        await next(); //跳到后面
-    } catch (err) {
-        //前面的代码执行错误，这边就会捕捉到
-        ctx.app.emit('error', err);
-        ctx.body = 'server error';
-        ctx.status = err.status || 500;
-    }
+  try {
+    await next(); //跳到后面
+  } catch (err) {
+    //前面的代码执行错误，这边就会捕捉到
+    ctx.app.emit("error", err);
+    ctx.body = "server error";
+    ctx.status = err.status || 500;
+  }
 }
 ```
 
 只需要将这个中间件放在其他中间件之前，就可以捕获它们所有的同步或者异步代码中抛出的异常了。
 
-## Egg继承于koa
+## Egg 继承于 koa
 
 https://eggjs.org/zh-cn/intro/quickstart.html
 
@@ -136,26 +140,26 @@ https://eggjs.org/zh-cn/intro/quickstart.html
 
 ### 扩展
 
-在基于 Egg 的框架或者应用中，我们可以通过定义 `app/extend/{application, context, request, response}.js` 来扩展 Koa 中对应的四个对象的原型，通过这个功能，我们可以快速的增加更多的辅助方法，例如我们在 `app/extend/context.js` 中写入下列代码： 
+在基于 Egg 的框架或者应用中，我们可以通过定义 `app/extend/{application, context, request, response}.js` 来扩展 Koa 中对应的四个对象的原型，通过这个功能，我们可以快速的增加更多的辅助方法，例如我们在 `app/extend/context.js` 中写入下列代码：
 
-``` js
+```js
 // app/extend/context.js
 module.exports = {
-    get isIOS() {
-        const iosReg = /iphone|ipad|ipod/i;
-        return iosReg.test(this.get('user-agent'));
-    },
+  get isIOS() {
+    const iosReg = /iphone|ipad|ipod/i;
+    return iosReg.test(this.get("user-agent"));
+  },
 };
 ```
 
 在 Controller 中，我们就可以使用到刚才定义的这个便捷属性了：
 
-``` js
+```js
 // app/controller/home.js
-exports.handler = ctx => {
-    ctx.body = ctx.isIOS ?
-        'Your operating system is iOS.' :
-        'Your operating system is not iOS.';
+exports.handler = (ctx) => {
+  ctx.body = ctx.isIOS
+    ? "Your operating system is iOS."
+    : "Your operating system is not iOS.";
 };
 ```
 
@@ -167,84 +171,84 @@ exports.handler = ctx => {
 
 一个插件可以包含：
 
-* extend：扩展基础对象的上下文，提供各种工具类、属性。
-* middleware：增加一个或多个中间件，提供请求的前置、后置处理逻辑。
-* config：配置各个环境下插件自身的默认配置项。
+- extend：扩展基础对象的上下文，提供各种工具类、属性。
+- middleware：增加一个或多个中间件，提供请求的前置、后置处理逻辑。
+- config：配置各个环境下插件自身的默认配置项。
 
-### MVC的egg
+### MVC 的 egg
 
-egg其实是一个MVC框架，对此我们一般需要考虑的主要有 `controller` ， `router` ， `service` , 这三个对象分布在app文件夹下， `app/controller` , `app/router` , `app/service`
+egg 其实是一个 MVC 框架，对此我们一般需要考虑的主要有 `controller` ， `router` ， `service` , 这三个对象分布在 app 文件夹下， `app/controller` , `app/router` , `app/service`
 
-* controller 控制器，可以理解成后端的API，匹配对应的路由
+- controller 控制器，可以理解成后端的 API，匹配对应的路由
 
-* router router对象，匹配前端发过来的对应的url，然后跳到与之绑定的controller
+- router router 对象，匹配前端发过来的对应的 url，然后跳到与之绑定的 controller
 
-``` js
- router.get('/news', controller.news.list)
+```js
+router.get("/news", controller.news.list);
 ```
 
-* 在实际应用中，Controller 一般不会自己产出数据，也不会包含复杂的逻辑，复杂的过程应抽象为业务逻辑层 Service。这一层跟数据读写相关
+- 在实际应用中，Controller 一般不会自己产出数据，也不会包含复杂的逻辑，复杂的过程应抽象为业务逻辑层 Service。这一层跟数据读写相关
 
-###  egg如何编写中间件
+### egg 如何编写中间件
 
-写一个简单的gzip中间件, 来看看中间件的写法
+写一个简单的 gzip 中间件, 来看看中间件的写法
 
-``` js
+```js
 // app/middleware/gzip.js
-const isJSON = require('koa-is-json');
-const zlib = require('zlib');
+const isJSON = require("koa-is-json");
+const zlib = require("zlib");
 
 async function gzip(ctx, next) {
+  await next();
+
+  // 后续中间件执行完成后将响应体转换成 gzip
+  let body = ctx.body;
+  if (!body) return;
+  if (isJSON(body)) body = JSON.stringify(body);
+
+  // 设置 gzip body，修正响应头
+  const stream = zlib.createGzip();
+  stream.end(body);
+  ctx.body = stream;
+  ctx.set("Content-Encoding", "gzip");
+}
+```
+
+可以看到，框架的中间件和 Koa 的中间件写法是一模一样的，所以任何 Koa 的中间件都可以直接被框架使用。
+
+#### 配置
+
+一般来说中间件也会有自己的配置。在框架中，一个完整的中间件是包含了配置处理的。我们约定一个中间件是一个放置在 `app/middleware` 目录下的单独文件，它需要 `exports` 一个普通的 `function` ，接受两个参数：
+
+- options: 中间件的配置项，框架会将` app.config[${middlewareName}]` 传递进来。
+- app: 当前应用 Application 的实例。
+
+我们将上面的 `gzip` 中间件做一个简单的优化，让它支持指定只有当 `body` 大于配置的 `threshold` 时才进行 `gzip` 压缩，我们要在 `app/middleware` 目录下新建一个文件 `gzip.js`
+
+```js
+// app/middleware/gzip.js
+const isJSON = require("koa-is-json");
+const zlib = require("zlib");
+
+module.exports = (options) => {
+  return async function gzip(ctx, next) {
     await next();
 
     // 后续中间件执行完成后将响应体转换成 gzip
     let body = ctx.body;
     if (!body) return;
+
+    // 支持 options.threshold
+    if (options.threshold && ctx.length < options.threshold) return;
+
     if (isJSON(body)) body = JSON.stringify(body);
 
     // 设置 gzip body，修正响应头
     const stream = zlib.createGzip();
     stream.end(body);
     ctx.body = stream;
-    ctx.set('Content-Encoding', 'gzip');
-}
-```
-
-可以看到，框架的中间件和 Koa 的中间件写法是一模一样的，所以任何 Koa 的中间件都可以直接被框架使用。
-
-####  配置
-
-一般来说中间件也会有自己的配置。在框架中，一个完整的中间件是包含了配置处理的。我们约定一个中间件是一个放置在 `app/middleware` 目录下的单独文件，它需要 `exports` 一个普通的 `function` ，接受两个参数：
-
-* options: 中间件的配置项，框架会将` app.config[${middlewareName}]` 传递进来。
-* app: 当前应用 Application 的实例。
-
-我们将上面的 `gzip` 中间件做一个简单的优化，让它支持指定只有当 `body` 大于配置的 `threshold` 时才进行 `gzip` 压缩，我们要在 `app/middleware` 目录下新建一个文件 `gzip.js`
-
-``` js
-// app/middleware/gzip.js
-const isJSON = require('koa-is-json');
-const zlib = require('zlib');
-
-module.exports = options => {
-    return async function gzip(ctx, next) {
-        await next();
-
-        // 后续中间件执行完成后将响应体转换成 gzip
-        let body = ctx.body;
-        if (!body) return;
-
-        // 支持 options.threshold
-        if (options.threshold && ctx.length < options.threshold) return;
-
-        if (isJSON(body)) body = JSON.stringify(body);
-
-        // 设置 gzip body，修正响应头
-        const stream = zlib.createGzip();
-        stream.end(body);
-        ctx.body = stream;
-        ctx.set('Content-Encoding', 'gzip');
-    };
+    ctx.set("Content-Encoding", "gzip");
+  };
 };
 ```
 
@@ -252,65 +256,65 @@ module.exports = options => {
 
 中间件编写完成后，我们还需要手动挂载，支持以下方式：
 
-* 在**应用中**使用中间件
+- 在**应用中**使用中间件
 
 在应用中，我们可以完全通过配置来加载自定义的中间件，并决定它们的顺序。
 
 如果我们需要加载上面的 gzip 中间件，在 `config.default.js` 中加入下面的配置就完成了中间件的开启和配置：
 
-``` js
+```js
 module.exports = {
-    // 配置需要的中间件，数组顺序即为中间件的加载顺序
-    middleware: ['gzip'],
+  // 配置需要的中间件，数组顺序即为中间件的加载顺序
+  middleware: ["gzip"],
 
-    // 配置 gzip 中间件的配置
-    //gzip中间件的options参数
-    gzip: {
-        threshold: 1024, // 小于 1k 的响应体不压缩
-    },
+  // 配置 gzip 中间件的配置
+  //gzip中间件的options参数
+  gzip: {
+    threshold: 1024, // 小于 1k 的响应体不压缩
+  },
 };
 ```
 
 该配置最终将在启动时合并到 `app.config.appMiddleware` 。
 
-* 在**框架和插件**(插件也可以配置中间件的)中使用中间件
+- 在**框架和插件**(插件也可以配置中间件的)中使用中间件
 
 框架和插件不支持在 `config.default.js` 中匹配 `middleware` ，需要通过以下方式：
 
-``` js
+```js
 // app.js
-module.exports = app => {
-    // 在中间件最前面统计请求时间
-    app.config.coreMiddleware.unshift('report');
+module.exports = (app) => {
+  // 在中间件最前面统计请求时间
+  app.config.coreMiddleware.unshift("report");
 };
 
 // app/middleware/report.js
 module.exports = () => {
-    return async function(ctx, next) {
-        const startTime = Date.now();
-        await next();
-        // 上报请求时间
-        reportTime(Date.now() - startTime);
-    }
+  return async function (ctx, next) {
+    const startTime = Date.now();
+    await next();
+    // 上报请求时间
+    reportTime(Date.now() - startTime);
+  };
 };
 ```
 
 **应用层**定义的中间件（ `app.config.appMiddleware` ）和框架默认中间件（ `app.config.coreMiddleware` ）都会被加载器加载，并挂载到 `app.middleware` 上。
 
-* router 中使用中间件
+- router 中使用中间件
 
 以上**两种方式配置的中间件是全局的，会处理每一次请求**。 如果你只想针对**单个路由**生效，可以直接在 app/router.js 中实例化和挂载，如下：
 
-``` js
-module.exports = app => {
-    const gzip = app.middleware.gzip({
-        threshold: 1024
-    });
-    app.router.get('/needgzip', gzip, app.controller.handler);
+```js
+module.exports = (app) => {
+  const gzip = app.middleware.gzip({
+    threshold: 1024,
+  });
+  app.router.get("/needgzip", gzip, app.controller.handler);
 };
 ```
 
-### egg.js的内置对象
+### egg.js 的内置对象
 
 1. Application
 
@@ -318,28 +322,28 @@ Application 是全局应用对象，在一个应用中，只会实例化一个�
 
 在框架运行时，会在 Application 实例上触发一些事件，应用开发者或者插件开发者可以监听这些事件做一些操作。作为应用开发者，我们一般会在启动自定义脚本中进行监听。
 
-* server: 该事件一个 worker 进程只会触发一次，在 HTTP 服务完成启动后，会将 HTTP server 通过这个事件暴露出来给开发者。
-* error: 运行时有任何的异常被 onerror 插件捕获后，都会触发 error 事件，将错误对象和关联的上下文（如果有）暴露给开发者，可以进行自定义的日志记录上报等处理。
-* request 和 response: 应用收到请求和响应请求时，分别会触发 request 和 response 事件，并将当前请求上下文暴露出来，开发者可以监听这两个事件来进行日志记录。
+- server: 该事件一个 worker 进程只会触发一次，在 HTTP 服务完成启动后，会将 HTTP server 通过这个事件暴露出来给开发者。
+- error: 运行时有任何的异常被 onerror 插件捕获后，都会触发 error 事件，将错误对象和关联的上下文（如果有）暴露给开发者，可以进行自定义的日志记录上报等处理。
+- request 和 response: 应用收到请求和响应请求时，分别会触发 request 和 response 事件，并将当前请求上下文暴露出来，开发者可以监听这两个事件来进行日志记录。
 
-``` js
+```js
 // app.js
 
-module.exports = app => {
-    app.once('server', server => {
-        // websocket
-    });
-    app.on('error', (err, ctx) => {
-        // report error
-    });
-    app.on('request', ctx => {
-        // log receive request
-    });
-    app.on('response', ctx => {
-        // ctx.starttime is set by framework
-        const used = Date.now() - ctx.starttime;
-        // log total cost
-    });
+module.exports = (app) => {
+  app.once("server", (server) => {
+    // websocket
+  });
+  app.on("error", (err, ctx) => {
+    // report error
+  });
+  app.on("request", (ctx) => {
+    // log receive request
+  });
+  app.on("response", (ctx) => {
+    // ctx.starttime is set by framework
+    const used = Date.now() - ctx.starttime;
+    // log total cost
+  });
 };
 ```
 
@@ -347,75 +351,75 @@ Application 对象几乎可以在编写应用时的任何一个地方获取到�
 
 几乎所有被框架 Loader 加载的文件（Controller，Service，Schedule 等），都可以 export 一个函数，这个函数会被 Loader 调用，并使用 app 作为参数：
 
-* 启动自定义脚本
+- 启动自定义脚本
 
-``` js
+```js
 // app.js
-module.exports = app => {
-    app.cache = new Cache();
+module.exports = (app) => {
+  app.cache = new Cache();
 };
 ```
 
-* Controller文件
+- Controller 文件
 
-``` js
+```js
 // app/controller/user.js
 class UserController extends Controller {
-    async fetch() {
-        this.ctx.body = this.app.cache.get(this.ctx.query.id);
-    }
+  async fetch() {
+    this.ctx.body = this.app.cache.get(this.ctx.query.id);
+  }
 }
 ```
 
 和 Koa 一样，在 `Context` 对象上，可以通过 `ctx.app` 访问到 `Application` 对象。以上面的 `Controller` 文件举例：
 
-``` js
+```js
 // app/controller/user.js
 class UserController extends Controller {
-    async fetch() {
-        this.ctx.body = this.ctx.app.cache.get(this.ctx.query.id);
-    }
+  async fetch() {
+    this.ctx.body = this.ctx.app.cache.get(this.ctx.query.id);
+  }
 }
 ```
 
 **在继承于 Controller, Service 基类的实例中**，可以通过 `this.app` 访问到 Application 对象。
 
-``` js
+```js
 // app/controller/user.js
 class UserController extends Controller {
-    async fetch() {
-        this.ctx.body = this.app.cache.get(this.ctx.query.id);
-    }
-};
+  async fetch() {
+    this.ctx.body = this.app.cache.get(this.ctx.query.id);
+  }
+}
 ```
 
 2. Controller
 
 框架提供了一个 Controller 基类，并推荐所有的 Controller 都继承于该基类实现。这个 Controller 基类有下列属性：
 
-* ctx - 当前请求的 Context 实例。
-* app - 应用的 Application 实例。
-* config - 应用的配置。
-* service - 应用所有的 service。
-* logger - 为当前 controller 封装的 logger 对象。
+- ctx - 当前请求的 Context 实例。
+- app - 应用的 Application 实例。
+- config - 应用的配置。
+- service - 应用所有的 service。
+- logger - 为当前 controller 封装的 logger 对象。
 
 在 Controller 文件中，可以通过两种方式来引用 Controller 基类：
 
-``` js
+```js
 // app/controller/user.js
 
 // 从 egg 上获取（推荐）
-const Controller = require('egg').Controller;
+const Controller = require("egg").Controller;
 class UserController extends Controller {
-    // implement
+  // implement
 }
 module.exports = UserController;
 
 // 从 app 实例上获取
-module.exports = app => {
-    return class UserController extends app.Controller {
-        // implement
-    };
+module.exports = (app) => {
+  return class UserController extends app.Controller {
+    // implement
+  };
 };
 ```
 
@@ -425,26 +429,26 @@ module.exports = app => {
 
 Service 基类的属性和 Controller 基类属性一致，访问方式也类似：
 
-``` js
+```js
 // app/service/user.js
 
 // 从 egg 上获取（推荐）
-const Service = require('egg').Service;
+const Service = require("egg").Service;
 class UserService extends Service {
-    // implement
+  // implement
 }
 module.exports = UserService;
 
 // 从 app 实例上获取
-module.exports = app => {
-    return class UserService extends app.Service {
-        // implement
-    };
+module.exports = (app) => {
+  return class UserService extends app.Service {
+    // implement
+  };
 };
 ```
 
 4. Helper
-Helper 用来提供一些实用的 utility 函数。它的作用在于我们可以将一些常用的动作抽离在 helper.js 里面成为一个独立的函数，这样可以用 JavaScript 来写复杂的逻辑，避免逻辑分散各处，同时可以更好的编写测试用例。
+   Helper 用来提供一些实用的 utility 函数。它的作用在于我们可以将一些常用的动作抽离在 helper.js 里面成为一个独立的函数，这样可以用 JavaScript 来写复杂的逻辑，避免逻辑分散各处，同时可以更好的编写测试用例。
 
 Helper 自身是一个类，有和 Controller 基类一样的属性，它也会在每次请求时进行实例化，因此 Helper 上的所有函数也能获取到当前请求相关的上下文信息。
 
@@ -463,102 +467,101 @@ class UserController extends Controller {
   }
 }
 ```
+
 除此之外，Helper 的实例还可以在模板中获取到，例如可以在模板中获取到 security 插件提供的 shtml 方法。
 
 自定义 helper 方法
 
 应用开发中，我们可能经常要自定义一些 helper 方法，例如上面例子中的 formatUser，我们可以通过框架扩展的形式来自定义 helper 方法。
+
 ```js
 // app/extend/helper.js
 module.exports = {
   formatUser(user) {
-    return only(user, [ 'name', 'phone' ]);
-  }
+    return only(user, ["name", "phone"]);
+  },
 };
 ```
-
 
 ### egg.js 怎么在控制器中拿到前端传的参数
 
 框架通过在 Controller 上绑定的 Context 实例，提供了许多便捷方法和属性获取用户通过 HTTP 请求发送过来的参数
 
-* query（get）
+- query（get）
 
 获取 url 的 ？后面的数据，通过 `ctx.query` 拿到数据：
 
-``` js
+```js
 // GET /posts?category=egg&language=node
 class PostController extends Controller {
-    async listPosts() {
-        const query = this.ctx.query;
-        // {
-        //   category: 'egg',
-        //   language: 'node',
-        // }
-    }
+  async listPosts() {
+    const query = this.ctx.query;
+    // {
+    //   category: 'egg',
+    //   language: 'node',
+    // }
+  }
 }
 ```
 
-* Router params（get）
+- Router params（get）
 
 获取 Router 上也可以申明参数，通过 ctx.params 拿到数据：
 
-``` js
+```js
 // app.get('/projects/:projectId/app/:appId', 'app.listApp');
 // GET /projects/1/app/2
 class AppController extends Controller {
-    async listApp() {
-        // assert.equal 相当于 ==
-        assert.equal(this.ctx.params.projectId, '1');
-        assert.equal(this.ctx.params.appId, '2');
-        // 或用解构赋值
-        const {
-            projectId,
-            appId
-        } = this.ctx.params
-    }
+  async listApp() {
+    // assert.equal 相当于 ==
+    assert.equal(this.ctx.params.projectId, "1");
+    assert.equal(this.ctx.params.appId, "2");
+    // 或用解构赋值
+    const { projectId, appId } = this.ctx.params;
+  }
 }
 ```
 
-* body（post）
+- body（post）
 
 也就是 `post、put、delete` 等方法，框架内置了 `bodyParser` 中间件来对这两类格式的请求 body 解析成 `object` 挂载到 `ctx.request.body` 上。
 
-``` js
+```js
 // POST /api/posts HTTP/1.1
 // Host: localhost:3000
 // Content-Type: application/json; charset=UTF-8
 //
 // {"title": "controller", "content": "what is controller"}
 class PostController extends Controller {
-    async listPosts() {
-        assert.equal(this.ctx.request.body.title, 'controller');
-        assert.equal(this.ctx.request.body.content, 'what is controller');
-    }
+  async listPosts() {
+    assert.equal(this.ctx.request.body.title, "controller");
+    assert.equal(this.ctx.request.body.content, "what is controller");
+  }
 }
 ```
 
 可以在 `config/config.default.js` 配置解析请求的大小，会覆盖框架默认值 100kb：
 
-``` js
+```js
 module.exports = {
-    bodyParser: {
-        jsonLimit: '1mb',
-        formLimit: '1mb',
-    },
+  bodyParser: {
+    jsonLimit: "1mb",
+    formLimit: "1mb",
+  },
 };
 ```
 
 > 注意区分：ctx.request.body 和 ctx.body ：
 > ctx.body 是 ctx.response.body 的简写。
 
-* egg的file模式
+- egg 的 file 模式
+
 1. 在 config 文件中启用 file 模式：
 
-``` js
+```js
 // config/config.default.js
 exports.multipart = {
-    mode: 'file',
+  mode: "file",
 };
 ```
 
@@ -566,74 +569,75 @@ exports.multipart = {
 
 前端
 
-``` html
-<form method="POST" action="/upload?_csrf={{ ctx.csrf | safe }}" enctype="multipart/form-data">
-    title: <input name="title" />
-    file: <input name="file" type="file" />
-    <button type="submit">Upload</button>
+```html
+<form
+  method="POST"
+  action="/upload?_csrf={{ ctx.csrf | safe }}"
+  enctype="multipart/form-data"
+>
+  title: <input name="title" /> file: <input name="file" type="file" />
+  <button type="submit">Upload</button>
 </form>
 ```
 
 后端
 
-``` js
+```js
 // app/controller/upload.js
-const Controller = require('egg').Controller;
-const fs = require('mz/fs');
+const Controller = require("egg").Controller;
+const fs = require("mz/fs");
 
 module.exports = class extends Controller {
-    async upload() {
-        const {
-            ctx
-        } = this;
-        const file = ctx.request.files[0];
-        const name = 'egg-multipart-test/' + path.basename(file.filename);
-        let result;
-        try {
-            // 处理文件，比如上传到云端
-            result = await ctx.oss.put(name, file.filepath);
-        } finally {
-            // 需要删除临时文件
-            await fs.unlink(file.filepath);
-        }
-
-        ctx.body = {
-            url: result.url,
-            // 获取所有的字段值
-            requestBody: ctx.request.body,
-        };
+  async upload() {
+    const { ctx } = this;
+    const file = ctx.request.files[0];
+    const name = "egg-multipart-test/" + path.basename(file.filename);
+    let result;
+    try {
+      // 处理文件，比如上传到云端
+      result = await ctx.oss.put(name, file.filepath);
+    } finally {
+      // 需要删除临时文件
+      await fs.unlink(file.filepath);
     }
+
+    ctx.body = {
+      url: result.url,
+      // 获取所有的字段值
+      requestBody: ctx.request.body,
+    };
+  }
 };
 ```
 
-* stream模式获取file
+- stream 模式获取 file
 
-``` js
-const path = require('path');
-const sendToWormhole = require('stream-wormhole');
-const Controller = require('egg').Controller;
+```js
+const path = require("path");
+const sendToWormhole = require("stream-wormhole");
+const Controller = require("egg").Controller;
 
 class UploaderController extends Controller {
-    async upload() {
-        const ctx = this.ctx;
-        const stream = await ctx.getFileStream();
-        const name = 'egg-multipart-test/' + path.basename(stream.filename);
-        // 文件处理，上传到云存储等等
-        let result;
-        try {
-            result = await ctx.oss.put(name, stream);
-        } catch (err) {
-            // 必须将上传的文件流消费掉，要不然浏览器响应会卡死
-            await sendToWormhole(stream);
-            throw err;
-        }
-
-        ctx.body = {
-            url: result.url,
-            // 所有表单字段都能通过 `stream.fields` 获取到
-            fields: stream.fields,
-        };
+  async upload() {
+    const ctx = this.ctx;
+    const stream = await ctx.getFileStream();
+    const name = "egg-multipart-test/" + path.basename(stream.filename);
+    // 文件处理，上传到云存储等等
+    let result;
+    try {
+      result = await ctx.oss.put(name, stream);
+    } catch (err) {
+      // 必须将上传的文件流消费掉，要不然浏览器响应会卡死
+      await sendToWormhole(stream);
+      throw err;
     }
+
+    ctx.body = {
+      url: result.url,
+      // 所有表单字段都能通过 `stream.fields` 获取到
+      fields: stream.fields,
+    };
+  }
 }
 
 module.exports = UploaderController;
@@ -644,7 +648,7 @@ module.exports = UploaderController;
 1. 只支持上传一个文件。
 2. 上传文件必须在所有其他的 fields 后面，否则在拿到文件流时可能还获取不到 fields。
 
-* 获取header值
+- 获取 header 值
 
 `ctx.headers，ctx.header，ctx.request.headers，ctx.request.header` 等价
 `ctx.get(name)` ， `ctx.request.get(name)` 获取 `header` 某一个字段
@@ -652,19 +656,19 @@ stream 模式上传多个文件使用 `ctx.multipart()`
 
 ## nrm
 
-这个东西相当于维护一个npm registry也就是npm 源的一个hash table
+这个东西相当于维护一个 npm registry 也就是 npm 源的一个 hash table
 
-``` 
+```
 
 # 安装
 
 npm install -g nrm
- 
+
 
 # 添加一个名为taobao的仓库，地址为私有仓库地址
 
  nrm  add taobao http://registry.npm.taobao.org/
- 
+
 
 # 查看现有的仓库，出现 taobao项说明添加成功
 
@@ -677,24 +681,46 @@ nrm ls
       rednpm - http://registry.mirror.cqupt.edu.cn/
       npmMirror  https://skimdb.npmjs.com/registry/
       edunpm - http://registry.enpmjs.org/
-    
+
 
 ## 切换到taobao源
 
 nrm use taobao
 
- 
+
 
 # 安装项目依赖
 
 npm install
 ```
 
-## 为什么npm install之后有.staging这一目录
+## 为什么 npm install 之后有.staging 这一目录
 
-因为你的npm install 还没下载完，所以有.staging这个目录
+因为你的 npm install 还没下载完，所以有.staging 这个目录
 
-## node 接口sequelize
-1. findAndCountAll这个是分页时候用的，里面的offset和limit这两个参数是，offset是当前从哪个位置开始取，limit是要取多少条.
+## node 接口 sequelize
 
-所以 offset通常是` (pageIndex-1)*pageSize`当前页减去一，再乘以页的大小
+1. findAndCountAll 这个是分页时候用的，里面的 offset 和 limit 这两个参数是，offset 是当前从哪个位置开始取，limit 是要取多少条.
+
+所以 offset 通常是` (pageIndex-1)*pageSize`当前页减去一，再乘以页的大小
+
+## node 如何返回文件流给前端
+
+```js
+import got from 'got';
+
+      try {
+        const file = await got.stream(fileUrl);
+        res
+          .header('Content-Type', 'application/octet-stream')//设置好返回的响应头，流格式
+          .header('Content-Disposition', `attachment;filename=${file_name}`)
+          .send(file);
+      } catch (error) {
+        return new BadRequestException({
+          code: 500,
+          data: [],
+        });
+
+
+```
+然后前端 写一个 a标签地址写对应的服务端接口地址
