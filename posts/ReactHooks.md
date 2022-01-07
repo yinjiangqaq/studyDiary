@@ -567,11 +567,11 @@ useEffect(() => {
 
 ```js
 useEffect(() => {
-  const subscription = props.source.subscribe();//这边建立了定时器，订阅事件
+  const subscription = props.source.subscribe(); //这边建立了定时器，订阅事件
   return () => {
-    subscription.unsubscribe();//需要return一个函数，取消订阅这个事件，取消订阅这个定时器
+    subscription.unsubscribe(); //需要return一个函数，取消订阅这个事件，取消订阅这个定时器
   };
-}, [props.source]);//依赖项
+}, [props.source]); //依赖项
 ```
 
 此时，只有当 props.source 改变后才会重新创建订阅。
@@ -787,7 +787,7 @@ function TextInputWithFocusButton() {
 
 **请记住，当 ref 对象内容发生变化时，useRef 并不会通知你。变更 .current 属性不会引发组件重新渲染。**如果想要在 React 绑定或解绑 DOM 节点的 ref 时运行某些代码，则需要使用回调 ref 来实现。
 
-### useImperativeHandle **
+### useImperativeHandle \*\*
 
 ```js
 useImperativeHandle(ref, createHandle, [deps]);
@@ -814,7 +814,6 @@ FancyInput = forwardRef(FancyInput);
 
 https://juejin.cn/post/6844903734644834312
 
-
 ## useState
 
 ```
@@ -825,3 +824,31 @@ setCount(count+1);
 
 ++count是返回 count原先的值，但是count会加一，++count是返回加一之后的count
 ```
+
+## Redux
+
+redux 是状态管理库，与其他框架如 react 是没有直接关系，所以 redux 可以脱离 react 在别的环境下使用。由于没有和 react 相关逻辑耦合，所以 redux 的源码很纯粹，目的就是把如何数据管理好。而真正在 react 项目中使用 redux 时，是需要有一个 react-redux 当作连接器，去连接 react 和 redux
+
+### compose
+
+compose 的实现
+
+```js
+export default function compose(...funcs) {
+  if (funcs.length == 0) {
+    return (arg) => arg;
+  }
+  if (funcs.length == 1) {
+    return funcs[0];
+  }
+  return funcs.renduce(
+    (a, b) =>
+      (...args) =>
+        a(b(...args))
+  );
+}
+```
+
+其实 compose 函数做的事就是把 `var a = fn1(fn2(fn3(fn4(x))))` 这种嵌套的调用方式改成 `var a = compose(fn1,fn2,fn3,fn4)(x)` 的方式调用。
+
+而按照 redux-compose 官方文档的的定义介绍，`compose(...funcs)(x)`里面的每个参数都是函数，每个函数只会接受一个参数，最右边的函数的执行结果，会作为它上一个函数的参数，以此类推。而 `compose(...funcs)`本身也是一个函数，返回的函数的参数会作为 compose 函数中函数参数列表的最右边的函数的参数。

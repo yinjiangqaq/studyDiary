@@ -45,7 +45,7 @@ $ git config --global --unset user.name
 
 2. 切换到需要开发的分支
 
-3. 使用 git stash apply 应用修改
+3. 使用 git stash apply + hash  能把丢失的stash 也给找回来，只要保留了hash值，git stash pop 的时候，就会暴露这个stash 的 hash 值
 
 ## 企业 git 流程
 
