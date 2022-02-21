@@ -289,3 +289,38 @@ git rebase —abort
 ## 本地更改分支名
 
 git 本地分支还没推到远程的时候，但是已经写了一部分代码的了，可以先把更改，commit， 然后把不需要推上远程的代码 git stash ，如果没有，就不用执行这个操作，然后 执行`git branch -m new branch name`，然后 git push 上去。
+
+## 查看本地所有git config
+
+```
+git config -l //查看本地config 列表
+//取消设置
+git config --unset http.proxy
+git config --unset https.proxy
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+//设置
+
+git config http.proxy xxx:xxx
+git config https.proxy xxx:xxx
+
+```
+
+## git 提交代码形式从http形式更改为ssh形式
+```
+$: git remote set-url origin git@github.com:yinjiangqaq/studyDiary.git
+```
+
+## git 提交代码形式从ssh 形式更改为http 形式
+
+```
+$: git remote set-url origin http://github.com/yinjiangqaq/studyDiary.git
+```
+
+## git set upstream 
+
+```
+//因为是属于分支操作，所以前置命令是git branch 
+
+$: git branch --set-upstream-to origin/<branch Name>
+```
