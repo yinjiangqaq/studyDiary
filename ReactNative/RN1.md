@@ -555,3 +555,8 @@ Image.getSize(uri, success, [failure]);
 ## 关于flex
 
 React Native 的flex 布局大体上跟浏览器的差不多，可能有区别的是，浏览器上，主轴是x轴，在RN上，主轴是Y轴。所以在RN这里，屏幕垂直居中需要的属性是 `justify-content:center;`
+## react native 透明度
+
+react native 不能直接在父元素设置 opacity，这会让子元素同样也受到 opacity 的影响而透明
+
+一般是在 background color 设置对应的 opacity 值。例如 `rgba(207, 207, 207, 0.54)`，或者 `'#CFCFCF54'`

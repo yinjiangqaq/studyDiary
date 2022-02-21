@@ -852,3 +852,30 @@ export default function compose(...funcs) {
 其实 compose 函数做的事就是把 `var a = fn1(fn2(fn3(fn4(x))))` 这种嵌套的调用方式改成 `var a = compose(fn1,fn2,fn3,fn4)(x)` 的方式调用。
 
 而按照 redux-compose 官方文档的的定义介绍，`compose(...funcs)(x)`里面的每个参数都是函数，每个函数只会接受一个参数，最右边的函数的执行结果，会作为它上一个函数的参数，以此类推。而 `compose(...funcs)`本身也是一个函数，返回的函数的参数会作为 compose 函数中函数参数列表的最右边的函数的参数。
+
+## useState
+
+```js
+const [count, setCount] = useState(0);//首先这么声明useState，表示count是一个常量，唯一改变count的值得方式只要有setCount
+
+submit(){
+  setCount(count + 1);
+} // 而为什么不设置 setCount(count++)或者setCount(++count)呢，因为后面这两种都会改变count的值，不符合常量的设定。而++count返回的是更改之后的count值，也就是先加，count++是先返回原先值，再加上去，也就是后加
+
+//如果submit方法是在表单提交的时候调用，本身没有任何依赖的话，会导致每次取到的count都是第一次渲染时的count,也就是0。
+
+   render 1
+   count_render_1 = 0
+   submit_render_1()//执行setCount(count+1),使count 为1，count改变，进入到render2
+    ||
+    render 2 
+    count_render_2 = 1
+    submit_render_2()//执行setCount(count+1),此时拿到的count依旧是0，count+1,使count为1，跟现在的count_render_2没区别，不会进行下一次render，结束
+
+
+    //因为React永远都不会创建新值，只会拷贝副本，一开始submit_render_1()的执行使count发生改变，进入render2，render2拷贝的是count=1的副本，count_render_2 = 1,拷贝的submit_render_2()是从render_1中的submit_render_1()拷贝的，里面依赖的count还是原先的count，所以导致后面执行的时候还是从setCount(0+1)
+
+    //两种方式可以使setCount生效，一种是 setCount(count=>count+1) 这种每次执行的时候都会去拿最新的count
+
+    //一种是 submit函数加上useCallback，然后依赖是count
+```
