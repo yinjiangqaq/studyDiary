@@ -281,6 +281,9 @@ git rebase --continue  //注意，你无需执行 git-commit，只要执行 cont
 git rebase —abort
 ```
 
+
+### 常用 git rebase -i origin/master
+
 ## git rebase 成功之后，还没push --force到远程时，如何撤销git rebase。
 
 此时应该执行 `git reflog `命令，然后查看到远程的commit记录，执行`git reset --hard origin commit号`回到执行git rebase之前的位置。

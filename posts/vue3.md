@@ -543,12 +543,13 @@ $refs.xxx，获取到实例后直接获取属性数据或调用组件方法
 
 兄弟组件通信
 
-Event Bus：每一个Vue实例都是一个Event Bus，都支持$on/$emit，可以为兄弟组件的实例之间new一个Vue实例，作为Event Bus进行通信。
+Event Bus：每一个 Vue 实例都是一个 Event Bus，都支持$on/$emit，可以为兄弟组件的实例之间 new 一个 Vue 实例，作为 Event Bus 进行通信。
 
-Vuex：将状态和方法提取到Vuex，完成共享
+Vuex：将状态和方法提取到 Vuex，完成共享
 
-跨级组件通信使用provide/inject
+跨级组件通信使用 provide/inject
 
-Event Bus：同兄弟组件Event Bus通信
+Event Bus：同兄弟组件 Event Bus 通信
 
-Vuex：将状态和方法提取到Vuex，完成共享
+Vuex：将状态和方法提取到 Vuex，完成共享
+
