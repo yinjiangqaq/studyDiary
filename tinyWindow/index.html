@@ -9,8 +9,12 @@
   <body>
     <script type="text/javascript" src="./tinyWindow.js"></script>
     <script type="text/javascript">
-    console.log("执行createIframe 方法")
+      console.log("执行createIframe 方法");
       tinyWindow.init();
+      window.addEventListener("message", function (e) {
+        console.log(e.data);
+      });
+      //如果需要跟iframe的窗口进行消息交互，需要获取到iframe的contentWindow,调用contentWindow.postMessage向iframe的窗口发送信息
     </script>
   </body>
 </html>

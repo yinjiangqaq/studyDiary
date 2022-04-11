@@ -6,7 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>demo</title>
   </head>
+  <script type="text/javascript">
+    // 实现消息通信
+    var sendMessage = function () {
+      console.log("执行消息推送");
+      //postmessage方法调用的主体，需要发送信息给谁，如果要发送信息给父窗口是window.parent,window是当前窗口，window.parent是父窗口
+      window.parent.postMessage(
+        { error: 0, msg: "success", data: { code: 0 } },
+        "*"
+      );
+    };
+    // document.getElementById('sender').onclick = sendMessage
+  </script>
   <body>
     <div>这是一个test</div>
+    <button id="sender" onclick="sendMessage()">发送信息</button>
   </body>
 </html>
