@@ -506,10 +506,12 @@ setState 函数用于更新 state。它接收一个新的 state 值并将组件�
 
 ```js
 const [state, setState] = useState({});
+// 使用回调的方式，是因为React中的setState无法确保组件执行更新的时候，能够每次都能及时拿到更新之后的值，所以useState中的setState还提供了一种回调的方式，setState((preState)=>{xxx; return {new State}})
 setState((prevState) => {
   // 也可以使用 Object.assign
   return { ...prevState, ...updatedValues };
 });
+
 //也就是h函数式组件里面的useState中的set方法更新的只是单纯这个state，不像class组件，setState方法，会自动把更新的这个对象，更新合并到这个组件全局的state里面。
 ```
 
@@ -759,6 +761,8 @@ const refContainer = useRef(initialValue);
 
 useRef 返回一个可变的 ref 对象，其 `.current` 属性被初始化为（initialValue）。返回的 ref 对象在组件的整个生命周期内持续存在。
 
+react FC 中如果对 UI state 没有影响的，都可以放在 ref 里面
+
 一个常见的用例便是命令式地访问子组件：
 
 ```js
@@ -868,7 +872,7 @@ submit(){
    count_render_1 = 0
    submit_render_1()//执行setCount(count+1),使count 为1，count改变，进入到render2
     ||
-    render 2 
+    render 2
     count_render_2 = 1
     submit_render_2()//执行setCount(count+1),此时拿到的count依旧是0，count+1,使count为1，跟现在的count_render_2没区别，不会进行下一次render，结束
 
@@ -878,4 +882,116 @@ submit(){
     //两种方式可以使setCount生效，一种是 setCount(count=>count+1) 这种每次执行的时候都会去拿最新的count
 
     //一种是 submit函数加上useCallback，然后依赖是count
+```
+
+## useImperativeHandle 结合 forwardRef 在函数组件中实现父组件调用子组件的属性和方法
+
+我们知道在 hook 中有 react.useRef()来创建一个 ref，对于类组件来说，可以直接赋值在 ref 属性上
+
+```ts
+class A {
+  return(
+    <div ref={props.ARef}></div>
+  )
+}
+
+const B = (props)=>{
+  const ARef = React.useRef()
+  return(
+    <A ref={ARef}></A>
+  )
+}
+```
+
+但是如果 A 组件是一个函数式组件的话，就不能直接给它赋值 ref 属性，因为函数式组件不支持。所以函数式组件要使用 ref 属性，就要使用`forwardRef`。
+
+`forwardRef`的作用是什么呢？
+
+> forwardRef 是一个高阶函数，会创建一个 React 组件，这个组件能够将其接收的 ref 属性转发到其组件树下面的另一个组件中。其目的就是希望在封装组建的时候，外层组件可以通过 ref 直接控制内层组建的或元素的行为
+
+所以如果 A 组件是一个函数组件的话，就用通过这样的方式来声明组件才能支持 ref
+
+```ts
+const A = React.forwardRef((props, ref) => {
+  return <div ref={props.ARef}></div>;
+});
+```
+
+下面可以详细看一个具体的例子：
+
+```ts
+import React, { useRef, forwardRef } from "react";
+
+const SonComponent = forwardRef((props, refparams) => {
+  return (
+    <>
+      <div>
+        <input type="text" defaultValue={props.value} ref={refparams} />
+        <button onClick={() => console.log(refparams.current)}>
+          点击打印ref
+        </button>
+      </div>
+    </>
+  );
+});
+
+const FatherComponent = () => {
+  const sonRef = useRef();
+  return (
+    <>
+      <SonComponent ref={sonRef} value="这是子组件的value值" />
+    </>
+  );
+};
+```
+
+分析： 在父组件 FatherComponent 中设置 sonRef 并传给了子组件的 ref 属性，在定义子组件时用 forwardRef 包裹渲染函数并传入 props，refparamas 两个参数，refparamas 对应的是子组件的 ref 属性，并且 SonComponent 组件将 ref 转发给其内部的 input 框，此时，点击按钮就可以获取到这个 input 框；
+
+### useImperativeHandle ---> 父组件调用子组件的属性和方法的钩子函数
+
+这个 hook 接受三个参数：
+
+1. 父组件传过来的 ref
+2. 处理函数，函数的返回值就是传给父组件的方法和属性
+3. 依赖项，表示只要依赖项发生改变，才会把最新的属性和方法传给父组件；如果没有依赖项，表示只要子组件 render 都会把属性和方法传给父组件
+
+
+所以把forwardRef 和 useImrativeHandle结合起来就是：
+```ts
+import React,{useRef,forwardRef} from 'react'
+
+const SonComponent = forwardRef((props, refparams) => {
+useImperativeHandle(refparams, () => {
+    return {
+      logSon: () => {
+        console.log('测试');
+      }
+    }
+  },[])
+  
+    return (
+        <>
+            <div>
+                <input type="text" defaultValue={props.value} ref={refparams} />
+                <button onClick={() => console.log(refparams.current)}>点击打印ref</button>
+            </div>
+        </>
+
+    )
+})
+
+const FatherComponent = () => {
+    const sonRef = useRef()
+    
+    useEffect(()=>{
+          sonRef.current.logSon()  ----测试
+    },[])
+    
+    return (
+        <>
+            <SonComponent ref={sonRef} value='这是子组件的value值' />
+        </>
+    )
+}
+
 ```
