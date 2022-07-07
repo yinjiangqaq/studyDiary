@@ -320,6 +320,11 @@ $: git remote set-url origin git@github.com:yinjiangqaq/studyDiary.git
 $: git remote set-url origin http://github.com/yinjiangqaq/studyDiary.git
 ```
 
+## 查看远端设置的源
+```
+git remote -v
+```
+
 ## git set upstream 
 
 ```
