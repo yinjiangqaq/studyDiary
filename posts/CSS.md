@@ -913,3 +913,9 @@ box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 ```
  box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 ```
+
+## ant design 中的table组件，为什么会出现本来就是自适应屏幕宽度的，但是有些突然就会超出宽度，尽管你没有设置任何column的宽度。
+
+这是因为你的列内容中有下划线，一些@等特殊符号这种，ant design认为是不可以换行的，所以导致会超出屏幕宽度。
+
+一般这种如果你设置了 word-break: break all 会导致很多单词都被截断了。如果你不想要这种效果，你可以设置column的fixed 固定方向，然后在table外层设置一个容器，`overview: auto， width: 100%`

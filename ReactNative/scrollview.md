@@ -87,7 +87,7 @@ const scrollIndicatorPosition = Animated.multiply(
 const MULTI_BANNER_WIDTH = 300;
 const scrollIndicator = new Animated.Value(0);
 const [preOffset_x, setPreOffset_x] = React.useState(0); // record pre x-offset
-const scrollView = React.useRef < ScrollView >(null);
+const scrollView = React.useRef < ScrollView > null;
 const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
   // console.log(event.nativeEvent.contentOffset.x, preOffset_x); //scroll offset
   const NumOfBanner = getNumOfBanner(
@@ -152,4 +152,90 @@ const getNumOfBanner = (offset: number, isRight: boolean) => {
 >
   ...
 </ScrollView>;
+```
+
+## Animated 动画
+
+RN 在设置动画的时候，尽量不要，少编写 setState 的代码，因为会导致页面重新渲染，会让页面的性能很差。如果要增加的话，就给 setState 的代码增加防抖
+
+```tsx
+const [isFolded, setIsFolded] = React.useState(false);
+const stateKeys = React.useRef<{
+  scrollPosition: number;
+  animatedScrollPosition: Animated.Value;
+  folded: boolean;
+}>({
+  scrollPosition: 0,
+  animatedScrollPosition: new Animated.Value(0),
+  folded: false,
+});
+
+// 需要给setIsFolded 设置防抖，避免频繁更新setState,导致页面刷新
+const updateIsFolded = useDebouncedCallback(
+  (folded: boolean) => setIsFolded(folded),
+  100,
+  {
+    leading: false,
+    trailing: true,
+  }
+);
+
+const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+  const scrollPosition = event.nativeEvent.contentOffset.y;
+  const previousScrollPosition = stateKeys.current.scrollPosition;
+
+  setShouldCloseSubwalletHandler(true);
+
+  if (scrollPosition < 0) {
+    return;
+  }
+
+  if (
+    (previousScrollPosition < scrollPosition && !stateKeys.current.folded) ||
+    scrollPosition >= 50
+  ) {
+    updateIsFolded(true);
+    stateKeys.current.folded = true;
+  }
+
+  if (scrollPosition < 50 && stateKeys.current.folded) {
+    updateIsFolded(false);
+    stateKeys.current.folded = false;
+  }
+
+  stateKeys.current.scrollPosition = scrollPosition;
+};
+
+// 滑动时间也需要增加相应的节流
+const onScrollEvent = Animated.event(
+  [
+    {
+      nativeEvent: {
+        contentOffset: { y: stateKeys.current.animatedScrollPosition },
+      },
+    },
+  ],
+  {
+    listener: onScroll,
+    useNativeDriver: false,
+  }  const foldedOpacityValue = stateKeys.current.animatedScrollPosition.interpolate(
+    {
+      inputRange: [0, 25, 50],
+      outputRange: [1, 0.5, 0],
+      extrapolate: 'clamp',
+    }
+  );
+);
+// 动画还可以添加插值
+  const foldedOpacityValue = stateKeys.current.animatedScrollPosition.interpolate(
+    {
+      inputRange: [0, 25, 50],
+      outputRange: [1, 0.5, 0],
+      extrapolate: 'clamp',
+    }
+  );
+<Animated.ScrollView onScroll={onScrollEvent} scrollEventThrottle={1}>
+  <A />
+  <B />
+</Animated.ScrollView>;
 ```

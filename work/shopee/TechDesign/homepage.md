@@ -2,6 +2,52 @@
 sequenceDiagram
 autonumber
 
+participant U as user
+participant R as withRateLimiter
+participant H as withHomepageHoc
+participant A as withAuthHoc
+participant N as withAuthHoc(newp)
+participant O as OldHomepage
+participant V as Homepage_V2
+participant E as errorPage
+participant S as shopeepay Setup flow page
+
+U ->> R: check rateLimiter
+alt hit rateLimit
+R->>E:  navigate to ErrorPage
+else
+U ->> H: check homepage grayscale
+alt homepage ccms toggle true
+H ->> N : enter AuthHoc(new)
+N -->>N: do Auth login logic(shopee login status)
+N ->> V: navigate to Homepage_V2
+V -->>V: request new overview api and check if need to do active flow
+alt if need active flow
+V ->> S: navigate to shopeepay setup flow page
+S -->>S: do active flow logic
+S -->>V: finish active flow, return  to homepage
+else
+end
+V-->>U: display homepage
+else
+H ->> A: enter AuthHoc(old)
+A -->> A: do the auth login logic, check if need active flow
+alt if need active flow
+A ->>S: navigate to shopeepay setup flow page
+S -->>S: do active flow logic
+S -->>A: pop active flow result
+else
+end
+A ->>O: navigate to Old homepage
+O -->>U: display Old homepage
+end
+end
+```
+
+```mermaid
+sequenceDiagram
+autonumber
+
 participant H as Homepage
 participant P as HomepagePopup
 participant I as PopupItem
@@ -12,7 +58,6 @@ P -->>P: format homepage PropsData, get formattedHomepagePopupPropsPropsArray
 P->>I: render Popup by props
 I-->>H: display Homepage Popup
 ```
-
 
 ```mermaid
 sequenceDiagram
@@ -29,7 +74,7 @@ W->>W: getMigratedEntrance by config 1
 W->>M: render migratedEntrance
 M->>B: request API
 B->>M: get response
-M->>H: dispatch(updateHomePageWalletEntrancesLoading({ withdrawLoading: false })) 
+M->>H: dispatch(updateHomePageWalletEntrancesLoading({ withdrawLoading: false }))
 H->>M: homepageInitLoading ==false, hide placeHolder, display Entrance
 ```
 
