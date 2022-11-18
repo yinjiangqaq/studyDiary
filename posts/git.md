@@ -332,3 +332,22 @@ git remote -v
 
 $: git branch --set-upstream-to origin/<branch Name>
 ```
+
+## 回滚
+
+```
+$ git show commitID // 展示对应commit的信息
+$ git reset --hard commitId // 这是强删。会把对应的commit删掉
+
+$ git revert commitId // 这是在对应的commit上再加一个commit，把对应的代码删掉
+```
+
+## 本地合并远程分支
+
+```
+$ git fetch origin branchA
+
+$ git checkout  localBranchB
+
+$ git merge origin branchA
+```

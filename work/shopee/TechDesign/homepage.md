@@ -2,6 +2,21 @@
 sequenceDiagram
 autonumber
 
+participant A as Homepage
+participant B as WalletBalance
+participant Z as BE 
+
+A->>Z: request overview api for buyer_wallet and hideSubWallet data
+Z-->>A: get the api response data, and then format into hideSubWallets
+```
+
+
+
+
+```mermaid
+sequenceDiagram
+autonumber
+
 participant U as user
 participant R as withRateLimiter
 participant H as withHomepageHoc
