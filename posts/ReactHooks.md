@@ -527,6 +527,115 @@ const [state, setState] = useState(() => {
 
 ```
 
+#### 对ant design的表单做操作的时候衍生出来的一些思考和尝试
+
+因为`useEffect`没法监听到form表单的更新，因为`useForm()`拿到的form表单的对象其实是像`ref`的一个东西，**没法监听到他的更新**的。所以如果想要触发更新，拿到最新的form表单对象，其实可以通过一种旁门左道哈。就是hack一个state，
+```
+import React from 'react';
+
+export default () => {
+  const [, setState] = React.useState({});
+  return () => setState({});
+};
+```
+每次`setFormFieldsValue`之后，调用这个hook触发**组件的的更新**, 进行重新渲染，这时候就能针对form表单对象的变化而做出UI上的变化了，对于一些没有被ant design表单元素包含的一些组件，可以通过这种方法来触发他的更新
+
+
+而这里有触发了对useState的重新思考，我们只有set了一个跟**之前不一样**的值，才会**触发组件的更新**，而useEffect来说，只是因为setState了一个跟之前不同的值，**而此时useEffect中的依赖项又有相应的state值，才会触发use Effect 回调的再次执行**，如果没有useEffect依赖中**没有相应的依赖项 state**，就算state变化，也是不会触发useEffect的再次执行的
+
+```ts
+import React from 'react';
+import 'antd/dist/antd.css';
+import './index.css';
+import { Button, Checkbox, Form, Input } from 'antd';
+
+
+const App = () => {
+  const[,setTrueOrFalse] = React.useState(false)
+  const onFinish = (values) => {
+    console.log('Success:', values);
+    setTrueOrFalse(true)// 这里只会触发两次打印 xxxxx，第一次式刚进来的时候，第二次是因为从false 被设为 true了，后续都不会打印了，因为没有更新了
+  };
+  console.log("xxxxxx ")
+React.useEffect(()=>{
+  console.log("xxxxx run useEffect") //这里只会执行一次，因为依赖项里没有trueOrFalse这个state
+  // setTrue(false) //如果这句话执行
+},[])
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+  };
+
+  return (
+    <Form
+      name="basic"
+      labelCol={{
+        span: 8,
+      }}
+      wrapperCol={{
+        span: 16,
+      }}
+      initialValues={{
+        remember: true,
+      }}
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      autoComplete="off"
+    >
+      <Form.Item
+        label="Username"
+        name="username"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your username!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        label="Password"
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your password!',
+          },
+        ]}
+      >
+        <Input.Password />
+      </Form.Item>
+
+      <Form.Item
+        name="remember"
+        valuePropName="checked"
+        wrapperCol={{
+          offset: 8,
+          span: 16,
+        }}
+      >
+        <Checkbox>Remember me</Checkbox>
+      </Form.Item>
+
+      <Form.Item
+        wrapperCol={{
+          offset: 8,
+          span: 16,
+        }}
+      >
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
+  );
+};
+
+export default App;
+```
+
+
 ### useEffect
 
 **在函数组件主体内（这里指在 React 渲染阶段）改变 DOM、添加订阅、设置定时器、记录日志以及执行其他包含副作用的操作都是不被允许的**，因为这可能会产生莫名其妙的 bug 并破坏 UI 的一致性。
@@ -995,3 +1104,4 @@ const FatherComponent = () => {
 }
 
 ```
+

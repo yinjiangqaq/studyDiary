@@ -122,3 +122,66 @@ const onFinish = (values) => {
     });
 };
 ```
+
+## antd design form
+
+### Form.Item.shouldUpdate
+
+当 `shouldUpdate` 为 `true` 时，`Form` 的任意变化都会使该 `Form.Item` 重新渲染。这对于自定义渲染一些区域十分有帮助：
+
+```js
+<Form.Item shouldUpdate>
+  {() => {
+    return <pre>{JSON.stringify(form.getFieldsValue(), null, 2)}</pre>;
+  }}
+</Form.Item>
+```
+
+当 `shouldUpdate` 为方法时，表单的每次数值更新都会调用该方法，**提供原先的值与当前的值以供你比较是否需要更新**。这对于是否根据值来渲染额外字段十分有帮助
+： 这种十分适合那种单选框和其他表单的复合形式，例如单选框的选择决定了另外一个表单的展示与否，而且这两个表单后端需要的其实只有一个字段，所以我们还需要经过一层处理，把这个字段交给后端，等到编辑模式，需要把表单数据展示出来的时候，还是需要经过处理，把原来的一个字段拆分成两个字段。
+场景:
+
+```js
+<Form.Item name="pricexx" label="设备价格">
+  <Radio.Group>
+    <Radio.Button value={0}>不限</Radio.Button>
+    <Radio.Button value={1}>选择价格</Radio.Button>
+  </Radio.Group>
+</Form.Item>;
+{
+  form.getFieldValue("pricexxx") === 1 ? (
+    <Form.Item name="price" label>
+      <Select>xxxx</Select>
+    </Form.Item>
+  ) : null;
+}
+```
+
+如果采用 Form.Item.shouldUpdate，就可以比较好的满足这种场景
+
+```js
+<Form.Item
+  shouldUpdate={(pre: any, cur: any) => pre.price !== curr.price}
+  label="设备价格"
+>
+  {({ getFieldValue }) => {
+    const price = getFieldValue("price");
+    return (
+      <>
+        <Radio.Group value={price ? 1 : 0}>
+          <Radio.Button value={0}>不限</Radio.Button>
+          <Radio.Button value={1}>选择价格</Radio.Button>
+        </Radio.Group>
+      {
+        price? (
+          <Form.Item name="price" label>
+            <Select>xxxx</Select>
+          </Form.Item>
+        ) : null;
+      }
+      </>
+    );
+  }}
+</Form.Item>;
+
+```
