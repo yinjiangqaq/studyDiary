@@ -4,6 +4,8 @@
 
 > View 组件是构建 UI 的最基本的容器组件，它支持 flexbox、style、一些触摸处理和可访问性控件的布局。不论在什么平台上，View 都直接对应当前平台的原生视图，无论它是 UIView、div 还是 android.view.View。
 
+如果父组件不设置flex:1,或者固定的宽高的话，子元素的View设置flex:2,flex:1是没有意义的，都是不会展示的
+
 ```js
 //style样式支持内联和stylesheet对象
 import React from "react";
