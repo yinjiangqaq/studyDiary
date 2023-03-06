@@ -362,3 +362,37 @@ $ git merge origin branchA
 ## 查看react native页面性能的工具
 
 `react-dev-tools`
+
+
+
+## git 二分查找有问题的commit 
+
+git bisect 
+
+```
+首先你当前的commit是有问题的，但是你不知道从哪个commit开始你的commit就有这个问题，你需要通过二分查找的方式，找到这个有问题的commit
+
+1. 确认你的判断条件，例如单测，yarn run test 对应的文件
+
+2. 确认正常OK的commit hash
+
+3. 然后开始我们的git bisect之旅
+
+4. git bisect start
+
+5. git bisect bad // 当前所在的commit是错误的
+
+6. git bisect good 正常commit hash //定义好终点
+
+7. 定义好起点终点以后，它会自动告诉你还有多少次二分，然后每一次进行操作，我们都用之前定好的判断条件来进行判断，这个commit是好是坏，然后告诉它 git bisect good or bad
+
+...
+
+到最后就能确认有问题的commit是哪个
+
+```
+
+
+## git merge-base 
+
+git merge-base head [branc

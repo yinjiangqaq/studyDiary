@@ -562,3 +562,8 @@ React Native 的flex 布局大体上跟浏览器的差不多，可能有区别�
 react native 不能直接在父元素设置 opacity，这会让子元素同样也受到 opacity 的影响而透明
 
 一般是在 background color 设置对应的 opacity 值。例如 `rgba(207, 207, 207, 0.54)`，或者 `'#CFCFCF54'`
+
+
+## Text 组件的 numOfLines
+
+numOfLines 这个组件是设置Text总共可以展示几行的，如果超过的话就会默认展示省略号。然后不用给这个Text设置height，不然numOfLines属性有可能会失效
