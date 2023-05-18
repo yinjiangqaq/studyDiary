@@ -1,0 +1,5 @@
+## HttpClient 和 native 的 刷token逻辑
+
+如果RN这边知道native这边会代理RN的请求的话，RN这边请求的access-token就会native拦截，然后替换成native的access-token, BE这边一个device id只会维护一个access_token。所以如果RN和native两者用到的access-token 不一致的话，就会导致token验证一直失败，因为native只是替换了它的device-id对应的access token，而request的meta里面携带的是RN自己的device_id，BE那边验证就不通过了。
+
+

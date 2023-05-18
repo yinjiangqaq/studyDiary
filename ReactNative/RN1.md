@@ -567,3 +567,8 @@ react native 不能直接在父元素设置 opacity，这会让子元素同样�
 ## Text 组件的 numOfLines
 
 numOfLines 这个组件是设置Text总共可以展示几行的，如果超过的话就会默认展示省略号。然后不用给这个Text设置height，不然numOfLines属性有可能会失效
+
+
+## RN
+
+做RN的一直都需要考虑新老版本的问题。热更的问题。

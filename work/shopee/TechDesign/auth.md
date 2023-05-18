@@ -1,0 +1,12 @@
+## Auth
+
+在shopeepay 团队做merge之前，我们使用的鉴权是使用shopee那边的登陆态。cookie和session_token主要是这两种进行鉴权的。
+
+而做merge的原因是，shopeepay作为一个独立的app产品，应该是需要有自己的一套鉴权，有一套自己的账户体系，这样后续业务拓展，切割方面都会比较方便。
+
+而在shopeepay merge项目中的鉴权方式，也是通过token，而我们作为shopee里面的支付方式，我们怎么和虾皮的鉴权体系联系起来呢？
+
+首先shopee那边会统一提供一个get_nonce的接口给到shopeepay这边调用，这个接口用的是虾皮的登陆态，拿到shopee的nonce之后，我们调用shoeepay的登陆接口，用shopee的nonce来换取shopeepay的token，后续所有的业务接口都携带上这个token，这就完成了两者的鉴权联系。
+
+
+而根据上面的核心链路，我们FE这边需要封装自己的http网关(axios)，具体的链路如下图:

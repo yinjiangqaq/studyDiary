@@ -112,3 +112,11 @@ H -->C(HomepageContent)
 C -->|request related API, get response| D(updateHomepageInitLoading false)
 D-->|hide HomepagePlaceholder| H
 ```
+
+
+
+## 首页变慢的原因
+以后每次首页的开发都需要关注一下首页的渲染次数，渲染次数的增加，很有可能会导致首页变慢，因为js的执行是单线程，它是需要去优先做render的事情的。所以渲染次数的增加，会导致其他异步的操作都要往后稍稍。
+
+
+## 容灾

@@ -527,9 +527,10 @@ const [state, setState] = useState(() => {
 
 ```
 
-#### 对ant design的表单做操作的时候衍生出来的一些思考和尝试
+#### 对 ant design 的表单做操作的时候衍生出来的一些思考和尝试
 
-因为`useEffect`没法监听到form表单的更新，因为`useForm()`拿到的form表单的对象其实是像`ref`的一个东西，**没法监听到他的更新**的。所以如果想要触发更新，拿到最新的form表单对象，其实可以通过一种旁门左道哈。就是hack一个state，
+因为`useEffect`没法监听到 form 表单的更新，因为`useForm()`拿到的 form 表单的对象其实是像`ref`的一个东西，**没法监听到他的更新**的。所以如果想要触发更新，拿到最新的 form 表单对象，其实可以通过一种旁门左道哈。就是 hack 一个 state，
+
 ```
 import React from 'react';
 
@@ -538,31 +539,30 @@ export default () => {
   return () => setState({});
 };
 ```
-每次`setFormFieldsValue`之后，调用这个hook触发**组件的的更新**, 进行重新渲染，这时候就能针对form表单对象的变化而做出UI上的变化了，对于一些没有被ant design表单元素包含的一些组件，可以通过这种方法来触发他的更新
 
+每次`setFormFieldsValue`之后，调用这个 hook 触发**组件的的更新**, 进行重新渲染，这时候就能针对 form 表单对象的变化而做出 UI 上的变化了，对于一些没有被 ant design 表单元素包含的一些组件，可以通过这种方法来触发他的更新
 
-而这里有触发了对useState的重新思考，我们只有set了一个跟**之前不一样**的值，才会**触发组件的更新**，而useEffect来说，只是因为setState了一个跟之前不同的值，**而此时useEffect中的依赖项又有相应的state值，才会触发use Effect 回调的再次执行**，如果没有useEffect依赖中**没有相应的依赖项 state**，就算state变化，也是不会触发useEffect的再次执行的
+而这里有触发了对 useState 的重新思考，我们只有 set 了一个跟**之前不一样**的值，才会**触发组件的更新**，而 useEffect 来说，只是因为 setState 了一个跟之前不同的值，**而此时 useEffect 中的依赖项又有相应的 state 值，才会触发 use Effect 回调的再次执行**，如果没有 useEffect 依赖中**没有相应的依赖项 state**，就算 state 变化，也是不会触发 useEffect 的再次执行的
 
 ```ts
-import React from 'react';
-import 'antd/dist/antd.css';
-import './index.css';
-import { Button, Checkbox, Form, Input } from 'antd';
-
+import React from "react";
+import "antd/dist/antd.css";
+import "./index.css";
+import { Button, Checkbox, Form, Input } from "antd";
 
 const App = () => {
-  const[,setTrueOrFalse] = React.useState(false)
+  const [, setTrueOrFalse] = React.useState(false);
   const onFinish = (values) => {
-    console.log('Success:', values);
-    setTrueOrFalse(true)// 这里只会触发两次打印 xxxxx，第一次式刚进来的时候，第二次是因为从false 被设为 true了，后续都不会打印了，因为没有更新了
+    console.log("Success:", values);
+    setTrueOrFalse(true); // 这里只会触发两次打印 xxxxx，第一次式刚进来的时候，第二次是因为从false 被设为 true了，后续都不会打印了，因为没有更新了
   };
-  console.log("xxxxxx ")
-React.useEffect(()=>{
-  console.log("xxxxx run useEffect") //这里只会执行一次，因为依赖项里没有trueOrFalse这个state
-  // setTrue(false) //如果这句话执行
-},[])
+  console.log("xxxxxx ");
+  React.useEffect(() => {
+    console.log("xxxxx run useEffect"); //这里只会执行一次，因为依赖项里没有trueOrFalse这个state
+    // setTrue(false) //如果这句话执行
+  }, []);
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -587,7 +587,7 @@ React.useEffect(()=>{
         rules={[
           {
             required: true,
-            message: 'Please input your username!',
+            message: "Please input your username!",
           },
         ]}
       >
@@ -600,7 +600,7 @@ React.useEffect(()=>{
         rules={[
           {
             required: true,
-            message: 'Please input your password!',
+            message: "Please input your password!",
           },
         ]}
       >
@@ -634,7 +634,6 @@ React.useEffect(()=>{
 
 export default App;
 ```
-
 
 ### useEffect
 
@@ -1064,8 +1063,8 @@ const FatherComponent = () => {
 2. 处理函数，函数的返回值就是传给父组件的方法和属性
 3. 依赖项，表示只要依赖项发生改变，才会把最新的属性和方法传给父组件；如果没有依赖项，表示只要子组件 render 都会把属性和方法传给父组件
 
+所以把 forwardRef 和 useImrativeHandle 结合起来就是：
 
-所以把forwardRef 和 useImrativeHandle结合起来就是：
 ```ts
 import React,{useRef,forwardRef} from 'react'
 
@@ -1077,7 +1076,7 @@ useImperativeHandle(refparams, () => {
       }
     }
   },[])
-  
+
     return (
         <>
             <div>
@@ -1091,11 +1090,11 @@ useImperativeHandle(refparams, () => {
 
 const FatherComponent = () => {
     const sonRef = useRef()
-    
+
     useEffect(()=>{
           sonRef.current.logSon()  ----测试
     },[])
-    
+
     return (
         <>
             <SonComponent ref={sonRef} value='这是子组件的value值' />
@@ -1105,3 +1104,24 @@ const FatherComponent = () => {
 
 ```
 
+## Effect 里面最好不要做异步操作.
+
+如果 effect 里面是有异步请求的，很可能会导致整个数据流发生混乱，导致拿到的还是上一次的值
+
+所以一般 effect 里面**不让执行异步操作**
+
+## useState
+
+所以不建议用下面的方式进行 useState 的初始化
+
+```ts
+useState(func());
+func(); // 会执行多次，但是useState的初始化用的初始化值，只会用第一次func()执行的结果
+```
+
+如何用让 useState 里面的函数只执行一次呢,下面是推荐写法
+
+```ts
+const funcA = () => a;
+const [A, setA] = React.useState(funcA); // 传入一个函数，这样子funcA只会在useState初始化执行的时候，执行一次
+```

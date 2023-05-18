@@ -45,7 +45,7 @@ $ git config --global --unset user.name
 
 2. 切换到需要开发的分支
 
-3. 使用 git stash apply + hash  能把丢失的stash 也给找回来，只要保留了hash值，git stash pop 的时候，就会暴露这个stash 的 hash 值
+3. 使用 git stash apply + hash 能把丢失的 stash 也给找回来，只要保留了 hash 值，git stash pop 的时候，就会暴露这个 stash 的 hash 值
 
 ## 企业 git 流程
 
@@ -102,11 +102,11 @@ git push -u origin new_branch  or git push --set-upstream origin new_branch //�
 
 ```
 
-## git本地合并代码有冲突(还没提交到远程)怎么撤销合并
+## git 本地合并代码有冲突(还没提交到远程)怎么撤销合并
+
 ```
 $ git merge --abort
 ```
-
 
 ## 将远程的分支拉到本地
 
@@ -116,14 +116,13 @@ git fetch origin branch name : local branch name
 git checkout local branch name
 ```
 
-
 ## 怎么查看该分支的来源
 
 ```
 git reflog show childBranchName
 ```
 
-## 当feature分支落后于master，也就是master分支有更新的commit的时候，怎么让feature分支跟master分支对齐
+## 当 feature 分支落后于 master，也就是 master 分支有更新的 commit 的时候，怎么让 feature 分支跟 master 分支对齐
 
 ```
 1. feature $: git merge master
@@ -135,13 +134,16 @@ git reflog show childBranchName
 ```
 
 ## git rebase
+
 > 这是一个拿来合并多次提交记录的命令,可以让我们的提交记录更简洁
 
 ### 场景一：合并多次提交记录
+
 ```
 git rebase -i HEAD~4 //合并最近的四次提交记录
 ```
-这时候，会自动进入到vi编辑模式
+
+这时候，会自动进入到 vi 编辑模式
 
 ```
 s cacc52da add: qrcode
@@ -169,6 +171,7 @@ s 8f33126c feat: add test2.js
 ```
 
 有几个命令需要注意一下
+
 ```
 p, pick = use commit
 r, reword = use commit, but edit the commit message
@@ -178,7 +181,9 @@ f, fixup = like “squash”, but discard this commit’s log message
 x, exec = run command (the rest of the line) using shell
 d, drop = remove commit
 ```
+
 按照上面的命令来修改你的提交记录
+
 ```
 s cacc52da add: qrcode
 s f072ef48 update: indexeddb hack
@@ -187,12 +192,12 @@ p 8f33126c feat: add test2.js
 ```
 
 如果保存的时候，你碰到了这个错误：
+
 ```
 error: cannot 'squash' without a previous commit
 ```
 
 > 注意不要合并先前提交的东西，也就是已经提交远程分支的纪录。
-
 
 如果你异常退出了 vi 窗口，不要紧张：
 
@@ -205,6 +210,7 @@ git rebase --edit-todo
 ```
 git rebase --continue
 ```
+
 查看结果
 
 ```
@@ -217,11 +223,11 @@ git log
 git rebase -i HEAD~5
 ```
 
-把最前面的五个commit  合并为一个,sqash是 合并到上一个更改，然后保留commit信息
-,fix 是合并到上一个更改，但是不保留commit信息,pick是保留此次更改
-
+把最前面的五个 commit 合并为一个,sqash 是 合并到上一个更改，然后保留 commit 信息
+,fix 是合并到上一个更改，但是不保留 commit 信息,pick 是保留此次更改
 
 所以进行完 git rebase -i HEAD~5 命令之后，会出现。
+
 ```
 pick commit 1
 pick commit 2
@@ -230,7 +236,8 @@ pick commit 4
 pick commit 5
 ```
 
-这样的操作界面，一般commit 5就是你最新的一个commit，现在你需要把这五个commit合并为一个，你需要向上合并，pick commit 1，然后其他四个commit 的 `pick` 都改为f,不保留 commit信息，向上合并
+这样的操作界面，一般 commit 5 就是你最新的一个 commit，现在你需要把这五个 commit 合并为一个，你需要向上合并，pick commit 1，然后其他四个 commit 的 `pick` 都改为 f,不保留 commit 信息，向上合并
+
 ```
 pick commit 1
 f commit 2
@@ -238,15 +245,14 @@ f commit 3
 pick commit 4
 f commit 5
 ```
-如果最后是这样的话，rebase就会保留两个commit记录，一个是commit 1，合并了2和3的，一个是commit 4 合并了5的。 而f 和 s的区别是，f是会丢弃commit记录，而s是会把commit记录合并到上一个更改中。
 
+如果最后是这样的话，rebase 就会保留两个 commit 记录，一个是 commit 1，合并了 2 和 3 的，一个是 commit 4 合并了 5 的。 而 f 和 s 的区别是，f 是会丢弃 commit 记录，而 s 是会把 commit 记录合并到上一个更改中。
 
-如果在rebase过程中，因为commit记录太多的话，手动把pick改成squash的话，很困难，可以采用 vi 全局配置。
+如果在 rebase 过程中，因为 commit 记录太多的话，手动把 pick 改成 squash 的话，很困难，可以采用 vi 全局配置。
 
 ```
 :%s/pick/squash/g（等同于 :g/pick/s//squash/g） 替换每一行中所有 pick 为 squash
 ```
-
 
 ### 分支合并
 
@@ -258,7 +264,8 @@ git:(master) git checkout -b feature1 //从master切出来功能分支
 git:(feature1) git rebase master//切换到功能分支，执行rebase命令
 
 ```
-在这里，rebase做的操作是：
+
+在这里，rebase 做的操作是：
 
 首先，git 会把 feature1 分支里面的每个 commit 取消掉；
 
@@ -270,7 +277,6 @@ git:(feature1) git rebase master//切换到功能分支，执行rebase命令
 
 在 rebase 的过程中，也许会出现冲突 conflict。在这种情况，git 会停止 rebase 并会让你去解决冲突。在解决完冲突后，用 git add 命令去更新这些内容。
 
-
 ```
 git rebase --continue  //注意，你无需执行 git-commit，只要执行 continue,这样 git 会继续应用余下的 patch 补丁文件。
 ```
@@ -281,19 +287,17 @@ git rebase --continue  //注意，你无需执行 git-commit，只要执行 cont
 git rebase —abort
 ```
 
-
 ### 常用 git rebase -i origin/master
 
-## git rebase 成功之后，还没push --force到远程时，如何撤销git rebase。
+## git rebase 成功之后，还没 push --force 到远程时，如何撤销 git rebase。
 
-此时应该执行 `git reflog `命令，然后查看到远程的commit记录，执行`git reset --hard origin commit号`回到执行git rebase之前的位置。
-
+此时应该执行 `git reflog `命令，然后查看到远程的 commit 记录，执行`git reset --hard origin commit号`回到执行 git rebase 之前的位置。
 
 ## 本地更改分支名
 
 git 本地分支还没推到远程的时候，但是已经写了一部分代码的了，可以先把更改，commit， 然后把不需要推上远程的代码 git stash ，如果没有，就不用执行这个操作，然后 执行`git branch -m new branch name`，然后 git push 上去。
 
-## 查看本地所有git config
+## 查看本地所有 git config
 
 ```
 git config -l //查看本地config 列表
@@ -309,26 +313,28 @@ git config https.proxy xxx:xxx
 
 ```
 
-## git 提交代码形式从http形式更改为ssh形式
+## git 提交代码形式从 http 形式更改为 ssh 形式
+
 ```
 $: git remote set-url origin git@github.com:yinjiangqaq/studyDiary.git
 ```
 
-## git 提交代码形式从ssh 形式更改为http 形式
+## git 提交代码形式从 ssh 形式更改为 http 形式
 
 ```
 $: git remote set-url origin http://github.com/yinjiangqaq/studyDiary.git
 ```
 
 ## 查看远端设置的源
+
 ```
 git remote -v
 ```
 
-## git set upstream 
+## git set upstream
 
 ```
-//因为是属于分支操作，所以前置命令是git branch 
+//因为是属于分支操作，所以前置命令是git branch
 
 $: git branch --set-upstream-to origin/<branch Name>
 ```
@@ -352,22 +358,19 @@ $ git checkout  localBranchB
 $ git merge origin branchA
 ```
 
-## 开发过程中性能相关的
+##  开发过程中性能相关的
 
-对于一个页面，如果子组件很多，而且子组件依赖了父组件的一些state和一些props，对于子组件，我们一定要用`React.useMemo()`进行包裹，避免子组件因为父级的重新渲染导致的渲染。
+对于一个页面，如果子组件很多，而且子组件依赖了父组件的一些 state 和一些 props，对于子组件，我们一定要用`React.useMemo()`进行包裹，避免子组件因为父级的重新渲染导致的渲染。
 
-然后对于一些对首页的状态没有任何依赖的纯函数，我们一定要防止在首页的最外层，避免因为首页的重新渲染导致纯函数的重复执行，因为每一次执行，都会生成一个新的副本。这种对页面性能的影响也很不好。
+然后对于一些  对首页的状态没有任何依赖的纯函数，我们一定要防止在首页的最外层，避免因为首页的重新渲染导致纯函数的重复执行，因为每一次执行，都会生成一个新的副本。这种对页面性能的影响也很不好。
 
-
-## 查看react native页面性能的工具
+## 查看 react native 页面性能的工具
 
 `react-dev-tools`
 
+## git 二分查找有问题的 commit
 
-
-## git 二分查找有问题的commit 
-
-git bisect 
+git bisect
 
 ```
 首先你当前的commit是有问题的，但是你不知道从哪个commit开始你的commit就有这个问题，你需要通过二分查找的方式，找到这个有问题的commit
@@ -392,7 +395,8 @@ git bisect
 
 ```
 
+## git merge-base
 
-## git merge-base 
+找 branch A 和 branch B 的共同分支
 
-git merge-base head [branc
+git merge-base branchA branchB
