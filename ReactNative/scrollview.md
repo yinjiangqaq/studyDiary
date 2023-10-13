@@ -239,3 +239,11 @@ const onScrollEvent = Animated.event(
   <B />
 </Animated.ScrollView>;
 ```
+
+
+## ReactNative 的ScrollView 当 refreshControl设置成true的时候，点击事件没有触发。
+
+当下拉刷新触发refresh的逻辑的时候，因为refresh control本身是有动画的，**动画会导致scrollView的高度发生改变，高度发生改变的这个过程中，点击scroll view 中的可点击元素，其实是触发不了onPress事件的**，可能触发的是别的事件。 
+
+
+如果你把API请求的持续时间设置长一些，让refresh control暂时维持loading的状态，你会发现这时候scrollView里面的元素其实是可以点击的。因为这时候scroll view的高度没有改变。

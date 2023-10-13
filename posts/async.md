@@ -393,7 +393,7 @@ class myPromise {
       }
 
       if (this.status === REJECTED) {
-          //setTimeout的异步操作，导致我们可以拿到 promise2
+        //setTimeout的异步操作，导致我们可以拿到 promise2
         setTimeout(() => {
           try {
             let x = onRejected(this.reason);
@@ -452,3 +452,19 @@ const promise = new myPromise((resolve, reject) => {
 ```
 
 控制台输出`err 失败` 至此，我们已经完成了 promise 最关键的部分：then 的链式调用和值的穿透。搞清楚了 then 的链式调用和值的穿透，你也就搞清楚了 Promise。
+
+## async await
+
+async, await 其实是 generator 的语法糖，他的效果类似generator和yield。 await的实现是靠 promise实现的，**需要执行到Promise的终态**才能往后继续执行。
+```ts
+const c = () => Promise((resolve) => resolve(1));
+const b = async () => {
+  const res = await c();
+  console.log(res);
+  console.log("2");
+};
+const a = async () => {
+  await b();
+  console.log("3");
+};
+```

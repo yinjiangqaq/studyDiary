@@ -1125,3 +1125,41 @@ func(); // 会执行多次，但是useState的初始化用的初始化值，只�
 const funcA = () => a;
 const [A, setA] = React.useState(funcA); // 传入一个函数，这样子funcA只会在useState初始化执行的时候，执行一次
 ```
+
+## 当 useEffect 使用 useRef 作为依赖时，useRef 的值更新，不会触发 useEffect，但是如果此时有一个 useState 的值发生了更新，就会触发 useRef 的这个 useEffect 的那个 hook
+
+示例:
+
+```ts
+import { useState, useEffect, useRef } from "react";
+
+export default () => {
+  const [count, setCount] = useState(0);
+  const countRef = useRef(0);
+
+  // 取名为useEffect1
+  useEffect(() => {
+    console.log("count", count);
+  }, [count]);
+
+  // 取名为useEffect2
+  useEffect(() => {
+    console.log("countRef", countRef);
+  }, [countRef.current]);
+
+  return (
+    <div>
+      <p>{count}</p>
+      <button onClick={() => setCount((c) => c + 1)}>button1</button>
+      <button onClick={() => (countRef.current += 1)}>button2</button>
+    </div>
+  );
+};
+```
+* 点击 button1 时，会触发 useEffect1
+
+* 点击 button2 时，不会触发 useEffect2
+
+* 再次点击 button1 时，会触发 useEffect1 和 useEffect2
+
+原因： useRef出来的countRef.current是一个基本类型， countRef的对象是不会认为是一个state，如果它更新并不会触发Effect2的更新。但是再次点击button1的时候，会触发setState,导致组件更新，这时候页面所有的hook都是重新执行，判断依赖更新，因为countRef.current是一个基础类型，检查到值发生了变化,Effect2就会触发更新
