@@ -1,0 +1,17 @@
+@startuml
+
+actor User as U
+participant ActiveFlow as A
+participant Homepage as H
+participant BEService as B
+
+U->A: user enter active flow
+
+A->B: request api checking whether has active flow
+B->A: get user active flow
+alt activeflow not null
+A->A: doing active flow
+end
+A->H: enter homepage
+
+@enduml

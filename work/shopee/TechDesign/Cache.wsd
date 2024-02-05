@@ -1,0 +1,16 @@
+@startuml
+
+abstract class Cache{
+  String key
+  set()
+  get()
+  clear()
+}
+
+class MemoryCache extends Cache
+
+class StorageCache extends Cache
+
+Object : useRequestWithCache()
+@enduml
+
