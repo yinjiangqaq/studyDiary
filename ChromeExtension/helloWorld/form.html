@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOD Form</title>
+  </head>
+  <body>
+    <form id="myForm">
+      <label for="appType">appType:</label>
+      <input
+        type="checkbox"
+        id="appType"
+        name="appType"
+        value="appTypeValue1"
+      />
+      appTypeValue1
+      <input
+        type="checkbox"
+        id="appType"
+        name="appType"
+        value="appTypeValue2"
+      />
+      appTypeValue2
+      <input
+        type="checkbox"
+        id="appType"
+        name="appType"
+        value="appTypeValue3"
+      />
+      appTypeValue3
+
+      <br />
+
+      <label for="pfbName">pfbName:</label>
+      <input type="text" id="pfbName" name="pfbName" />
+
+      <br />
+
+      <label for="branchName">branchName:</label>
+      <input type="text" id="branchName" name="branchName" />
+
+      <br />
+
+      <button type="button" onclick="build()">Build</button>
+      <button type="button" onclick="buildAndPublish()">BuildAndPublish</button>
+    </form>
+  </body>
+
+  <script>
+    function build() {
+      var form = document.getElementById("myForm");
+      var appTypeValues = [];
+      var appTypeCheckboxes = form.elements["appType"];
+      for (var i = 0; i < appTypeCheckboxes.length; i++) {
+        if (appTypeCheckboxes[i].checked) {
+          appTypeValues.push(appTypeCheckboxes[i].value);
+        }
+      }
+      var pfbName = form.elements["pfbName"].value;
+      var branchName = form.elements["branchName"].value;
+
+      // 在此处使用获取到的表单内容执行 BuildAndPublish 操作
+      console.log("BuildAndPublish 按钮被点击");
+      console.log("appType:", appTypeValues);
+      console.log("pfbName:", pfbName);
+      console.log("branchName:", branchName);
+    }
+  </script>
+</html>

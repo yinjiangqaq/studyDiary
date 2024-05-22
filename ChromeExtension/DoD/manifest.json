@@ -1,0 +1,16 @@
+{
+  "name": "DoD Code Push Auto Build Tool",
+  "description": "Base Level Extension",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "hello_extensions.png"
+  },
+  "content_scripts": [
+    {
+      "js": ["./index.js"],
+      "matches": ["https://admin.codepush.i.test.shopee.io/build"]
+    }
+  ]
+}
