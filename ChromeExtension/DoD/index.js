@@ -1,5 +1,10 @@
+var token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibWl0cmFxYSIsImVtYWlsIjoibWl0cmFxYUBzaG9wZWUuY29tIiwicGljdHVyZSI6IiIsInVzZXJpZCI6IiIsImlhdCI6MTY2MTkzMjU3MCwiZXhwIjoxOTc3MjkyNTcwfQ.oZQoJn7dHmJsVQLOJKzjp7N1mb4O8NPrLvShcRgcLgk";
+var headers = {
+  "Content-Type": "application/json",
+};
 
-
+const build_url = `${window.location.origin}/api/admin/v2/fe.apc.hotpatch.PatchAdminService/BuildPackageFromRemote`;
 /**
  * shopeepay 相关app构建服务对应的信息
  */
@@ -262,9 +267,24 @@ function buildAndPublish() {
  */
 
 function injectForm() {
+  // 动态加载 Ant Design 的样式文件
+  const antdStyle = document.createElement("link");
+  antdStyle.rel = "stylesheet";
+  antdStyle.href = "https://cdn.jsdelivr.net/npm/antd/dist/antd.css";
+  document.head.appendChild(antdStyle);
+
+  // 动态加载 Ant Design 的脚本文件
+  const antdScript = document.createElement("script");
+  antdScript.src = "https://cdn.jsdelivr.net/npm/antd/dist/antd.js";
+  document.head.appendChild(antdScript);
+
   // 创建表单元素
+  const formContainer = document.createElement("div");
+  formContainer.id = "formContainer";
   var form = document.createElement("form");
   form.id = "dodForm";
+  const formItemContainer = document.createElement("div");
+  form.appendChild(formItemContainer);
   // 创建并添加 appType 多选框
   var appTypeLabel = document.createElement("label");
   appTypeLabel.textContent = "appType:";
@@ -332,63 +352,142 @@ function injectForm() {
   // 将表单添加到页面
   content.appendChild(form);
 }
+// 辅助函数
+const createFormItem = (labelText, inputElement) => {
+  const formItem = document.createElement("div");
+  formItem.classList.add("ant-form-item");
 
-// 辅助函数：创建单选框
-function createRadio(value, name) {
-  var radio = document.createElement("input");
-  radio.type = "radio";
-  radio.value = value;
-  radio.name = name;
-  radio.id = value;
-  radio.required = true;
+  const label = document.createElement("label");
+  label.classList.add("ant-form-item-label");
+  label.innerText = labelText;
 
-  var label = document.createElement("label");
-  label.textContent = value;
-  label.htmlFor = value;
+  const inputContainer = document.createElement("div");
+  inputContainer.classList.add("ant-form-item-control");
 
-  var container = document.createElement("div");
-  container.appendChild(radio);
-  container.appendChild(label);
+  inputContainer.appendChild(inputElement);
 
-  return container;
-}
+  formItem.appendChild(label);
+  formItem.appendChild(inputContainer);
 
-// 辅助函数：创建多选框
-function createCheckbox(value, name) {
-  var checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  checkbox.value = value;
-  checkbox.name = name;
-  checkbox.id = value;
-  checkbox.required = true;
+  return formItem;
+};
+// 辅助函数
+const createCheckboxGroup = (options) => {
+  const checkboxGroup = document.createElement("div");
+  checkboxGroup.classList.add("ant-checkbox-group");
 
-  var label = document.createElement("label");
-  label.textContent = value;
-  label.htmlFor = value;
+  options.forEach((option) => {
+    const checkbox = document.createElement("label");
+    checkbox.classList.add("ant-checkbox-wrapper");
 
-  var container = document.createElement("div");
-  container.appendChild(checkbox);
-  container.appendChild(label);
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.value = option.value;
 
-  return container;
-}
+    checkbox.appendChild(input);
+    checkbox.appendChild(document.createTextNode(option.label));
 
-// 辅助函数：创建文本框
-function createTextInput(name) {
-  var input = document.createElement("input");
-  input.type = "text";
-  input.name = name;
-  input.required = true;
+    checkboxGroup.appendChild(checkbox);
+  });
+
+  return checkboxGroup;
+};
+// 辅助函数
+const createRadioGroup = (options) => {
+  const radioGroup = document.createElement("div");
+  radioGroup.classList.add("ant-radio-group");
+
+  options.forEach((option) => {
+    const radio = document.createElement("label");
+    radio.classList.add("ant-radio-wrapper");
+
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = "buildType";
+    input.value = option.value;
+
+    radio.appendChild(input);
+    radio.appendChild(document.createTextNode(option.label));
+
+    radioGroup.appendChild(radio);
+  });
+
+  return radioGroup;
+};
+// 辅助函数
+const createInput = () => {
+  const input = document.createElement("input");
+  input.classList.add("ant-input");
+
   return input;
-}
+};
+// 辅助函数
+const createButton = (text, onClick) => {
+  const button = document.createElement("button");
+  button.classList.add("ant-btn");
+  button.innerText = text;
+  button.addEventListener("click", onClick);
 
-// 辅助函数：创建按钮
-function createButton(text, clickHandler) {
-  var button = document.createElement("button");
-  button.type = "button";
-  button.textContent = text;
-  button.addEventListener("click", clickHandler);
   return button;
-}
+};
+
+// // 辅助函数：创建单选框
+// function createRadio(value, name) {
+//   var radio = document.createElement("input");
+//   radio.type = "radio";
+//   radio.value = value;
+//   radio.name = name;
+//   radio.id = value;
+//   radio.required = true;
+
+//   var label = document.createElement("label");
+//   label.textContent = value;
+//   label.htmlFor = value;
+
+//   var container = document.createElement("div");
+//   container.appendChild(radio);
+//   container.appendChild(label);
+
+//   return container;
+// }
+
+// // 辅助函数：创建多选框
+// function createCheckbox(value, name) {
+//   var checkbox = document.createElement("input");
+//   checkbox.type = "checkbox";
+//   checkbox.value = value;
+//   checkbox.name = name;
+//   checkbox.id = value;
+//   checkbox.required = true;
+
+//   var label = document.createElement("label");
+//   label.textContent = value;
+//   label.htmlFor = value;
+
+//   var container = document.createElement("div");
+//   container.appendChild(checkbox);
+//   container.appendChild(label);
+
+//   return container;
+// }
+
+// // 辅助函数：创建文本框
+// function createTextInput(name) {
+//   var input = document.createElement("input");
+//   input.type = "text";
+//   input.name = name;
+//   input.required = true;
+//   return input;
+// }
+
+// // 辅助函数：创建按钮
+// function createButton(text, clickHandler) {
+//   var button = document.createElement("button");
+//   button.type = "button";
+//   button.textContent = text;
+//   button.classList.add("ant-btn", "ant-btn-primary");
+//   button.addEventListener("click", clickHandler);
+//   return button;
+// }
 
 injectForm();
