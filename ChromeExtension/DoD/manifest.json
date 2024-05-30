@@ -10,7 +10,8 @@
   "content_scripts": [
     {
       "js": ["./index.js"],
-      "matches": ["https://admin.codepush.i.test.shopee.io/build"]
+      "css": ["./index.css"],
+      "matches": ["https://admin.codepush.i.test.shopee.io/build*"]
     }
   ]
 }

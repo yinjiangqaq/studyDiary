@@ -171,7 +171,7 @@ function transformFormData() {
       appTypeValues.push(appTypeCheckboxes[i].value);
     }
   }
-  const pfbName = form.elements["pfb_name"].value;
+  const pfbName = form.elements["pfb_name"].value.trim();
   const buildType = form.elements["build_type"];
 
   let build_type_val;
@@ -181,7 +181,7 @@ function transformFormData() {
     }
   }
   console.log("xxxxxxxxx branchType", buildType, build_type_val);
-  const branchName = form.elements["build_val"].value;
+  const branchName = form.elements["build_val"].value.trim();
 
   console.log("xxxxxxxxx form data", appTypeValues, pfbName, branchName);
   return {
@@ -199,7 +199,9 @@ function transformFormData() {
  * build_val -> 对应构建方式的值，分支对应分支名，tag对应tag名字
  * pfb_name -> 想要构建的PFB名字
  */
-function build() {
+function build(event) {
+  // 避免默认表单提交行为
+  event.preventDefault();
   const env = getCodePushPlatformEnv();
   const options = transformFormData();
   console.log("xxxxxxx options", options);
@@ -218,6 +220,10 @@ function build() {
     basicInfo
   );
 
+  if (shopeepayBuildPromise.length) {
+    window.alert("Trigger build job");
+  }
+
   Promise.all([shopeepayBuildPromise])
     .then((results) => {
       console.log("xxxxxxxxxxx results", results);
@@ -235,6 +241,8 @@ function build() {
  * pfb_name -> 想要构建的PFB名字
  */
 function buildAndPublish() {
+  // 避免默认表单提交行为
+  event.preventDefault();
   const env = getCodePushPlatformEnv();
   const options = transformFormData();
   console.log("xxxxxxx options", options);
@@ -253,11 +261,16 @@ function buildAndPublish() {
     basicInfo
   );
 
+  if (shopeepayBuildPromise.length) {
+    window.alert("Trigger build job");
+  }
+
   Promise.all([shopeepayBuildPromise])
     .then((results) => {
       console.log("xxxxxxxxxxx build and publish results", results);
     })
     .catch((error) => {
+      window.alert("Build fail");
       console.log("xxxxxxxx error", error);
     });
 }
@@ -274,96 +287,103 @@ function injectForm() {
   document.head.appendChild(antdStyle);
 
   // 动态加载 Ant Design 的脚本文件
-  const antdScript = document.createElement("script");
-  antdScript.src = "https://cdn.jsdelivr.net/npm/antd/dist/antd.js";
-  document.head.appendChild(antdScript);
+  // const antdScript = document.createElement("script");
+  // antdScript.src = "https://cdn.jsdelivr.net/npm/antd/dist/antd.js";
+  // document.head.appendChild(antdScript);
 
   // 创建表单元素
   const formContainer = document.createElement("div");
   formContainer.id = "formContainer";
   var form = document.createElement("form");
+  form.classList.add("ant-form", "ant-form-horizontal");
   form.id = "dodForm";
   const formItemContainer = document.createElement("div");
   form.appendChild(formItemContainer);
   // 创建并添加 appType 多选框
-  var appTypeLabel = document.createElement("label");
-  appTypeLabel.textContent = "appType:";
-  form.appendChild(appTypeLabel);
+  const appTypeOptions = [
+    {
+      name: "need_build_app_services",
+      label: "shopeepay",
+      value: "shopeepay",
+    },
+    {
+      name: "need_build_app_services",
+      label: "mitra",
+      value: "mitra",
+    },
+    {
+      name: "need_build_app_services",
+      label: "driver",
+      value: "driver",
+    },
+    {
+      name: "need_build_app_services",
+      label: "partner",
+      value: "partner",
+    },
+    {
+      name: "need_build_app_services",
+      label: "spx-sp",
+      value: "spx-sp",
+    },
+  ];
 
-  var appTypeCheckbox1 = createCheckbox("shopeepay", "need_build_app_services");
-  var appTypeCheckbox2 = createCheckbox("mitra", "need_build_app_services");
-  var appTypeCheckbox3 = createCheckbox("driver", "need_build_app_services");
-  var appTypeCheckbox4 = createCheckbox("partner", "need_build_app_services");
-  var appTypeCheckbox5 = createCheckbox("spx-sp", "need_build_app_services");
+  const buildTypeOptions = [
+    {
+      name: "build_type",
+      label: "tag",
+      value: "tag",
+    },
+    {
+      name: "build_type",
+      label: "branch",
+      value: "branch",
+    },
+  ];
 
-  form.appendChild(appTypeCheckbox1);
-  form.appendChild(appTypeCheckbox2);
-  form.appendChild(appTypeCheckbox3);
-  form.appendChild(appTypeCheckbox4);
-  form.appendChild(appTypeCheckbox5);
+  const appTypeCheckBoxGroup = createCheckboxGroup(appTypeOptions);
+  const buildTypeRadioGroup = createRadioGroup(buildTypeOptions);
+  const branchNameInput = createInput("build_val");
+  const pfbNameInput = createInput("pfb_name");
+  const buildButton = createButton("Build", build);
+  const buildAndPublishButton = createButton(
+    "Build and Publish",
+    buildAndPublish
+  );
+  const appTypeFormItem = createFormItem("App Type", appTypeCheckBoxGroup);
+  const buildTypeFormItem = createFormItem("Build Type", buildTypeRadioGroup);
+  const branchNameFormItem = createFormItem("Branch Name", branchNameInput);
+  const pfbNameFormItem = createFormItem("PFB Name", pfbNameInput);
+  const buttonFormItem = createFormItem("", buildButton);
+  const buildAndPublishButtonFormItem = createFormItem(
+    "",
+    buildAndPublishButton
+  );
 
-  // 添加换行
-  form.appendChild(document.createElement("br"));
+  formItemContainer.appendChild(appTypeFormItem);
+  formItemContainer.appendChild(buildTypeFormItem);
+  formItemContainer.appendChild(branchNameFormItem);
+  formItemContainer.appendChild(pfbNameFormItem);
+  formItemContainer.appendChild(buttonFormItem);
+  formItemContainer.appendChild(buildAndPublishButtonFormItem);
+  formContainer.appendChild(form);
 
-  // 创建并添加 pfbName 文本框
-  var pfbNameLabel = document.createElement("label");
-  pfbNameLabel.textContent = "pfbName:";
-  form.appendChild(pfbNameLabel);
-
-  var pfbNameInput = createTextInput("pfb_name");
-  form.appendChild(pfbNameInput);
-
-  // 添加换行
-  form.appendChild(document.createElement("br"));
-
-  // 创建并添加 buildType 单选框
-  var buildTypeLabel = document.createElement("label");
-  buildTypeLabel.textContent = "buildType:";
-  form.appendChild(buildTypeLabel);
-
-  var buildTypeRadio1 = createRadio("tag", "build_type");
-  var buildTypeRadio2 = createRadio("branch", "build_type");
-
-  form.appendChild(buildTypeRadio1);
-  form.appendChild(buildTypeRadio2);
-
-  // 添加换行
-  form.appendChild(document.createElement("br"));
-
-  // 创建并添加 branch Val 文本框
-  var branchNameLabel = document.createElement("label");
-  branchNameLabel.textContent = "branchName:";
-  form.appendChild(branchNameLabel);
-
-  var branchNameInput = createTextInput("build_val");
-  form.appendChild(branchNameInput);
-
-  // 添加换行
-  form.appendChild(document.createElement("br"));
-
-  // 创建并添加 Build 按钮
-  var buildButton = createButton("Build", build);
-  form.appendChild(buildButton);
-
-  // 创建并添加 BuildAndPublish 按钮
-  var buildAndPublishButton = createButton("BuildAndPublish", buildAndPublish);
-  form.appendChild(buildAndPublishButton);
-  var content = document.body.querySelector("div");
-  // 将表单添加到页面
-  content.appendChild(form);
+  document.body.appendChild(formContainer);
 }
 // 辅助函数
 const createFormItem = (labelText, inputElement) => {
   const formItem = document.createElement("div");
-  formItem.classList.add("ant-form-item");
-
-  const label = document.createElement("label");
-  label.classList.add("ant-form-item-label");
+  formItem.classList.add("ant-form-item", "ant-row", "formRow");
+  const label = document.createElement("div");
+  label.classList.add("ant-col", "ant-col-5", "label-text");
   label.innerText = labelText;
 
   const inputContainer = document.createElement("div");
-  inputContainer.classList.add("ant-form-item-control");
-
+  inputContainer.classList.add(
+    "ant-form-item-control",
+    "ant-col",
+    "ant-col-19"
+  );
   inputContainer.appendChild(inputElement);
 
   formItem.appendChild(label);
@@ -379,11 +399,12 @@ const createCheckboxGroup = (options) => {
   options.forEach((option) => {
     const checkbox = document.createElement("label");
     checkbox.classList.add("ant-checkbox-wrapper");
-
+    checkbox.id = "checkBoxLabel";
     const input = document.createElement("input");
+    input.classList.add("check-box-input");
     input.type = "checkbox";
+    input.name = option.name;
     input.value = option.value;
-
     checkbox.appendChild(input);
     checkbox.appendChild(document.createTextNode(option.label));
 
@@ -400,12 +421,13 @@ const createRadioGroup = (options) => {
   options.forEach((option) => {
     const radio = document.createElement("label");
     radio.classList.add("ant-radio-wrapper");
-
+    radio.id = "radioLabel";
     const input = document.createElement("input");
+    input.classList.add("radio-input");
     input.type = "radio";
-    input.name = "buildType";
+    input.name = option.name;
     input.value = option.value;
-
+    input.required = true;
     radio.appendChild(input);
     radio.appendChild(document.createTextNode(option.label));
 
@@ -415,8 +437,10 @@ const createRadioGroup = (options) => {
   return radioGroup;
 };
 // 辅助函数
-const createInput = () => {
+const createInput = (name) => {
   const input = document.createElement("input");
+  input.name = name;
+  input.required = true;
   input.classList.add("ant-input");
 
   return input;
@@ -424,70 +448,13 @@ const createInput = () => {
 // 辅助函数
 const createButton = (text, onClick) => {
   const button = document.createElement("button");
-  button.classList.add("ant-btn");
+  button.classList.add("ant-btn", "ant-btn-primary");
   button.innerText = text;
   button.addEventListener("click", onClick);
 
   return button;
 };
 
-// // 辅助函数：创建单选框
-// function createRadio(value, name) {
-//   var radio = document.createElement("input");
-//   radio.type = "radio";
-//   radio.value = value;
-//   radio.name = name;
-//   radio.id = value;
-//   radio.required = true;
-
-//   var label = document.createElement("label");
-//   label.textContent = value;
-//   label.htmlFor = value;
-
-//   var container = document.createElement("div");
-//   container.appendChild(radio);
-//   container.appendChild(label);
-
-//   return container;
-// }
-
-// // 辅助函数：创建多选框
-// function createCheckbox(value, name) {
-//   var checkbox = document.createElement("input");
-//   checkbox.type = "checkbox";
-//   checkbox.value = value;
-//   checkbox.name = name;
-//   checkbox.id = value;
-//   checkbox.required = true;
-
-//   var label = document.createElement("label");
-//   label.textContent = value;
-//   label.htmlFor = value;
-
-//   var container = document.createElement("div");
-//   container.appendChild(checkbox);
-//   container.appendChild(label);
-
-//   return container;
-// }
-
-// // 辅助函数：创建文本框
-// function createTextInput(name) {
-//   var input = document.createElement("input");
-//   input.type = "text";
-//   input.name = name;
-//   input.required = true;
-//   return input;
-// }
-
-// // 辅助函数：创建按钮
-// function createButton(text, clickHandler) {
-//   var button = document.createElement("button");
-//   button.type = "button";
-//   button.textContent = text;
-//   button.classList.add("ant-btn", "ant-btn-primary");
-//   button.addEventListener("click", clickHandler);
-//   return button;
-// }
+// TODO: toast 提示， git分支远程获取
 
 injectForm();

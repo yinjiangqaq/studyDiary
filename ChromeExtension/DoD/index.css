@@ -1,0 +1,30 @@
+#formContainer {
+  max-width: 600px;
+  position: relative;
+  left: 300px;
+  bottom: 300px;
+}
+.formRow {
+  display: flex;
+  align-items: center;
+}
+#checkBoxLabel {
+  align-items: center;
+}
+
+#radioLabel {
+  align-items: center;
+}
+
+.check-box-input {
+  margin-right: 5px;
+}
+
+.radio-input {
+  margin-right: 5px;
+}
+
+.label-text {
+  font-weight: 800;
+  font-size: larger;
+}
