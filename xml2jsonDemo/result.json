@@ -1,0 +1,194 @@
+{
+  "dbl": {
+    "meta": {
+      "good": [
+        {
+          "price": { "_text": "3.11" },
+          "image": {
+            "_text": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+          }
+        },
+        {
+          "price": { "_text": "3.22" },
+          "image": {
+            "_text": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+          }
+        },
+        {
+          "price": { "_text": "3.33" },
+          "image": {
+            "_text": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+          }
+        },
+        {
+          "price": { "_text": "3.44" },
+          "image": {
+            "_text": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+          }
+        },
+        {
+          "price": { "_text": "3.55" },
+          "image": {
+            "_text": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+          }
+        },
+        {
+          "price": { "_text": "3.66" },
+          "image": {
+            "_text": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+          }
+        },
+        {
+          "price": { "_text": "3.77" },
+          "image": {
+            "_text": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+          }
+        },
+        {
+          "price": { "_text": "3.88" },
+          "image": {
+            "_text": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+          }
+        },
+        {
+          "price": { "_text": "3.99" },
+          "image": {
+            "_text": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+          }
+        }
+      ]
+    },
+    "layout": {
+      "_attributes": {
+        "type": "yoga",
+        "width": "fill",
+        "background": "tpl_seckill_card_bg",
+        "flexDirection": "column"
+      },
+      "layout": {
+        "_attributes": {
+          "type": "yoga",
+          "flex-direction": "row",
+          "align-items": "center"
+        },
+        "image": {
+          "_attributes": {
+            "height": "35dp",
+            "marginLeft": "4dp",
+            "src": "tpl_seckill_goods_icon",
+            "width": "81dp"
+          }
+        },
+        "frame": {
+          "_attributes": {
+            "marginLeft": "20dp",
+            "width": "40dp",
+            "height": "20dp"
+          },
+          "image": [
+            {
+              "_attributes": {
+                "width": "16dp",
+                "height": "16dp",
+                "radius": "8dp",
+                "layoutGravity": "center_vertical",
+                "src": ""
+              }
+            },
+            {
+              "_attributes": {
+                "width": "16dp",
+                "height": "16dp",
+                "marginLeft": "10dp",
+                "radius": "8dp",
+                "layoutGravity": "center_vertical",
+                "src": ""
+              }
+            },
+            {
+              "_attributes": {
+                "width": "16dp",
+                "height": "16dp",
+                "marginLeft": "10dp",
+                "radius": "8dp",
+                "layoutGravity": "center_vertical",
+                "src": ""
+              }
+            }
+          ]
+        },
+        "text": [
+          {
+            "_attributes": {
+              "width": "100",
+              "height": "100",
+              "color": "#FFFFFF",
+              "fontSize": "11",
+              "marginLeft": "2"
+            },
+            "_text": "33355"
+          },
+          {
+            "_attributes": {
+              "flex-grow": "1",
+              "fontSize": "18",
+              "color": "#7F7F7F"
+            },
+            "_text": "人正在抢购"
+          }
+        ],
+        "layout": {
+          "_attributes": {
+            "onClick": "{actions: []}",
+            "type": "yoga",
+            "backgroundColor": "#cccccc",
+            "background": "tpl_seckill_all_btn_bg",
+            "marginLeft": "20",
+            "flex-direction": "row",
+            "align-items": "center",
+            "marginRight": "10dp",
+            "paddingLeft": "6dp",
+            "paddingTop": "2dp",
+            "paddingBottom": "2dp"
+          },
+          "text": {
+            "_attributes": { "fontSize": "11", "color": "#FFFFFF" },
+            "_text": "全部秒杀"
+          },
+          "image": {
+            "_attributes": {
+              "width": "8dp",
+              "height": "10dp",
+              "src": "tpl_white_arrow",
+              "backgroundColor": "#cc00cc"
+            }
+          }
+        }
+      },
+      "list": {
+        "_attributes": {
+          "height": "125dp",
+          "src": "{good}",
+          "marginBottom": "10dp"
+        },
+        "layout": {
+          "layout": {
+            "_attributes": { "type": "frame" },
+            "image": [{}, {}],
+            "layout": [
+              {
+                "_attributes": { "type": "yoga" },
+                "image": {},
+                "text": { "_text": "直降3.1元" }
+              },
+              {
+                "_attributes": { "type": "yoga" },
+                "text": { "_text": "{price}" }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

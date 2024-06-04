@@ -1,0 +1,71 @@
+<dbl>
+    <meta>
+        <good>
+            <price>3.11</price>
+            <image>https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png</image>
+        </good>
+        <good>
+            <price>3.22</price>
+            <image>https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png</image>
+        </good>
+        <good>
+            <price>3.33</price>
+            <image>https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png</image>
+        </good>
+        <good>
+            <price>3.44</price>
+            <image>https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png</image>
+        </good>
+        <good>
+            <price>3.55</price>
+            <image>https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png</image>
+        </good>
+        <good>
+            <price>3.66</price>
+            <image>https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png</image>
+        </good>
+        <good>
+            <price>3.77</price>
+            <image>https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png</image>
+        </good>
+        <good>
+            <price>3.88</price>
+            <image>https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png</image>
+        </good>
+        <good>
+            <price>3.99</price>
+            <image>https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png</image>
+        </good>
+    </meta>
+      <layout type="yoga" width="fill" background="tpl_seckill_card_bg" flexDirection="column">
+        <layout type="yoga" flex-direction="row" align-items="center">
+           <image  height="35dp" marginLeft="4dp" src="tpl_seckill_goods_icon" width="81dp"/>
+           <frame marginLeft="20dp" width="40dp" height="20dp">
+              <image width="16dp" height="16dp" radius="8dp" layoutGravity="center_vertical" src=""/>
+              <image width="16dp" height="16dp" marginLeft="10dp" radius="8dp" layoutGravity="center_vertical" src=""/>
+              <image width="16dp" height="16dp" marginLeft="10dp" radius="8dp" layoutGravity="center_vertical" src=""/>
+           </frame>
+           <text width="100" height="100" color="#FFFFFF" fontSize="11" marginLeft="2">33355</text>
+           <text flex-grow="1" fontSize="18" color="#7F7F7F">人正在抢购</text>
+           <layout onClick="{actions: []}" type="yoga" backgroundColor="#cccccc" background="tpl_seckill_all_btn_bg" marginLeft="20" flex-direction="row" align-items="center" marginRight="10dp" paddingLeft="6dp" paddingTop="2dp" paddingBottom="2dp">
+              <text fontSize="11" color="#FFFFFF">全部秒杀</text>
+              <image width="8dp" height="10dp" src="tpl_white_arrow" backgroundColor="#cc00cc"/>
+           </layout>
+        </layout>
+        <list height="125dp" src="{good}" marginBottom="10dp">
+          <layout>
+            <layout type="frame">
+              <image/>
+              <image/>
+              <layout type="yoga">
+                <image/>
+                <text>直降3.1元</text>
+              </layout>
+              <layout type="yoga">
+                <text>{price}</text>
+              </layout>
+            </layout>
+          </layout>
+        </list>
+      </layout>
+    </dbl> 
