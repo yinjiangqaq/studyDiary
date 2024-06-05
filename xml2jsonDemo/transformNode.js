@@ -91,10 +91,10 @@ function transformNode(node, type) {
 }
 
 /**
- * 为了保持节点树的顺序，打开了 explicitArray: false, explicitChildren: true, preserveChildrenOrder: true 
+ * 为了保持节点树的顺序，打开了 explicitArray: false, explicitChildren: true, preserveChildrenOrder: true
  * 所以整个节点树会变成了新的结构，transformV2方法就是为了处理这个结构的节点树
- * @param {*} node 
- * @returns 
+ * @param {*} node
+ * @returns
  */
 function transformNodeV2(node) {
   let newNode = {};
@@ -105,13 +105,11 @@ function transformNodeV2(node) {
       ...node.$,
       widgetType: node["#name"] || "layout", // 使用 #name 作为 widgetType
     };
-    // // 特殊处理背景图片和颜色
-    // if (newNode.background) {
-    //   newNode.background = newNode.background.replace("tpl_", "");
-    // }
-    // if (newNode.backgroundColor) {
-    //   newNode.backgroundColor = newNode.backgroundColor.replace("tpl_", "");
-    // }
+  }
+
+  // 如果当前节点有子节点，但是没有其他多余的属性放置在$的话,也需要把#name放入节点中，无论如何，只要是节点，name总是用的
+  if (!node.$ && node.$$) {
+    newNode.widgetType = node["#name"];
   }
 
   // 处理当前节点的子节点
@@ -124,14 +122,6 @@ function transformNodeV2(node) {
     newNode.src = node._;
   }
 
-  // 处理单独的文本和图像属性（如果存在）
-  // if (node.text) {
-  //   newNode.text = transform(node.text);
-  // }
-  // if (node.image) {
-  //   newNode.image = transform(node.image);
-  // }
-
   // 处理当前节点特定的回调或动作
   if (node.$?.onClick) {
     newNode.callbacks = [
@@ -140,13 +130,9 @@ function transformNodeV2(node) {
         actions: JSON.parse(node.$.onClick).actions,
       },
     ];
+    // 需要删除onClick
+    delete newNode.onClick;
   }
-
-  // 如果当前节点有子节点，但是没有其他多余的属性放置在$的话,也需要把#name放入节点中，无论如何，只要是节点，name总是用的
-  if (!node.$ && node.$$) {
-    newNode.widgetType = node["#name"];
-  }
-
   // 处理叶子节点，终点
   if (!node.$ && !node.$$) {
     const { _: src, $$: children, "#name": name, ...otherParams } = node;

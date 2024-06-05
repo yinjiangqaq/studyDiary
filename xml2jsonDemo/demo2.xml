@@ -1,0 +1,33 @@
+<layout flexDirection="column" padding="14dp">
+  <layout flexDirection="row" justifyContent="center">
+    <layout flexDirection="row" alignItems="center">
+      <image width="12dp" height="12dp" src="ic_shopeepay_coin" />
+      <text fontSize="12" fontWeight="400">{{coin_balance}}</text>
+    </layout>
+
+    <layout flexGrow="1">
+      <list marginLeft="10dp" flexDirection="row" alignItems="center">
+        <image src="https://sdfsdfjaljfa.jpg" height="12dp" width="12dp"/>
+        <image src="https://sdfsdfjaljfa.jpg" height="12dp" width="12dp"/>
+        <image src="https://sdfsdfjaljfa.jpg" height="12dp" width="12dp"/>
+      </list>
+    </layout>
+  </layout>
+
+  <layout>
+    <list>
+        <layout>
+            <image width="12dp" height="12dp" src="ic_circle_item_1"/>
+            <text fontSize="12" fontWeight="400"></text>
+        </layout>
+            <layout>
+            <image width="12dp" height="12dp" src="ic_circle_item_2"/>
+            <text fontSize="12" fontWeight="400"></text>
+        </layout>
+            <layout>
+            <image width="12dp" height="12dp" src="ic_circle_item_3"/>
+            <text fontSize="12" fontWeight="400"></text>
+        </layout>
+    </list>
+  </layout>
+</layout>

@@ -29,5 +29,35 @@ xml2jsConvert.parseString(
     const resultNode = transformNodeV2(result.dbl.layout);
     const resultStr = JSON.stringify(resultNode, null, 2);
     fs.writeFileSync("./xml2jsResult.json", resultStr);
+
+    /**
+     * 读取demo2.xml 并将作为layout的内容填补进index.json里面的layout字段
+     */
+
+    const originalJson = fs.readFileSync("./index.json", "utf-8");
+    const originJsonObj = JSON.parse(originalJson);
+    // console.log("======originalJson", originJsonObj);
+    const demoXML2 = fs.readFileSync("./demo2.xml", "utf-8");
+    xml2jsConvert.parseString(
+      demoXML2,
+      {
+        explicitArray: false,
+        explicitChildren: true,
+        preserveChildrenOrder: true,
+      },
+      (err, result) => {
+        if (err) {
+          console.log("error============", err);
+        }
+
+        const root = result.layout;
+        const resultNode = transformNodeV2(root);
+        // console.log("===========resultNode", resultNode);
+        originJsonObj.dbl.layout = resultNode;
+        originJsonObjString = JSON.stringify(originJsonObj, null, 2);
+        // console.log("============originalJsonObj", originJsonObj);
+        fs.writeFileSync("./index.json", originJsonObjString);
+      }
+    );
   }
 );

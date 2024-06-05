@@ -59,16 +59,17 @@
           "color": "#FFFFFF",
           "fontSize": "11",
           "marginLeft": "2",
-          "widgetType": "text"
+          "widgetType": "text",
+          "src": "33355"
         },
         {
           "flexGrow": "1",
           "fontSize": "18",
           "color": "#7F7F7F",
-          "widgetType": "text"
+          "widgetType": "text",
+          "src": "人正在抢购"
         },
         {
-          "onClick": "{\"actions\":[]}",
           "type": "yoga",
           "backgroundColor": "#cccccc",
           "background": "tpl_seckill_all_btn_bg",
@@ -84,7 +85,8 @@
             {
               "fontSize": "11",
               "color": "#FFFFFF",
-              "widgetType": "text"
+              "widgetType": "text",
+              "src": "全部秒杀"
             },
             {
               "width": "8dp",
@@ -110,6 +112,7 @@
       "widgetType": "list",
       "children": [
         {
+          "widgetType": "layout",
           "children": [
             {
               "type": "frame",
@@ -129,6 +132,7 @@
                       "widgetType": "image"
                     },
                     {
+                      "src": "直降3.1元",
                       "widgetType": "text"
                     }
                   ]
@@ -138,14 +142,14 @@
                   "widgetType": "layout",
                   "children": [
                     {
+                      "src": "{price}",
                       "widgetType": "text"
                     }
                   ]
                 }
               ]
             }
-          ],
-          "widgetType": "layout"
+          ]
         }
       ]
     }

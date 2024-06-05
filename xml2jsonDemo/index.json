@@ -1,0 +1,172 @@
+{
+  "dbl": {
+    "meta": {
+      "good": [
+        {
+          "price": "3.11",
+          "image": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+        },
+        {
+          "price": "3.22",
+          "image": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+        },
+        {
+          "price": "3.33",
+          "image": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+        },
+        {
+          "price": "3.44",
+          "image": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+        },
+        {
+          "price": "3.55",
+          "image": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+        },
+        {
+          "price": "3.66",
+          "image": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+        },
+        {
+          "price": "3.77",
+          "image": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+        },
+        {
+          "price": "3.88",
+          "image": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+        },
+        {
+          "price": "3.99",
+          "image": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+        }
+      ]
+    },
+    "layout": {
+      "flexDirection": "column",
+      "padding": "14dp",
+      "widgetType": "layout",
+      "children": [
+        {
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "widgetType": "layout",
+          "children": [
+            {
+              "flexDirection": "row",
+              "alignItems": "center",
+              "widgetType": "layout",
+              "children": [
+                {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_shopeepay_coin",
+                  "widgetType": "image"
+                },
+                {
+                  "fontSize": "12",
+                  "fontWeight": "400",
+                  "widgetType": "text",
+                  "src": "{{coin_balance}}"
+                }
+              ]
+            },
+            {
+              "flexGrow": "1",
+              "widgetType": "layout",
+              "children": [
+                {
+                  "marginLeft": "10dp",
+                  "flexDirection": "row",
+                  "alignItems": "center",
+                  "widgetType": "list",
+                  "children": [
+                    {
+                      "src": "https://sdfsdfjaljfa.jpg",
+                      "height": "12dp",
+                      "width": "12dp",
+                      "widgetType": "image"
+                    },
+                    {
+                      "src": "https://sdfsdfjaljfa.jpg",
+                      "height": "12dp",
+                      "width": "12dp",
+                      "widgetType": "image"
+                    },
+                    {
+                      "src": "https://sdfsdfjaljfa.jpg",
+                      "height": "12dp",
+                      "width": "12dp",
+                      "widgetType": "image"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "widgetType": "layout",
+          "children": [
+            {
+              "widgetType": "list",
+              "children": [
+                {
+                  "widgetType": "layout",
+                  "children": [
+                    {
+                      "width": "12dp",
+                      "height": "12dp",
+                      "src": "ic_circle_item_1",
+                      "widgetType": "image"
+                    },
+                    {
+                      "fontSize": "12",
+                      "fontWeight": "400",
+                      "widgetType": "text"
+                    }
+                  ]
+                },
+                {
+                  "widgetType": "layout",
+                  "children": [
+                    {
+                      "width": "12dp",
+                      "height": "12dp",
+                      "src": "ic_circle_item_2",
+                      "widgetType": "image"
+                    },
+                    {
+                      "fontSize": "12",
+                      "fontWeight": "400",
+                      "widgetType": "text"
+                    }
+                  ]
+                },
+                {
+                  "widgetType": "layout",
+                  "children": [
+                    {
+                      "width": "12dp",
+                      "height": "12dp",
+                      "src": "ic_circle_item_3",
+                      "widgetType": "image"
+                    },
+                    {
+                      "fontSize": "12",
+                      "fontWeight": "400",
+                      "widgetType": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "ids": {
+    "parent": "0",
+    "img_1": "1",
+    "txt_1": "2"
+  }
+}
