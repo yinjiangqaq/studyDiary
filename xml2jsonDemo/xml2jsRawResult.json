@@ -1,0 +1,1216 @@
+{
+  "$": {
+    "type": "yoga",
+    "width": "fill",
+    "background": "tpl_seckill_card_bg",
+    "flexDirection": "column"
+  },
+  "$$": [
+    {
+      "$": {
+        "type": "yoga",
+        "flexDirection": "row",
+        "alignItems": "center"
+      },
+      "#name": "layout",
+      "$$": [
+        {
+          "$": {
+            "height": "35dp",
+            "marginLeft": "4dp",
+            "src": "tpl_seckill_goods_icon",
+            "width": "81dp"
+          },
+          "#name": "image"
+        },
+        {
+          "$": {
+            "type": "frame",
+            "marginLeft": "20dp",
+            "width": "40dp",
+            "height": "20dp"
+          },
+          "#name": "layout",
+          "$$": [
+            {
+              "$": {
+                "width": "16dp",
+                "height": "16dp",
+                "radius": "8dp",
+                "layoutGravity": "center_vertical",
+                "src": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+              },
+              "#name": "image"
+            },
+            {
+              "$": {
+                "width": "16dp",
+                "height": "16dp",
+                "marginLeft": "10dp",
+                "radius": "8dp",
+                "layoutGravity": "center_vertical",
+                "src": ""
+              },
+              "#name": "image"
+            },
+            {
+              "$": {
+                "width": "16dp",
+                "height": "16dp",
+                "marginLeft": "10dp",
+                "radius": "8dp",
+                "layoutGravity": "center_vertical",
+                "src": ""
+              },
+              "#name": "image"
+            }
+          ],
+          "image": [
+            {
+              "$": {
+                "width": "16dp",
+                "height": "16dp",
+                "radius": "8dp",
+                "layoutGravity": "center_vertical",
+                "src": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+              }
+            },
+            {
+              "$": {
+                "width": "16dp",
+                "height": "16dp",
+                "marginLeft": "10dp",
+                "radius": "8dp",
+                "layoutGravity": "center_vertical",
+                "src": ""
+              }
+            },
+            {
+              "$": {
+                "width": "16dp",
+                "height": "16dp",
+                "marginLeft": "10dp",
+                "radius": "8dp",
+                "layoutGravity": "center_vertical",
+                "src": ""
+              }
+            }
+          ]
+        },
+        {
+          "$": {
+            "width": "100",
+            "height": "100",
+            "color": "#FFFFFF",
+            "fontSize": "11",
+            "marginLeft": "2"
+          },
+          "#name": "text"
+        },
+        {
+          "$": {
+            "flexGrow": "1",
+            "fontSize": "18",
+            "color": "#7F7F7F"
+          },
+          "#name": "text"
+        },
+        {
+          "$": {
+            "onClick": "{\"actions\":[]}",
+            "type": "yoga",
+            "backgroundColor": "#cccccc",
+            "background": "tpl_seckill_all_btn_bg",
+            "marginLeft": "20",
+            "flexDirection": "row",
+            "alignItems": "center",
+            "marginRight": "10dp",
+            "paddingLeft": "6dp",
+            "paddingTop": "2dp",
+            "paddingBottom": "2dp"
+          },
+          "#name": "layout",
+          "$$": [
+            {
+              "$": {
+                "fontSize": "11",
+                "color": "#FFFFFF"
+              },
+              "#name": "text"
+            },
+            {
+              "$": {
+                "width": "8dp",
+                "height": "10dp",
+                "src": "tpl_white_arrow",
+                "backgroundColor": "#cc00cc"
+              },
+              "#name": "image"
+            }
+          ],
+          "text": {
+            "$": {
+              "fontSize": "11",
+              "color": "#FFFFFF"
+            }
+          },
+          "image": {
+            "$": {
+              "width": "8dp",
+              "height": "10dp",
+              "src": "tpl_white_arrow",
+              "backgroundColor": "#cc00cc"
+            }
+          }
+        }
+      ],
+      "image": {
+        "$": {
+          "height": "35dp",
+          "marginLeft": "4dp",
+          "src": "tpl_seckill_goods_icon",
+          "width": "81dp"
+        }
+      },
+      "layout": [
+        {
+          "$": {
+            "type": "frame",
+            "marginLeft": "20dp",
+            "width": "40dp",
+            "height": "20dp"
+          },
+          "$$": [
+            {
+              "$": {
+                "width": "16dp",
+                "height": "16dp",
+                "radius": "8dp",
+                "layoutGravity": "center_vertical",
+                "src": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+              },
+              "#name": "image"
+            },
+            {
+              "$": {
+                "width": "16dp",
+                "height": "16dp",
+                "marginLeft": "10dp",
+                "radius": "8dp",
+                "layoutGravity": "center_vertical",
+                "src": ""
+              },
+              "#name": "image"
+            },
+            {
+              "$": {
+                "width": "16dp",
+                "height": "16dp",
+                "marginLeft": "10dp",
+                "radius": "8dp",
+                "layoutGravity": "center_vertical",
+                "src": ""
+              },
+              "#name": "image"
+            }
+          ],
+          "image": [
+            {
+              "$": {
+                "width": "16dp",
+                "height": "16dp",
+                "radius": "8dp",
+                "layoutGravity": "center_vertical",
+                "src": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+              }
+            },
+            {
+              "$": {
+                "width": "16dp",
+                "height": "16dp",
+                "marginLeft": "10dp",
+                "radius": "8dp",
+                "layoutGravity": "center_vertical",
+                "src": ""
+              }
+            },
+            {
+              "$": {
+                "width": "16dp",
+                "height": "16dp",
+                "marginLeft": "10dp",
+                "radius": "8dp",
+                "layoutGravity": "center_vertical",
+                "src": ""
+              }
+            }
+          ]
+        },
+        {
+          "$": {
+            "onClick": "{\"actions\":[]}",
+            "type": "yoga",
+            "backgroundColor": "#cccccc",
+            "background": "tpl_seckill_all_btn_bg",
+            "marginLeft": "20",
+            "flexDirection": "row",
+            "alignItems": "center",
+            "marginRight": "10dp",
+            "paddingLeft": "6dp",
+            "paddingTop": "2dp",
+            "paddingBottom": "2dp"
+          },
+          "$$": [
+            {
+              "$": {
+                "fontSize": "11",
+                "color": "#FFFFFF"
+              },
+              "#name": "text"
+            },
+            {
+              "$": {
+                "width": "8dp",
+                "height": "10dp",
+                "src": "tpl_white_arrow",
+                "backgroundColor": "#cc00cc"
+              },
+              "#name": "image"
+            }
+          ],
+          "text": {
+            "$": {
+              "fontSize": "11",
+              "color": "#FFFFFF"
+            }
+          },
+          "image": {
+            "$": {
+              "width": "8dp",
+              "height": "10dp",
+              "src": "tpl_white_arrow",
+              "backgroundColor": "#cc00cc"
+            }
+          }
+        }
+      ],
+      "text": [
+        {
+          "$": {
+            "width": "100",
+            "height": "100",
+            "color": "#FFFFFF",
+            "fontSize": "11",
+            "marginLeft": "2"
+          }
+        },
+        {
+          "$": {
+            "flexGrow": "1",
+            "fontSize": "18",
+            "color": "#7F7F7F"
+          }
+        }
+      ]
+    },
+    {
+      "$": {
+        "height": "125dp",
+        "src": "{good}",
+        "marginBottom": "10dp"
+      },
+      "#name": "list",
+      "$$": [
+        {
+          "#name": "layout",
+          "$$": [
+            {
+              "$": {
+                "type": "frame"
+              },
+              "#name": "layout",
+              "$$": [
+                {
+                  "#name": "image"
+                },
+                {
+                  "#name": "image"
+                },
+                {
+                  "$": {
+                    "type": "yoga"
+                  },
+                  "#name": "layout",
+                  "$$": [
+                    {
+                      "#name": "image"
+                    },
+                    {
+                      "#name": "text"
+                    }
+                  ],
+                  "image": {}
+                },
+                {
+                  "$": {
+                    "type": "yoga"
+                  },
+                  "#name": "layout",
+                  "$$": [
+                    {
+                      "#name": "text"
+                    }
+                  ]
+                }
+              ],
+              "image": [
+                {},
+                {}
+              ],
+              "layout": [
+                {
+                  "$": {
+                    "type": "yoga"
+                  },
+                  "$$": [
+                    {
+                      "#name": "image"
+                    },
+                    {
+                      "#name": "text"
+                    }
+                  ],
+                  "image": {}
+                },
+                {
+                  "$": {
+                    "type": "yoga"
+                  },
+                  "$$": [
+                    {
+                      "#name": "text"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "layout": {
+            "$": {
+              "type": "frame"
+            },
+            "$$": [
+              {
+                "#name": "image"
+              },
+              {
+                "#name": "image"
+              },
+              {
+                "$": {
+                  "type": "yoga"
+                },
+                "#name": "layout",
+                "$$": [
+                  {
+                    "#name": "image"
+                  },
+                  {
+                    "#name": "text"
+                  }
+                ],
+                "image": {}
+              },
+              {
+                "$": {
+                  "type": "yoga"
+                },
+                "#name": "layout",
+                "$$": [
+                  {
+                    "#name": "text"
+                  }
+                ]
+              }
+            ],
+            "image": [
+              {},
+              {}
+            ],
+            "layout": [
+              {
+                "$": {
+                  "type": "yoga"
+                },
+                "$$": [
+                  {
+                    "#name": "image"
+                  },
+                  {
+                    "#name": "text"
+                  }
+                ],
+                "image": {}
+              },
+              {
+                "$": {
+                  "type": "yoga"
+                },
+                "$$": [
+                  {
+                    "#name": "text"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "layout": {
+        "$$": [
+          {
+            "$": {
+              "type": "frame"
+            },
+            "#name": "layout",
+            "$$": [
+              {
+                "#name": "image"
+              },
+              {
+                "#name": "image"
+              },
+              {
+                "$": {
+                  "type": "yoga"
+                },
+                "#name": "layout",
+                "$$": [
+                  {
+                    "#name": "image"
+                  },
+                  {
+                    "#name": "text"
+                  }
+                ],
+                "image": {}
+              },
+              {
+                "$": {
+                  "type": "yoga"
+                },
+                "#name": "layout",
+                "$$": [
+                  {
+                    "#name": "text"
+                  }
+                ]
+              }
+            ],
+            "image": [
+              {},
+              {}
+            ],
+            "layout": [
+              {
+                "$": {
+                  "type": "yoga"
+                },
+                "$$": [
+                  {
+                    "#name": "image"
+                  },
+                  {
+                    "#name": "text"
+                  }
+                ],
+                "image": {}
+              },
+              {
+                "$": {
+                  "type": "yoga"
+                },
+                "$$": [
+                  {
+                    "#name": "text"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "layout": {
+          "$": {
+            "type": "frame"
+          },
+          "$$": [
+            {
+              "#name": "image"
+            },
+            {
+              "#name": "image"
+            },
+            {
+              "$": {
+                "type": "yoga"
+              },
+              "#name": "layout",
+              "$$": [
+                {
+                  "#name": "image"
+                },
+                {
+                  "#name": "text"
+                }
+              ],
+              "image": {}
+            },
+            {
+              "$": {
+                "type": "yoga"
+              },
+              "#name": "layout",
+              "$$": [
+                {
+                  "#name": "text"
+                }
+              ]
+            }
+          ],
+          "image": [
+            {},
+            {}
+          ],
+          "layout": [
+            {
+              "$": {
+                "type": "yoga"
+              },
+              "$$": [
+                {
+                  "#name": "image"
+                },
+                {
+                  "#name": "text"
+                }
+              ],
+              "image": {}
+            },
+            {
+              "$": {
+                "type": "yoga"
+              },
+              "$$": [
+                {
+                  "#name": "text"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "layout": {
+    "$": {
+      "type": "yoga",
+      "flexDirection": "row",
+      "alignItems": "center"
+    },
+    "$$": [
+      {
+        "$": {
+          "height": "35dp",
+          "marginLeft": "4dp",
+          "src": "tpl_seckill_goods_icon",
+          "width": "81dp"
+        },
+        "#name": "image"
+      },
+      {
+        "$": {
+          "type": "frame",
+          "marginLeft": "20dp",
+          "width": "40dp",
+          "height": "20dp"
+        },
+        "#name": "layout",
+        "$$": [
+          {
+            "$": {
+              "width": "16dp",
+              "height": "16dp",
+              "radius": "8dp",
+              "layoutGravity": "center_vertical",
+              "src": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+            },
+            "#name": "image"
+          },
+          {
+            "$": {
+              "width": "16dp",
+              "height": "16dp",
+              "marginLeft": "10dp",
+              "radius": "8dp",
+              "layoutGravity": "center_vertical",
+              "src": ""
+            },
+            "#name": "image"
+          },
+          {
+            "$": {
+              "width": "16dp",
+              "height": "16dp",
+              "marginLeft": "10dp",
+              "radius": "8dp",
+              "layoutGravity": "center_vertical",
+              "src": ""
+            },
+            "#name": "image"
+          }
+        ],
+        "image": [
+          {
+            "$": {
+              "width": "16dp",
+              "height": "16dp",
+              "radius": "8dp",
+              "layoutGravity": "center_vertical",
+              "src": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+            }
+          },
+          {
+            "$": {
+              "width": "16dp",
+              "height": "16dp",
+              "marginLeft": "10dp",
+              "radius": "8dp",
+              "layoutGravity": "center_vertical",
+              "src": ""
+            }
+          },
+          {
+            "$": {
+              "width": "16dp",
+              "height": "16dp",
+              "marginLeft": "10dp",
+              "radius": "8dp",
+              "layoutGravity": "center_vertical",
+              "src": ""
+            }
+          }
+        ]
+      },
+      {
+        "$": {
+          "width": "100",
+          "height": "100",
+          "color": "#FFFFFF",
+          "fontSize": "11",
+          "marginLeft": "2"
+        },
+        "#name": "text"
+      },
+      {
+        "$": {
+          "flexGrow": "1",
+          "fontSize": "18",
+          "color": "#7F7F7F"
+        },
+        "#name": "text"
+      },
+      {
+        "$": {
+          "onClick": "{\"actions\":[]}",
+          "type": "yoga",
+          "backgroundColor": "#cccccc",
+          "background": "tpl_seckill_all_btn_bg",
+          "marginLeft": "20",
+          "flexDirection": "row",
+          "alignItems": "center",
+          "marginRight": "10dp",
+          "paddingLeft": "6dp",
+          "paddingTop": "2dp",
+          "paddingBottom": "2dp"
+        },
+        "#name": "layout",
+        "$$": [
+          {
+            "$": {
+              "fontSize": "11",
+              "color": "#FFFFFF"
+            },
+            "#name": "text"
+          },
+          {
+            "$": {
+              "width": "8dp",
+              "height": "10dp",
+              "src": "tpl_white_arrow",
+              "backgroundColor": "#cc00cc"
+            },
+            "#name": "image"
+          }
+        ],
+        "text": {
+          "$": {
+            "fontSize": "11",
+            "color": "#FFFFFF"
+          }
+        },
+        "image": {
+          "$": {
+            "width": "8dp",
+            "height": "10dp",
+            "src": "tpl_white_arrow",
+            "backgroundColor": "#cc00cc"
+          }
+        }
+      }
+    ],
+    "image": {
+      "$": {
+        "height": "35dp",
+        "marginLeft": "4dp",
+        "src": "tpl_seckill_goods_icon",
+        "width": "81dp"
+      }
+    },
+    "layout": [
+      {
+        "$": {
+          "type": "frame",
+          "marginLeft": "20dp",
+          "width": "40dp",
+          "height": "20dp"
+        },
+        "$$": [
+          {
+            "$": {
+              "width": "16dp",
+              "height": "16dp",
+              "radius": "8dp",
+              "layoutGravity": "center_vertical",
+              "src": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+            },
+            "#name": "image"
+          },
+          {
+            "$": {
+              "width": "16dp",
+              "height": "16dp",
+              "marginLeft": "10dp",
+              "radius": "8dp",
+              "layoutGravity": "center_vertical",
+              "src": ""
+            },
+            "#name": "image"
+          },
+          {
+            "$": {
+              "width": "16dp",
+              "height": "16dp",
+              "marginLeft": "10dp",
+              "radius": "8dp",
+              "layoutGravity": "center_vertical",
+              "src": ""
+            },
+            "#name": "image"
+          }
+        ],
+        "image": [
+          {
+            "$": {
+              "width": "16dp",
+              "height": "16dp",
+              "radius": "8dp",
+              "layoutGravity": "center_vertical",
+              "src": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+            }
+          },
+          {
+            "$": {
+              "width": "16dp",
+              "height": "16dp",
+              "marginLeft": "10dp",
+              "radius": "8dp",
+              "layoutGravity": "center_vertical",
+              "src": ""
+            }
+          },
+          {
+            "$": {
+              "width": "16dp",
+              "height": "16dp",
+              "marginLeft": "10dp",
+              "radius": "8dp",
+              "layoutGravity": "center_vertical",
+              "src": ""
+            }
+          }
+        ]
+      },
+      {
+        "$": {
+          "onClick": "{\"actions\":[]}",
+          "type": "yoga",
+          "backgroundColor": "#cccccc",
+          "background": "tpl_seckill_all_btn_bg",
+          "marginLeft": "20",
+          "flexDirection": "row",
+          "alignItems": "center",
+          "marginRight": "10dp",
+          "paddingLeft": "6dp",
+          "paddingTop": "2dp",
+          "paddingBottom": "2dp"
+        },
+        "$$": [
+          {
+            "$": {
+              "fontSize": "11",
+              "color": "#FFFFFF"
+            },
+            "#name": "text"
+          },
+          {
+            "$": {
+              "width": "8dp",
+              "height": "10dp",
+              "src": "tpl_white_arrow",
+              "backgroundColor": "#cc00cc"
+            },
+            "#name": "image"
+          }
+        ],
+        "text": {
+          "$": {
+            "fontSize": "11",
+            "color": "#FFFFFF"
+          }
+        },
+        "image": {
+          "$": {
+            "width": "8dp",
+            "height": "10dp",
+            "src": "tpl_white_arrow",
+            "backgroundColor": "#cc00cc"
+          }
+        }
+      }
+    ],
+    "text": [
+      {
+        "$": {
+          "width": "100",
+          "height": "100",
+          "color": "#FFFFFF",
+          "fontSize": "11",
+          "marginLeft": "2"
+        }
+      },
+      {
+        "$": {
+          "flexGrow": "1",
+          "fontSize": "18",
+          "color": "#7F7F7F"
+        }
+      }
+    ]
+  },
+  "list": {
+    "$": {
+      "height": "125dp",
+      "src": "{good}",
+      "marginBottom": "10dp"
+    },
+    "$$": [
+      {
+        "#name": "layout",
+        "$$": [
+          {
+            "$": {
+              "type": "frame"
+            },
+            "#name": "layout",
+            "$$": [
+              {
+                "#name": "image"
+              },
+              {
+                "#name": "image"
+              },
+              {
+                "$": {
+                  "type": "yoga"
+                },
+                "#name": "layout",
+                "$$": [
+                  {
+                    "#name": "image"
+                  },
+                  {
+                    "#name": "text"
+                  }
+                ],
+                "image": {}
+              },
+              {
+                "$": {
+                  "type": "yoga"
+                },
+                "#name": "layout",
+                "$$": [
+                  {
+                    "#name": "text"
+                  }
+                ]
+              }
+            ],
+            "image": [
+              {},
+              {}
+            ],
+            "layout": [
+              {
+                "$": {
+                  "type": "yoga"
+                },
+                "$$": [
+                  {
+                    "#name": "image"
+                  },
+                  {
+                    "#name": "text"
+                  }
+                ],
+                "image": {}
+              },
+              {
+                "$": {
+                  "type": "yoga"
+                },
+                "$$": [
+                  {
+                    "#name": "text"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "layout": {
+          "$": {
+            "type": "frame"
+          },
+          "$$": [
+            {
+              "#name": "image"
+            },
+            {
+              "#name": "image"
+            },
+            {
+              "$": {
+                "type": "yoga"
+              },
+              "#name": "layout",
+              "$$": [
+                {
+                  "#name": "image"
+                },
+                {
+                  "#name": "text"
+                }
+              ],
+              "image": {}
+            },
+            {
+              "$": {
+                "type": "yoga"
+              },
+              "#name": "layout",
+              "$$": [
+                {
+                  "#name": "text"
+                }
+              ]
+            }
+          ],
+          "image": [
+            {},
+            {}
+          ],
+          "layout": [
+            {
+              "$": {
+                "type": "yoga"
+              },
+              "$$": [
+                {
+                  "#name": "image"
+                },
+                {
+                  "#name": "text"
+                }
+              ],
+              "image": {}
+            },
+            {
+              "$": {
+                "type": "yoga"
+              },
+              "$$": [
+                {
+                  "#name": "text"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "layout": {
+      "$$": [
+        {
+          "$": {
+            "type": "frame"
+          },
+          "#name": "layout",
+          "$$": [
+            {
+              "#name": "image"
+            },
+            {
+              "#name": "image"
+            },
+            {
+              "$": {
+                "type": "yoga"
+              },
+              "#name": "layout",
+              "$$": [
+                {
+                  "#name": "image"
+                },
+                {
+                  "#name": "text"
+                }
+              ],
+              "image": {}
+            },
+            {
+              "$": {
+                "type": "yoga"
+              },
+              "#name": "layout",
+              "$$": [
+                {
+                  "#name": "text"
+                }
+              ]
+            }
+          ],
+          "image": [
+            {},
+            {}
+          ],
+          "layout": [
+            {
+              "$": {
+                "type": "yoga"
+              },
+              "$$": [
+                {
+                  "#name": "image"
+                },
+                {
+                  "#name": "text"
+                }
+              ],
+              "image": {}
+            },
+            {
+              "$": {
+                "type": "yoga"
+              },
+              "$$": [
+                {
+                  "#name": "text"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "layout": {
+        "$": {
+          "type": "frame"
+        },
+        "$$": [
+          {
+            "#name": "image"
+          },
+          {
+            "#name": "image"
+          },
+          {
+            "$": {
+              "type": "yoga"
+            },
+            "#name": "layout",
+            "$$": [
+              {
+                "#name": "image"
+              },
+              {
+                "#name": "text"
+              }
+            ],
+            "image": {}
+          },
+          {
+            "$": {
+              "type": "yoga"
+            },
+            "#name": "layout",
+            "$$": [
+              {
+                "#name": "text"
+              }
+            ]
+          }
+        ],
+        "image": [
+          {},
+          {}
+        ],
+        "layout": [
+          {
+            "$": {
+              "type": "yoga"
+            },
+            "$$": [
+              {
+                "#name": "image"
+              },
+              {
+                "#name": "text"
+              }
+            ],
+            "image": {}
+          },
+          {
+            "$": {
+              "type": "yoga"
+            },
+            "$$": [
+              {
+                "#name": "text"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

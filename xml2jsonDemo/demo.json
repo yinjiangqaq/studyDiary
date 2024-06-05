@@ -42,15 +42,15 @@
       },
       "layout": {
           "background": "tpl_seckill_card_bg",
-          "flex-direction": "column",
+          "flexDirection": "column",
           "type": "yoga",
           "width": "fill",
           "widgetType": "layout",
           "children": [
               {
                   "type": "yoga",
-                  "align-items": "center",
-                  "flex-direction": "row",
+                  "alignItems": "center",
+                  "flexDirection": "row",
                   "widgetType": "layout",
                   "children": [
                       {
@@ -105,7 +105,7 @@
                           "widgetType": "text"
                       },
                       {
-                          "flex-grow": "1",
+                          "flexGrow": "1",
                           "src": "人正在抢购",
                           "fontSize": "18",
                           "color": "#7F7F7F",
@@ -116,8 +116,8 @@
                           "backgroundColor": "#cccccc",
                           "background": "tpl_seckill_all_btn_bg",
                           "marginLeft": "20dp",
-                          "flex-direction": "row",
-                          "align-items": "center",
+                          "flexDirection": "row",
+                          "alignItems": "center",
                           "marginRight": "10dp",
                           "paddingLeft": "6dp",
                           "paddingTop": "2dp",
