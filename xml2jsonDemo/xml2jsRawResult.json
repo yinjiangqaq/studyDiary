@@ -1,1296 +1,1609 @@
 {
   "$": {
-    "type": "yoga",
-    "width": "fill",
-    "background": "tpl_seckill_card_bg",
-    "flexDirection": "column"
+    "flexDirection": "column",
+    "padding": "28dp",
+    "flex": "1",
+    "enableScroll": true,
+    "justifyContent": "flex-start"
   },
+  "#name": "layout",
   "$$": [
     {
       "$": {
-        "type": "yoga",
         "flexDirection": "row",
-        "alignItems": "center"
+        "justifyContent": "center"
       },
       "#name": "layout",
       "$$": [
         {
           "$": {
-            "height": "35dp",
-            "marginLeft": "4dp",
-            "src": "tpl_seckill_goods_icon",
-            "width": "81dp"
-          },
-          "#name": "image"
-        },
-        {
-          "$": {
-            "type": "frame",
-            "marginLeft": "20dp",
-            "width": "40dp",
-            "height": "20dp"
-          },
-          "#name": "layout",
-          "$$": [
-            {
-              "$": {
-                "width": "16dp",
-                "height": "16dp",
-                "radius": "8dp",
-                "layoutGravity": "center_vertical",
-                "src": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
-              },
-              "#name": "image"
-            },
-            {
-              "$": {
-                "width": "16dp",
-                "height": "16dp",
-                "marginLeft": "10dp",
-                "radius": "8dp",
-                "layoutGravity": "center_vertical",
-                "src": ""
-              },
-              "#name": "image"
-            },
-            {
-              "$": {
-                "width": "16dp",
-                "height": "16dp",
-                "marginLeft": "10dp",
-                "radius": "8dp",
-                "layoutGravity": "center_vertical",
-                "src": ""
-              },
-              "#name": "image"
-            }
-          ],
-          "image": [
-            {
-              "$": {
-                "width": "16dp",
-                "height": "16dp",
-                "radius": "8dp",
-                "layoutGravity": "center_vertical",
-                "src": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
-              }
-            },
-            {
-              "$": {
-                "width": "16dp",
-                "height": "16dp",
-                "marginLeft": "10dp",
-                "radius": "8dp",
-                "layoutGravity": "center_vertical",
-                "src": ""
-              }
-            },
-            {
-              "$": {
-                "width": "16dp",
-                "height": "16dp",
-                "marginLeft": "10dp",
-                "radius": "8dp",
-                "layoutGravity": "center_vertical",
-                "src": ""
-              }
-            }
-          ]
-        },
-        {
-          "_": "33355",
-          "$": {
-            "width": "100",
-            "height": "100",
-            "color": "#FFFFFF",
-            "fontSize": "11",
-            "marginLeft": "2"
-          },
-          "#name": "text"
-        },
-        {
-          "_": "人正在抢购",
-          "$": {
-            "flexGrow": "1",
-            "fontSize": "18",
-            "color": "#7F7F7F"
-          },
-          "#name": "text"
-        },
-        {
-          "$": {
-            "onClick": "{\"actions\":[]}",
-            "type": "yoga",
-            "backgroundColor": "#cccccc",
-            "background": "tpl_seckill_all_btn_bg",
-            "marginLeft": "20",
             "flexDirection": "row",
             "alignItems": "center",
-            "marginRight": "10dp",
-            "paddingLeft": "6dp",
-            "paddingTop": "2dp",
-            "paddingBottom": "2dp"
+            "width": "200"
           },
           "#name": "layout",
           "$$": [
             {
-              "_": "全部秒杀",
               "$": {
-                "fontSize": "11",
-                "color": "#FFFFFF"
-              },
-              "#name": "text"
-            },
-            {
-              "$": {
-                "width": "8dp",
-                "height": "10dp",
-                "src": "tpl_white_arrow",
-                "backgroundColor": "#cc00cc"
+                "width": "12dp",
+                "height": "12dp",
+                "src": "ic_shopeepay_coin"
               },
               "#name": "image"
+            },
+            {
+              "_": "{{$coin_balance}fdkajfasddafklsdjfasdjfasdjfjkasdjfajslfjkasdjlfasdjfkajsfklasd}",
+              "$": {
+                "fontSize": "20",
+                "fontWeight": "400",
+                "fontStyle": "bold",
+                "color": "#FAAFFF",
+                "ellipsizeMode": "tail",
+                "numberOfLines": "2",
+                "textAlign": "center"
+              },
+              "#name": "text"
             }
           ],
-          "text": {
-            "_": "全部秒杀",
-            "$": {
-              "fontSize": "11",
-              "color": "#FFFFFF"
-            }
-          },
           "image": {
             "$": {
-              "width": "8dp",
-              "height": "10dp",
-              "src": "tpl_white_arrow",
-              "backgroundColor": "#cc00cc"
+              "width": "12dp",
+              "height": "12dp",
+              "src": "ic_shopeepay_coin"
             }
+          },
+          "text": {
+            "_": "{{$coin_balance}fdkajfasddafklsdjfasdjfasdjfjkasdjfajslfjkasdjlfasdjfkajsfklasd}",
+            "$": {
+              "fontSize": "20",
+              "fontWeight": "400",
+              "fontStyle": "bold",
+              "color": "#FAAFFF",
+              "ellipsizeMode": "tail",
+              "numberOfLines": "2",
+              "textAlign": "center"
+            }
+          }
+        },
+        {
+          "$": {
+            "flexGrow": "1"
+          },
+          "#name": "layout",
+          "$$": [
+            {
+              "$": {
+                "marginLeft": "10dp",
+                "flexDirection": "row",
+                "alignItems": "center"
+              },
+              "#name": "list",
+              "$$": [
+                {
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  },
+                  "#name": "image"
+                },
+                {
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  },
+                  "#name": "image"
+                },
+                {
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  },
+                  "#name": "image"
+                }
+              ],
+              "image": [
+                {
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  }
+                },
+                {
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  }
+                },
+                {
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  }
+                }
+              ]
+            }
+          ],
+          "list": {
+            "$": {
+              "marginLeft": "10dp",
+              "flexDirection": "row",
+              "alignItems": "center"
+            },
+            "$$": [
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                },
+                "#name": "image"
+              },
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                },
+                "#name": "image"
+              },
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                },
+                "#name": "image"
+              }
+            ],
+            "image": [
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                }
+              },
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                }
+              },
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                }
+              }
+            ]
           }
         }
       ],
-      "image": {
-        "$": {
-          "height": "35dp",
-          "marginLeft": "4dp",
-          "src": "tpl_seckill_goods_icon",
-          "width": "81dp"
-        }
-      },
       "layout": [
         {
           "$": {
-            "type": "frame",
-            "marginLeft": "20dp",
-            "width": "40dp",
-            "height": "20dp"
-          },
-          "$$": [
-            {
-              "$": {
-                "width": "16dp",
-                "height": "16dp",
-                "radius": "8dp",
-                "layoutGravity": "center_vertical",
-                "src": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
-              },
-              "#name": "image"
-            },
-            {
-              "$": {
-                "width": "16dp",
-                "height": "16dp",
-                "marginLeft": "10dp",
-                "radius": "8dp",
-                "layoutGravity": "center_vertical",
-                "src": ""
-              },
-              "#name": "image"
-            },
-            {
-              "$": {
-                "width": "16dp",
-                "height": "16dp",
-                "marginLeft": "10dp",
-                "radius": "8dp",
-                "layoutGravity": "center_vertical",
-                "src": ""
-              },
-              "#name": "image"
-            }
-          ],
-          "image": [
-            {
-              "$": {
-                "width": "16dp",
-                "height": "16dp",
-                "radius": "8dp",
-                "layoutGravity": "center_vertical",
-                "src": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
-              }
-            },
-            {
-              "$": {
-                "width": "16dp",
-                "height": "16dp",
-                "marginLeft": "10dp",
-                "radius": "8dp",
-                "layoutGravity": "center_vertical",
-                "src": ""
-              }
-            },
-            {
-              "$": {
-                "width": "16dp",
-                "height": "16dp",
-                "marginLeft": "10dp",
-                "radius": "8dp",
-                "layoutGravity": "center_vertical",
-                "src": ""
-              }
-            }
-          ]
-        },
-        {
-          "$": {
-            "onClick": "{\"actions\":[]}",
-            "type": "yoga",
-            "backgroundColor": "#cccccc",
-            "background": "tpl_seckill_all_btn_bg",
-            "marginLeft": "20",
             "flexDirection": "row",
             "alignItems": "center",
-            "marginRight": "10dp",
-            "paddingLeft": "6dp",
-            "paddingTop": "2dp",
-            "paddingBottom": "2dp"
+            "width": "200"
           },
           "$$": [
             {
-              "_": "全部秒杀",
               "$": {
-                "fontSize": "11",
-                "color": "#FFFFFF"
-              },
-              "#name": "text"
-            },
-            {
-              "$": {
-                "width": "8dp",
-                "height": "10dp",
-                "src": "tpl_white_arrow",
-                "backgroundColor": "#cc00cc"
+                "width": "12dp",
+                "height": "12dp",
+                "src": "ic_shopeepay_coin"
               },
               "#name": "image"
+            },
+            {
+              "_": "{{$coin_balance}fdkajfasddafklsdjfasdjfasdjfjkasdjfajslfjkasdjlfasdjfkajsfklasd}",
+              "$": {
+                "fontSize": "20",
+                "fontWeight": "400",
+                "fontStyle": "bold",
+                "color": "#FAAFFF",
+                "ellipsizeMode": "tail",
+                "numberOfLines": "2",
+                "textAlign": "center"
+              },
+              "#name": "text"
             }
           ],
-          "text": {
-            "_": "全部秒杀",
-            "$": {
-              "fontSize": "11",
-              "color": "#FFFFFF"
-            }
-          },
           "image": {
             "$": {
-              "width": "8dp",
-              "height": "10dp",
-              "src": "tpl_white_arrow",
-              "backgroundColor": "#cc00cc"
+              "width": "12dp",
+              "height": "12dp",
+              "src": "ic_shopeepay_coin"
             }
-          }
-        }
-      ],
-      "text": [
-        {
-          "_": "33355",
-          "$": {
-            "width": "100",
-            "height": "100",
-            "color": "#FFFFFF",
-            "fontSize": "11",
-            "marginLeft": "2"
+          },
+          "text": {
+            "_": "{{$coin_balance}fdkajfasddafklsdjfasdjfasdjfjkasdjfajslfjkasdjlfasdjfkajsfklasd}",
+            "$": {
+              "fontSize": "20",
+              "fontWeight": "400",
+              "fontStyle": "bold",
+              "color": "#FAAFFF",
+              "ellipsizeMode": "tail",
+              "numberOfLines": "2",
+              "textAlign": "center"
+            }
           }
         },
         {
-          "_": "人正在抢购",
           "$": {
-            "flexGrow": "1",
-            "fontSize": "18",
-            "color": "#7F7F7F"
+            "flexGrow": "1"
+          },
+          "$$": [
+            {
+              "$": {
+                "marginLeft": "10dp",
+                "flexDirection": "row",
+                "alignItems": "center"
+              },
+              "#name": "list",
+              "$$": [
+                {
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  },
+                  "#name": "image"
+                },
+                {
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  },
+                  "#name": "image"
+                },
+                {
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  },
+                  "#name": "image"
+                }
+              ],
+              "image": [
+                {
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  }
+                },
+                {
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  }
+                },
+                {
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  }
+                }
+              ]
+            }
+          ],
+          "list": {
+            "$": {
+              "marginLeft": "10dp",
+              "flexDirection": "row",
+              "alignItems": "center"
+            },
+            "$$": [
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                },
+                "#name": "image"
+              },
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                },
+                "#name": "image"
+              },
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                },
+                "#name": "image"
+              }
+            ],
+            "image": [
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                }
+              },
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                }
+              },
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                }
+              }
+            ]
           }
         }
       ]
     },
     {
-      "$": {
-        "height": "125dp",
-        "src": "{good}",
-        "marginBottom": "10dp"
-      },
-      "#name": "list",
+      "#name": "layout",
       "$$": [
         {
+          "$": {
+            "cellTemplate": "{\n  \"widgetType\": \"layout\",\n  \"children\": [\n    {\n      \"width\": \"12dp\",\n      \"height\": \"12dp\",\n      \"src\": \"ic_circle_item_1\",\n      \"widgetType\": \"image\"\n    },\n    {\n      \"fontSize\": \"12\",\n      \"fontWeight\": \"400\",\n      \"widgetType\": \"text\",\n      \"src\": \"1\"\n    }\n  ]\n}"
+          },
+          "#name": "list"
+        }
+      ],
+      "list": {
+        "$": {
+          "cellTemplate": "{\n  \"widgetType\": \"layout\",\n  \"children\": [\n    {\n      \"width\": \"12dp\",\n      \"height\": \"12dp\",\n      \"src\": \"ic_circle_item_1\",\n      \"widgetType\": \"image\"\n    },\n    {\n      \"fontSize\": \"12\",\n      \"fontWeight\": \"400\",\n      \"widgetType\": \"text\",\n      \"src\": \"1\"\n    }\n  ]\n}"
+        }
+      }
+    },
+    {
+      "#name": "layout",
+      "$$": [
+        {
+          "#name": "list",
+          "$$": [
+            {
+              "#name": "layout",
+              "$$": [
+                {
+                  "$": {
+                    "width": "12dp",
+                    "height": "12dp",
+                    "src": "ic_circle_item_1"
+                  },
+                  "#name": "image"
+                },
+                {
+                  "_": "1",
+                  "$": {
+                    "fontSize": "12",
+                    "fontWeight": "400"
+                  },
+                  "#name": "text"
+                }
+              ],
+              "image": {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_1"
+                }
+              },
+              "text": {
+                "_": "1",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                }
+              }
+            },
+            {
+              "#name": "layout",
+              "$$": [
+                {
+                  "$": {
+                    "width": "12dp",
+                    "height": "12dp",
+                    "src": "ic_circle_item_2"
+                  },
+                  "#name": "image"
+                },
+                {
+                  "_": "2",
+                  "$": {
+                    "fontSize": "12",
+                    "fontWeight": "400"
+                  },
+                  "#name": "text"
+                }
+              ],
+              "image": {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_2"
+                }
+              },
+              "text": {
+                "_": "2",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                }
+              }
+            },
+            {
+              "#name": "layout",
+              "$$": [
+                {
+                  "$": {
+                    "width": "12dp",
+                    "height": "12dp",
+                    "src": "ic_circle_item_3"
+                  },
+                  "#name": "image"
+                },
+                {
+                  "_": "3",
+                  "$": {
+                    "fontSize": "12",
+                    "fontWeight": "400"
+                  },
+                  "#name": "text"
+                }
+              ],
+              "image": {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_3"
+                }
+              },
+              "text": {
+                "_": "3",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                }
+              }
+            }
+          ],
+          "layout": [
+            {
+              "$$": [
+                {
+                  "$": {
+                    "width": "12dp",
+                    "height": "12dp",
+                    "src": "ic_circle_item_1"
+                  },
+                  "#name": "image"
+                },
+                {
+                  "_": "1",
+                  "$": {
+                    "fontSize": "12",
+                    "fontWeight": "400"
+                  },
+                  "#name": "text"
+                }
+              ],
+              "image": {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_1"
+                }
+              },
+              "text": {
+                "_": "1",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                }
+              }
+            },
+            {
+              "$$": [
+                {
+                  "$": {
+                    "width": "12dp",
+                    "height": "12dp",
+                    "src": "ic_circle_item_2"
+                  },
+                  "#name": "image"
+                },
+                {
+                  "_": "2",
+                  "$": {
+                    "fontSize": "12",
+                    "fontWeight": "400"
+                  },
+                  "#name": "text"
+                }
+              ],
+              "image": {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_2"
+                }
+              },
+              "text": {
+                "_": "2",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                }
+              }
+            },
+            {
+              "$$": [
+                {
+                  "$": {
+                    "width": "12dp",
+                    "height": "12dp",
+                    "src": "ic_circle_item_3"
+                  },
+                  "#name": "image"
+                },
+                {
+                  "_": "3",
+                  "$": {
+                    "fontSize": "12",
+                    "fontWeight": "400"
+                  },
+                  "#name": "text"
+                }
+              ],
+              "image": {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_3"
+                }
+              },
+              "text": {
+                "_": "3",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "list": {
+        "$$": [
+          {
+            "#name": "layout",
+            "$$": [
+              {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_1"
+                },
+                "#name": "image"
+              },
+              {
+                "_": "1",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                },
+                "#name": "text"
+              }
+            ],
+            "image": {
+              "$": {
+                "width": "12dp",
+                "height": "12dp",
+                "src": "ic_circle_item_1"
+              }
+            },
+            "text": {
+              "_": "1",
+              "$": {
+                "fontSize": "12",
+                "fontWeight": "400"
+              }
+            }
+          },
+          {
+            "#name": "layout",
+            "$$": [
+              {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_2"
+                },
+                "#name": "image"
+              },
+              {
+                "_": "2",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                },
+                "#name": "text"
+              }
+            ],
+            "image": {
+              "$": {
+                "width": "12dp",
+                "height": "12dp",
+                "src": "ic_circle_item_2"
+              }
+            },
+            "text": {
+              "_": "2",
+              "$": {
+                "fontSize": "12",
+                "fontWeight": "400"
+              }
+            }
+          },
+          {
+            "#name": "layout",
+            "$$": [
+              {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_3"
+                },
+                "#name": "image"
+              },
+              {
+                "_": "3",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                },
+                "#name": "text"
+              }
+            ],
+            "image": {
+              "$": {
+                "width": "12dp",
+                "height": "12dp",
+                "src": "ic_circle_item_3"
+              }
+            },
+            "text": {
+              "_": "3",
+              "$": {
+                "fontSize": "12",
+                "fontWeight": "400"
+              }
+            }
+          }
+        ],
+        "layout": [
+          {
+            "$$": [
+              {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_1"
+                },
+                "#name": "image"
+              },
+              {
+                "_": "1",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                },
+                "#name": "text"
+              }
+            ],
+            "image": {
+              "$": {
+                "width": "12dp",
+                "height": "12dp",
+                "src": "ic_circle_item_1"
+              }
+            },
+            "text": {
+              "_": "1",
+              "$": {
+                "fontSize": "12",
+                "fontWeight": "400"
+              }
+            }
+          },
+          {
+            "$$": [
+              {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_2"
+                },
+                "#name": "image"
+              },
+              {
+                "_": "2",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                },
+                "#name": "text"
+              }
+            ],
+            "image": {
+              "$": {
+                "width": "12dp",
+                "height": "12dp",
+                "src": "ic_circle_item_2"
+              }
+            },
+            "text": {
+              "_": "2",
+              "$": {
+                "fontSize": "12",
+                "fontWeight": "400"
+              }
+            }
+          },
+          {
+            "$$": [
+              {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_3"
+                },
+                "#name": "image"
+              },
+              {
+                "_": "3",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                },
+                "#name": "text"
+              }
+            ],
+            "image": {
+              "$": {
+                "width": "12dp",
+                "height": "12dp",
+                "src": "ic_circle_item_3"
+              }
+            },
+            "text": {
+              "_": "3",
+              "$": {
+                "fontSize": "12",
+                "fontWeight": "400"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "layout": [
+    {
+      "$": {
+        "flexDirection": "row",
+        "justifyContent": "center"
+      },
+      "$$": [
+        {
+          "$": {
+            "flexDirection": "row",
+            "alignItems": "center",
+            "width": "200"
+          },
           "#name": "layout",
           "$$": [
             {
               "$": {
-                "type": "frame"
+                "width": "12dp",
+                "height": "12dp",
+                "src": "ic_shopeepay_coin"
               },
-              "#name": "layout",
+              "#name": "image"
+            },
+            {
+              "_": "{{$coin_balance}fdkajfasddafklsdjfasdjfasdjfjkasdjfajslfjkasdjlfasdjfkajsfklasd}",
+              "$": {
+                "fontSize": "20",
+                "fontWeight": "400",
+                "fontStyle": "bold",
+                "color": "#FAAFFF",
+                "ellipsizeMode": "tail",
+                "numberOfLines": "2",
+                "textAlign": "center"
+              },
+              "#name": "text"
+            }
+          ],
+          "image": {
+            "$": {
+              "width": "12dp",
+              "height": "12dp",
+              "src": "ic_shopeepay_coin"
+            }
+          },
+          "text": {
+            "_": "{{$coin_balance}fdkajfasddafklsdjfasdjfasdjfjkasdjfajslfjkasdjlfasdjfkajsfklasd}",
+            "$": {
+              "fontSize": "20",
+              "fontWeight": "400",
+              "fontStyle": "bold",
+              "color": "#FAAFFF",
+              "ellipsizeMode": "tail",
+              "numberOfLines": "2",
+              "textAlign": "center"
+            }
+          }
+        },
+        {
+          "$": {
+            "flexGrow": "1"
+          },
+          "#name": "layout",
+          "$$": [
+            {
+              "$": {
+                "marginLeft": "10dp",
+                "flexDirection": "row",
+                "alignItems": "center"
+              },
+              "#name": "list",
               "$$": [
                 {
-                  "#name": "image"
-                },
-                {
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  },
                   "#name": "image"
                 },
                 {
                   "$": {
-                    "type": "yoga"
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
                   },
-                  "#name": "layout",
-                  "$$": [
-                    {
-                      "#name": "image"
-                    },
-                    {
-                      "_": "直降3.1元",
-                      "#name": "text"
-                    }
-                  ],
-                  "image": {},
-                  "text": "直降3.1元"
+                  "#name": "image"
                 },
                 {
                   "$": {
-                    "type": "yoga"
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
                   },
-                  "#name": "layout",
-                  "$$": [
-                    {
-                      "_": "{price}",
-                      "#name": "text"
-                    }
-                  ],
-                  "text": "{price}"
+                  "#name": "image"
                 }
               ],
               "image": [
-                {},
-                {}
-              ],
-              "layout": [
                 {
                   "$": {
-                    "type": "yoga"
-                  },
-                  "$$": [
-                    {
-                      "#name": "image"
-                    },
-                    {
-                      "_": "直降3.1元",
-                      "#name": "text"
-                    }
-                  ],
-                  "image": {},
-                  "text": "直降3.1元"
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  }
                 },
                 {
                   "$": {
-                    "type": "yoga"
-                  },
-                  "$$": [
-                    {
-                      "_": "{price}",
-                      "#name": "text"
-                    }
-                  ],
-                  "text": "{price}"
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  }
+                },
+                {
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  }
                 }
               ]
             }
           ],
-          "layout": {
+          "list": {
             "$": {
-              "type": "frame"
+              "marginLeft": "10dp",
+              "flexDirection": "row",
+              "alignItems": "center"
             },
             "$$": [
               {
-                "#name": "image"
-              },
-              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                },
                 "#name": "image"
               },
               {
                 "$": {
-                  "type": "yoga"
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
                 },
-                "#name": "layout",
-                "$$": [
-                  {
-                    "#name": "image"
-                  },
-                  {
-                    "_": "直降3.1元",
-                    "#name": "text"
-                  }
-                ],
-                "image": {},
-                "text": "直降3.1元"
+                "#name": "image"
               },
               {
                 "$": {
-                  "type": "yoga"
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
                 },
-                "#name": "layout",
-                "$$": [
-                  {
-                    "_": "{price}",
-                    "#name": "text"
-                  }
-                ],
-                "text": "{price}"
+                "#name": "image"
               }
             ],
             "image": [
-              {},
-              {}
-            ],
-            "layout": [
               {
                 "$": {
-                  "type": "yoga"
-                },
-                "$$": [
-                  {
-                    "#name": "image"
-                  },
-                  {
-                    "_": "直降3.1元",
-                    "#name": "text"
-                  }
-                ],
-                "image": {},
-                "text": "直降3.1元"
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                }
               },
               {
                 "$": {
-                  "type": "yoga"
-                },
-                "$$": [
-                  {
-                    "_": "{price}",
-                    "#name": "text"
-                  }
-                ],
-                "text": "{price}"
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                }
+              },
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                }
               }
             ]
           }
         }
       ],
-      "layout": {
-        "$$": [
-          {
-            "$": {
-              "type": "frame"
-            },
-            "#name": "layout",
-            "$$": [
-              {
-                "#name": "image"
-              },
-              {
-                "#name": "image"
-              },
-              {
-                "$": {
-                  "type": "yoga"
-                },
-                "#name": "layout",
-                "$$": [
-                  {
-                    "#name": "image"
-                  },
-                  {
-                    "_": "直降3.1元",
-                    "#name": "text"
-                  }
-                ],
-                "image": {},
-                "text": "直降3.1元"
-              },
-              {
-                "$": {
-                  "type": "yoga"
-                },
-                "#name": "layout",
-                "$$": [
-                  {
-                    "_": "{price}",
-                    "#name": "text"
-                  }
-                ],
-                "text": "{price}"
-              }
-            ],
-            "image": [
-              {},
-              {}
-            ],
-            "layout": [
-              {
-                "$": {
-                  "type": "yoga"
-                },
-                "$$": [
-                  {
-                    "#name": "image"
-                  },
-                  {
-                    "_": "直降3.1元",
-                    "#name": "text"
-                  }
-                ],
-                "image": {},
-                "text": "直降3.1元"
-              },
-              {
-                "$": {
-                  "type": "yoga"
-                },
-                "$$": [
-                  {
-                    "_": "{price}",
-                    "#name": "text"
-                  }
-                ],
-                "text": "{price}"
-              }
-            ]
-          }
-        ],
-        "layout": {
+      "layout": [
+        {
           "$": {
-            "type": "frame"
+            "flexDirection": "row",
+            "alignItems": "center",
+            "width": "200"
           },
           "$$": [
             {
+              "$": {
+                "width": "12dp",
+                "height": "12dp",
+                "src": "ic_shopeepay_coin"
+              },
               "#name": "image"
             },
             {
-              "#name": "image"
-            },
-            {
+              "_": "{{$coin_balance}fdkajfasddafklsdjfasdjfasdjfjkasdjfajslfjkasdjlfasdjfkajsfklasd}",
               "$": {
-                "type": "yoga"
+                "fontSize": "20",
+                "fontWeight": "400",
+                "fontStyle": "bold",
+                "color": "#FAAFFF",
+                "ellipsizeMode": "tail",
+                "numberOfLines": "2",
+                "textAlign": "center"
               },
-              "#name": "layout",
-              "$$": [
-                {
-                  "#name": "image"
-                },
-                {
-                  "_": "直降3.1元",
-                  "#name": "text"
-                }
-              ],
-              "image": {},
-              "text": "直降3.1元"
-            },
-            {
-              "$": {
-                "type": "yoga"
-              },
-              "#name": "layout",
-              "$$": [
-                {
-                  "_": "{price}",
-                  "#name": "text"
-                }
-              ],
-              "text": "{price}"
+              "#name": "text"
             }
           ],
-          "image": [
-            {},
-            {}
-          ],
-          "layout": [
-            {
-              "$": {
-                "type": "yoga"
-              },
-              "$$": [
-                {
-                  "#name": "image"
-                },
-                {
-                  "_": "直降3.1元",
-                  "#name": "text"
-                }
-              ],
-              "image": {},
-              "text": "直降3.1元"
-            },
-            {
-              "$": {
-                "type": "yoga"
-              },
-              "$$": [
-                {
-                  "_": "{price}",
-                  "#name": "text"
-                }
-              ],
-              "text": "{price}"
-            }
-          ]
-        }
-      }
-    }
-  ],
-  "layout": {
-    "$": {
-      "type": "yoga",
-      "flexDirection": "row",
-      "alignItems": "center"
-    },
-    "$$": [
-      {
-        "$": {
-          "height": "35dp",
-          "marginLeft": "4dp",
-          "src": "tpl_seckill_goods_icon",
-          "width": "81dp"
-        },
-        "#name": "image"
-      },
-      {
-        "$": {
-          "type": "frame",
-          "marginLeft": "20dp",
-          "width": "40dp",
-          "height": "20dp"
-        },
-        "#name": "layout",
-        "$$": [
-          {
+          "image": {
             "$": {
-              "width": "16dp",
-              "height": "16dp",
-              "radius": "8dp",
-              "layoutGravity": "center_vertical",
-              "src": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
-            },
-            "#name": "image"
-          },
-          {
-            "$": {
-              "width": "16dp",
-              "height": "16dp",
-              "marginLeft": "10dp",
-              "radius": "8dp",
-              "layoutGravity": "center_vertical",
-              "src": ""
-            },
-            "#name": "image"
-          },
-          {
-            "$": {
-              "width": "16dp",
-              "height": "16dp",
-              "marginLeft": "10dp",
-              "radius": "8dp",
-              "layoutGravity": "center_vertical",
-              "src": ""
-            },
-            "#name": "image"
-          }
-        ],
-        "image": [
-          {
-            "$": {
-              "width": "16dp",
-              "height": "16dp",
-              "radius": "8dp",
-              "layoutGravity": "center_vertical",
-              "src": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
+              "width": "12dp",
+              "height": "12dp",
+              "src": "ic_shopeepay_coin"
             }
           },
-          {
+          "text": {
+            "_": "{{$coin_balance}fdkajfasddafklsdjfasdjfasdjfjkasdjfajslfjkasdjlfasdjfkajsfklasd}",
             "$": {
-              "width": "16dp",
-              "height": "16dp",
-              "marginLeft": "10dp",
-              "radius": "8dp",
-              "layoutGravity": "center_vertical",
-              "src": ""
-            }
-          },
-          {
-            "$": {
-              "width": "16dp",
-              "height": "16dp",
-              "marginLeft": "10dp",
-              "radius": "8dp",
-              "layoutGravity": "center_vertical",
-              "src": ""
+              "fontSize": "20",
+              "fontWeight": "400",
+              "fontStyle": "bold",
+              "color": "#FAAFFF",
+              "ellipsizeMode": "tail",
+              "numberOfLines": "2",
+              "textAlign": "center"
             }
           }
-        ]
-      },
-      {
-        "_": "33355",
-        "$": {
-          "width": "100",
-          "height": "100",
-          "color": "#FFFFFF",
-          "fontSize": "11",
-          "marginLeft": "2"
         },
-        "#name": "text"
-      },
-      {
-        "_": "人正在抢购",
-        "$": {
-          "flexGrow": "1",
-          "fontSize": "18",
-          "color": "#7F7F7F"
-        },
-        "#name": "text"
-      },
-      {
-        "$": {
-          "onClick": "{\"actions\":[]}",
-          "type": "yoga",
-          "backgroundColor": "#cccccc",
-          "background": "tpl_seckill_all_btn_bg",
-          "marginLeft": "20",
-          "flexDirection": "row",
-          "alignItems": "center",
-          "marginRight": "10dp",
-          "paddingLeft": "6dp",
-          "paddingTop": "2dp",
-          "paddingBottom": "2dp"
-        },
-        "#name": "layout",
-        "$$": [
-          {
-            "_": "全部秒杀",
-            "$": {
-              "fontSize": "11",
-              "color": "#FFFFFF"
-            },
-            "#name": "text"
-          },
-          {
-            "$": {
-              "width": "8dp",
-              "height": "10dp",
-              "src": "tpl_white_arrow",
-              "backgroundColor": "#cc00cc"
-            },
-            "#name": "image"
-          }
-        ],
-        "text": {
-          "_": "全部秒杀",
+        {
           "$": {
-            "fontSize": "11",
-            "color": "#FFFFFF"
-          }
-        },
-        "image": {
-          "$": {
-            "width": "8dp",
-            "height": "10dp",
-            "src": "tpl_white_arrow",
-            "backgroundColor": "#cc00cc"
-          }
-        }
-      }
-    ],
-    "image": {
-      "$": {
-        "height": "35dp",
-        "marginLeft": "4dp",
-        "src": "tpl_seckill_goods_icon",
-        "width": "81dp"
-      }
-    },
-    "layout": [
-      {
-        "$": {
-          "type": "frame",
-          "marginLeft": "20dp",
-          "width": "40dp",
-          "height": "20dp"
-        },
-        "$$": [
-          {
-            "$": {
-              "width": "16dp",
-              "height": "16dp",
-              "radius": "8dp",
-              "layoutGravity": "center_vertical",
-              "src": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
-            },
-            "#name": "image"
-          },
-          {
-            "$": {
-              "width": "16dp",
-              "height": "16dp",
-              "marginLeft": "10dp",
-              "radius": "8dp",
-              "layoutGravity": "center_vertical",
-              "src": ""
-            },
-            "#name": "image"
-          },
-          {
-            "$": {
-              "width": "16dp",
-              "height": "16dp",
-              "marginLeft": "10dp",
-              "radius": "8dp",
-              "layoutGravity": "center_vertical",
-              "src": ""
-            },
-            "#name": "image"
-          }
-        ],
-        "image": [
-          {
-            "$": {
-              "width": "16dp",
-              "height": "16dp",
-              "radius": "8dp",
-              "layoutGravity": "center_vertical",
-              "src": "https://s3-gz01.didistatic.com/creative-center/goods-picture-with-tag/22720_17_1608649386903.png"
-            }
-          },
-          {
-            "$": {
-              "width": "16dp",
-              "height": "16dp",
-              "marginLeft": "10dp",
-              "radius": "8dp",
-              "layoutGravity": "center_vertical",
-              "src": ""
-            }
-          },
-          {
-            "$": {
-              "width": "16dp",
-              "height": "16dp",
-              "marginLeft": "10dp",
-              "radius": "8dp",
-              "layoutGravity": "center_vertical",
-              "src": ""
-            }
-          }
-        ]
-      },
-      {
-        "$": {
-          "onClick": "{\"actions\":[]}",
-          "type": "yoga",
-          "backgroundColor": "#cccccc",
-          "background": "tpl_seckill_all_btn_bg",
-          "marginLeft": "20",
-          "flexDirection": "row",
-          "alignItems": "center",
-          "marginRight": "10dp",
-          "paddingLeft": "6dp",
-          "paddingTop": "2dp",
-          "paddingBottom": "2dp"
-        },
-        "$$": [
-          {
-            "_": "全部秒杀",
-            "$": {
-              "fontSize": "11",
-              "color": "#FFFFFF"
-            },
-            "#name": "text"
-          },
-          {
-            "$": {
-              "width": "8dp",
-              "height": "10dp",
-              "src": "tpl_white_arrow",
-              "backgroundColor": "#cc00cc"
-            },
-            "#name": "image"
-          }
-        ],
-        "text": {
-          "_": "全部秒杀",
-          "$": {
-            "fontSize": "11",
-            "color": "#FFFFFF"
-          }
-        },
-        "image": {
-          "$": {
-            "width": "8dp",
-            "height": "10dp",
-            "src": "tpl_white_arrow",
-            "backgroundColor": "#cc00cc"
-          }
-        }
-      }
-    ],
-    "text": [
-      {
-        "_": "33355",
-        "$": {
-          "width": "100",
-          "height": "100",
-          "color": "#FFFFFF",
-          "fontSize": "11",
-          "marginLeft": "2"
-        }
-      },
-      {
-        "_": "人正在抢购",
-        "$": {
-          "flexGrow": "1",
-          "fontSize": "18",
-          "color": "#7F7F7F"
-        }
-      }
-    ]
-  },
-  "list": {
-    "$": {
-      "height": "125dp",
-      "src": "{good}",
-      "marginBottom": "10dp"
-    },
-    "$$": [
-      {
-        "#name": "layout",
-        "$$": [
-          {
-            "$": {
-              "type": "frame"
-            },
-            "#name": "layout",
-            "$$": [
-              {
-                "#name": "image"
-              },
-              {
-                "#name": "image"
-              },
-              {
-                "$": {
-                  "type": "yoga"
-                },
-                "#name": "layout",
-                "$$": [
-                  {
-                    "#name": "image"
-                  },
-                  {
-                    "_": "直降3.1元",
-                    "#name": "text"
-                  }
-                ],
-                "image": {},
-                "text": "直降3.1元"
-              },
-              {
-                "$": {
-                  "type": "yoga"
-                },
-                "#name": "layout",
-                "$$": [
-                  {
-                    "_": "{price}",
-                    "#name": "text"
-                  }
-                ],
-                "text": "{price}"
-              }
-            ],
-            "image": [
-              {},
-              {}
-            ],
-            "layout": [
-              {
-                "$": {
-                  "type": "yoga"
-                },
-                "$$": [
-                  {
-                    "#name": "image"
-                  },
-                  {
-                    "_": "直降3.1元",
-                    "#name": "text"
-                  }
-                ],
-                "image": {},
-                "text": "直降3.1元"
-              },
-              {
-                "$": {
-                  "type": "yoga"
-                },
-                "$$": [
-                  {
-                    "_": "{price}",
-                    "#name": "text"
-                  }
-                ],
-                "text": "{price}"
-              }
-            ]
-          }
-        ],
-        "layout": {
-          "$": {
-            "type": "frame"
+            "flexGrow": "1"
           },
           "$$": [
             {
-              "#name": "image"
-            },
-            {
-              "#name": "image"
-            },
-            {
               "$": {
-                "type": "yoga"
+                "marginLeft": "10dp",
+                "flexDirection": "row",
+                "alignItems": "center"
               },
-              "#name": "layout",
+              "#name": "list",
               "$$": [
                 {
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  },
                   "#name": "image"
                 },
                 {
-                  "_": "直降3.1元",
-                  "#name": "text"
-                }
-              ],
-              "image": {},
-              "text": "直降3.1元"
-            },
-            {
-              "$": {
-                "type": "yoga"
-              },
-              "#name": "layout",
-              "$$": [
-                {
-                  "_": "{price}",
-                  "#name": "text"
-                }
-              ],
-              "text": "{price}"
-            }
-          ],
-          "image": [
-            {},
-            {}
-          ],
-          "layout": [
-            {
-              "$": {
-                "type": "yoga"
-              },
-              "$$": [
-                {
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  },
                   "#name": "image"
                 },
                 {
-                  "_": "直降3.1元",
-                  "#name": "text"
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  },
+                  "#name": "image"
                 }
               ],
-              "image": {},
-              "text": "直降3.1元"
-            },
-            {
-              "$": {
-                "type": "yoga"
-              },
-              "$$": [
+              "image": [
                 {
-                  "_": "{price}",
-                  "#name": "text"
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  }
+                },
+                {
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  }
+                },
+                {
+                  "$": {
+                    "src": "https://sdfsdfjaljfa.jpg",
+                    "height": "12dp",
+                    "width": "12dp"
+                  }
                 }
-              ],
-              "text": "{price}"
+              ]
             }
-          ]
+          ],
+          "list": {
+            "$": {
+              "marginLeft": "10dp",
+              "flexDirection": "row",
+              "alignItems": "center"
+            },
+            "$$": [
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                },
+                "#name": "image"
+              },
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                },
+                "#name": "image"
+              },
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                },
+                "#name": "image"
+              }
+            ],
+            "image": [
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                }
+              },
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                }
+              },
+              {
+                "$": {
+                  "src": "https://sdfsdfjaljfa.jpg",
+                  "height": "12dp",
+                  "width": "12dp"
+                }
+              }
+            ]
+          }
         }
-      }
-    ],
-    "layout": {
+      ]
+    },
+    {
       "$$": [
         {
           "$": {
-            "type": "frame"
+            "cellTemplate": "{\n  \"widgetType\": \"layout\",\n  \"children\": [\n    {\n      \"width\": \"12dp\",\n      \"height\": \"12dp\",\n      \"src\": \"ic_circle_item_1\",\n      \"widgetType\": \"image\"\n    },\n    {\n      \"fontSize\": \"12\",\n      \"fontWeight\": \"400\",\n      \"widgetType\": \"text\",\n      \"src\": \"1\"\n    }\n  ]\n}"
           },
-          "#name": "layout",
+          "#name": "list"
+        }
+      ],
+      "list": {
+        "$": {
+          "cellTemplate": "{\n  \"widgetType\": \"layout\",\n  \"children\": [\n    {\n      \"width\": \"12dp\",\n      \"height\": \"12dp\",\n      \"src\": \"ic_circle_item_1\",\n      \"widgetType\": \"image\"\n    },\n    {\n      \"fontSize\": \"12\",\n      \"fontWeight\": \"400\",\n      \"widgetType\": \"text\",\n      \"src\": \"1\"\n    }\n  ]\n}"
+        }
+      }
+    },
+    {
+      "$$": [
+        {
+          "#name": "list",
           "$$": [
             {
-              "#name": "image"
-            },
-            {
-              "#name": "image"
-            },
-            {
-              "$": {
-                "type": "yoga"
-              },
               "#name": "layout",
               "$$": [
                 {
+                  "$": {
+                    "width": "12dp",
+                    "height": "12dp",
+                    "src": "ic_circle_item_1"
+                  },
                   "#name": "image"
                 },
                 {
-                  "_": "直降3.1元",
+                  "_": "1",
+                  "$": {
+                    "fontSize": "12",
+                    "fontWeight": "400"
+                  },
                   "#name": "text"
                 }
               ],
-              "image": {},
-              "text": "直降3.1元"
+              "image": {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_1"
+                }
+              },
+              "text": {
+                "_": "1",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                }
+              }
             },
             {
-              "$": {
-                "type": "yoga"
-              },
               "#name": "layout",
               "$$": [
                 {
-                  "_": "{price}",
+                  "$": {
+                    "width": "12dp",
+                    "height": "12dp",
+                    "src": "ic_circle_item_2"
+                  },
+                  "#name": "image"
+                },
+                {
+                  "_": "2",
+                  "$": {
+                    "fontSize": "12",
+                    "fontWeight": "400"
+                  },
                   "#name": "text"
                 }
               ],
-              "text": "{price}"
+              "image": {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_2"
+                }
+              },
+              "text": {
+                "_": "2",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                }
+              }
+            },
+            {
+              "#name": "layout",
+              "$$": [
+                {
+                  "$": {
+                    "width": "12dp",
+                    "height": "12dp",
+                    "src": "ic_circle_item_3"
+                  },
+                  "#name": "image"
+                },
+                {
+                  "_": "3",
+                  "$": {
+                    "fontSize": "12",
+                    "fontWeight": "400"
+                  },
+                  "#name": "text"
+                }
+              ],
+              "image": {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_3"
+                }
+              },
+              "text": {
+                "_": "3",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                }
+              }
             }
-          ],
-          "image": [
-            {},
-            {}
           ],
           "layout": [
             {
-              "$": {
-                "type": "yoga"
-              },
               "$$": [
                 {
+                  "$": {
+                    "width": "12dp",
+                    "height": "12dp",
+                    "src": "ic_circle_item_1"
+                  },
                   "#name": "image"
                 },
                 {
-                  "_": "直降3.1元",
+                  "_": "1",
+                  "$": {
+                    "fontSize": "12",
+                    "fontWeight": "400"
+                  },
                   "#name": "text"
                 }
               ],
-              "image": {},
-              "text": "直降3.1元"
+              "image": {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_1"
+                }
+              },
+              "text": {
+                "_": "1",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                }
+              }
             },
             {
-              "$": {
-                "type": "yoga"
-              },
               "$$": [
                 {
-                  "_": "{price}",
+                  "$": {
+                    "width": "12dp",
+                    "height": "12dp",
+                    "src": "ic_circle_item_2"
+                  },
+                  "#name": "image"
+                },
+                {
+                  "_": "2",
+                  "$": {
+                    "fontSize": "12",
+                    "fontWeight": "400"
+                  },
                   "#name": "text"
                 }
               ],
-              "text": "{price}"
+              "image": {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_2"
+                }
+              },
+              "text": {
+                "_": "2",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                }
+              }
+            },
+            {
+              "$$": [
+                {
+                  "$": {
+                    "width": "12dp",
+                    "height": "12dp",
+                    "src": "ic_circle_item_3"
+                  },
+                  "#name": "image"
+                },
+                {
+                  "_": "3",
+                  "$": {
+                    "fontSize": "12",
+                    "fontWeight": "400"
+                  },
+                  "#name": "text"
+                }
+              ],
+              "image": {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_3"
+                }
+              },
+              "text": {
+                "_": "3",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                }
+              }
             }
           ]
         }
       ],
-      "layout": {
-        "$": {
-          "type": "frame"
-        },
+      "list": {
         "$$": [
           {
-            "#name": "image"
-          },
-          {
-            "#name": "image"
-          },
-          {
-            "$": {
-              "type": "yoga"
-            },
             "#name": "layout",
             "$$": [
               {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_1"
+                },
                 "#name": "image"
               },
               {
-                "_": "直降3.1元",
+                "_": "1",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                },
                 "#name": "text"
               }
             ],
-            "image": {},
-            "text": "直降3.1元"
+            "image": {
+              "$": {
+                "width": "12dp",
+                "height": "12dp",
+                "src": "ic_circle_item_1"
+              }
+            },
+            "text": {
+              "_": "1",
+              "$": {
+                "fontSize": "12",
+                "fontWeight": "400"
+              }
+            }
           },
           {
-            "$": {
-              "type": "yoga"
-            },
             "#name": "layout",
             "$$": [
               {
-                "_": "{price}",
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_2"
+                },
+                "#name": "image"
+              },
+              {
+                "_": "2",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                },
                 "#name": "text"
               }
             ],
-            "text": "{price}"
+            "image": {
+              "$": {
+                "width": "12dp",
+                "height": "12dp",
+                "src": "ic_circle_item_2"
+              }
+            },
+            "text": {
+              "_": "2",
+              "$": {
+                "fontSize": "12",
+                "fontWeight": "400"
+              }
+            }
+          },
+          {
+            "#name": "layout",
+            "$$": [
+              {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_3"
+                },
+                "#name": "image"
+              },
+              {
+                "_": "3",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                },
+                "#name": "text"
+              }
+            ],
+            "image": {
+              "$": {
+                "width": "12dp",
+                "height": "12dp",
+                "src": "ic_circle_item_3"
+              }
+            },
+            "text": {
+              "_": "3",
+              "$": {
+                "fontSize": "12",
+                "fontWeight": "400"
+              }
+            }
           }
-        ],
-        "image": [
-          {},
-          {}
         ],
         "layout": [
           {
-            "$": {
-              "type": "yoga"
-            },
             "$$": [
               {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_1"
+                },
                 "#name": "image"
               },
               {
-                "_": "直降3.1元",
+                "_": "1",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                },
                 "#name": "text"
               }
             ],
-            "image": {},
-            "text": "直降3.1元"
+            "image": {
+              "$": {
+                "width": "12dp",
+                "height": "12dp",
+                "src": "ic_circle_item_1"
+              }
+            },
+            "text": {
+              "_": "1",
+              "$": {
+                "fontSize": "12",
+                "fontWeight": "400"
+              }
+            }
           },
           {
-            "$": {
-              "type": "yoga"
-            },
             "$$": [
               {
-                "_": "{price}",
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_2"
+                },
+                "#name": "image"
+              },
+              {
+                "_": "2",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                },
                 "#name": "text"
               }
             ],
-            "text": "{price}"
+            "image": {
+              "$": {
+                "width": "12dp",
+                "height": "12dp",
+                "src": "ic_circle_item_2"
+              }
+            },
+            "text": {
+              "_": "2",
+              "$": {
+                "fontSize": "12",
+                "fontWeight": "400"
+              }
+            }
+          },
+          {
+            "$$": [
+              {
+                "$": {
+                  "width": "12dp",
+                  "height": "12dp",
+                  "src": "ic_circle_item_3"
+                },
+                "#name": "image"
+              },
+              {
+                "_": "3",
+                "$": {
+                  "fontSize": "12",
+                  "fontWeight": "400"
+                },
+                "#name": "text"
+              }
+            ],
+            "image": {
+              "$": {
+                "width": "12dp",
+                "height": "12dp",
+                "src": "ic_circle_item_3"
+              }
+            },
+            "text": {
+              "_": "3",
+              "$": {
+                "fontSize": "12",
+                "fontWeight": "400"
+              }
+            }
           }
         ]
       }
     }
-  }
+  ]
 }

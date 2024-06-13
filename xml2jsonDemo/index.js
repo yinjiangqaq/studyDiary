@@ -1,9 +1,29 @@
-const convert = require("xml-js");
+const xml2jsConvert = require("xml2js");
 const fs = require("fs");
+const transformXMLFileIntoJson = require("./xml2js");
+const transformNodeV2 = require("./transformNode");
+const attrValueProcessor = require("./attrValueProcessor");
+/**
+ * 这些处理器后续可以作为处理JSON字段不正确的case,大小写纠正，驼峰纠正, 目前可以做为告警
+ */
+// const attrNameProcessor = require("./attrNameProcessor");
+// const valueProcessor = require("./valueProcessor");
 
-const jsonStr = fs.readFileSync("./demo.json", "utf-8");
+/**
+ * 读取demo2.xml 并将作为layout的内容填补进index.json里面的layout字段
+ */
 
-const result = convert.json2xml(jsonStr, { compact: true, spaces: 4 });
+const originalJson = fs.readFileSync("./index.json", "utf-8");
+const originJsonObj = JSON.parse(originalJson);
+// console.log("======originalJson", originJsonObj);
 
-fs.writeFileSync("./result.xml", result);
-// console.log(result);
+const resultJSON = transformXMLFileIntoJson("./demo2.xml", {
+  attrValueProcessors: [attrValueProcessor],
+});
+const resultNode = JSON.parse(resultJSON);
+originJsonObj.root.layout = resultNode;
+originJsonObjString = JSON.stringify(originJsonObj, null, 2);
+// console.log("============originalJsonObj", originJsonObj);
+fs.writeFileSync("./index.json", originJsonObjString);
+// 同步复制到桌面
+fs.copyFileSync("./index.json", "../../../Desktop/index.json");

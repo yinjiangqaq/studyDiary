@@ -44,6 +44,7 @@
       "flexDirection": "column",
       "padding": "28dp",
       "flex": "1",
+      "enableScroll": true,
       "justifyContent": "flex-start",
       "widgetType": "layout",
       "children": [
@@ -55,7 +56,7 @@
             {
               "flexDirection": "row",
               "alignItems": "center",
-              "height": "20",
+              "width": "200",
               "widgetType": "layout",
               "children": [
                 {
@@ -65,10 +66,15 @@
                   "widgetType": "image"
                 },
                 {
-                  "fontSize": "12",
+                  "fontSize": "20",
                   "fontWeight": "400",
+                  "fontStyle": "bold",
+                  "color": "#FAAFFF",
+                  "ellipsizeMode": "tail",
+                  "numberOfLines": "2",
+                  "textAlign": "center",
                   "widgetType": "text",
-                  "src": "{{$coin_balance}}"
+                  "src": "{{$coin_balance}fdkajfasddafklsdjfasdjfasdjfjkasdjfajslfjkasdjlfasdjfkajsfklasd}"
                 }
               ]
             },
@@ -103,6 +109,15 @@
                   ]
                 }
               ]
+            }
+          ]
+        },
+        {
+          "widgetType": "layout",
+          "children": [
+            {
+              "cellTemplate": "{\n  \"widgetType\": \"layout\",\n  \"children\": [\n    {\n      \"width\": \"12dp\",\n      \"height\": \"12dp\",\n      \"src\": \"ic_circle_item_1\",\n      \"widgetType\": \"image\"\n    },\n    {\n      \"fontSize\": \"12\",\n      \"fontWeight\": \"400\",\n      \"widgetType\": \"text\",\n      \"src\": \"1\"\n    }\n  ]\n}",
+              "widgetType": "list"
             }
           ]
         },

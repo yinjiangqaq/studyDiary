@@ -1,8 +1,8 @@
-<layout flexDirection="column" padding="28dp" flex="1" justifyContent="flex-start">
+<layout flexDirection="column" padding="28dp" flex="1" enableScroll="true" justifyContent="flex-start">
   <layout flexDirection="row" justifyContent="center">
-    <layout flexDirection="row" alignItems="center" height="20">
+    <layout flexDirection="row" alignItems="center" width="200">
       <image width="12dp" height="12dp" src="ic_shopeepay_coin" />
-      <text fontSize="12" fontWeight="400">{{$coin_balance}}</text>
+      <text fontSize="20" fontWeight="400" fontStyle="bold" color="#FAAFFF" ellipsizeMode="tail" numberOfLines="2"  textAlign="center" >{{$coin_balance}fdkajfasddafklsdjfasdjfasdjfjkasdjfajslfjkasdjlfasdjfkajsfklasd}</text>
     </layout>
 
     <layout flexGrow="1">
@@ -12,6 +12,10 @@
         <image src="https://sdfsdfjaljfa.jpg" height="12dp" width="12dp"/>
       </list>
     </layout>
+  </layout>
+
+  <layout>
+    <list cellTemplate="import('./components/listItem.xml')"></list>
   </layout>
 
   <layout>
