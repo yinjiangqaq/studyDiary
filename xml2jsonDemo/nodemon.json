@@ -1,0 +1,5 @@
+{
+  "watch": ["demo2.xml"],
+  "ignore": ["node_modules"],
+  "exec": "node xml2js.js"
+}

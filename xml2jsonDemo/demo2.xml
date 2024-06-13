@@ -1,8 +1,8 @@
-<layout flexDirection="column" padding="14dp">
+<layout flexDirection="column" padding="28dp" flex="1" justifyContent="flex-start">
   <layout flexDirection="row" justifyContent="center">
-    <layout flexDirection="row" alignItems="center">
+    <layout flexDirection="row" alignItems="center" height="20">
       <image width="12dp" height="12dp" src="ic_shopeepay_coin" />
-      <text fontSize="12" fontWeight="400">{{coin_balance}}</text>
+      <text fontSize="12" fontWeight="400">{{$coin_balance}}</text>
     </layout>
 
     <layout flexGrow="1">
@@ -18,15 +18,15 @@
     <list>
         <layout>
             <image width="12dp" height="12dp" src="ic_circle_item_1"/>
-            <text fontSize="12" fontWeight="400"></text>
+            <text fontSize="12" fontWeight="400">1</text>
         </layout>
             <layout>
             <image width="12dp" height="12dp" src="ic_circle_item_2"/>
-            <text fontSize="12" fontWeight="400"></text>
+            <text fontSize="12" fontWeight="400">2</text>
         </layout>
             <layout>
             <image width="12dp" height="12dp" src="ic_circle_item_3"/>
-            <text fontSize="12" fontWeight="400"></text>
+            <text fontSize="12" fontWeight="400">3</text>
         </layout>
     </list>
   </layout>

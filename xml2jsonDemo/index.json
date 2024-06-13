@@ -1,5 +1,5 @@
 {
-  "dbl": {
+  "root": {
     "meta": {
       "good": [
         {
@@ -42,7 +42,9 @@
     },
     "layout": {
       "flexDirection": "column",
-      "padding": "14dp",
+      "padding": "28dp",
+      "flex": "1",
+      "justifyContent": "flex-start",
       "widgetType": "layout",
       "children": [
         {
@@ -53,6 +55,7 @@
             {
               "flexDirection": "row",
               "alignItems": "center",
+              "height": "20",
               "widgetType": "layout",
               "children": [
                 {
@@ -65,7 +68,7 @@
                   "fontSize": "12",
                   "fontWeight": "400",
                   "widgetType": "text",
-                  "src": "{{coin_balance}}"
+                  "src": "{{$coin_balance}}"
                 }
               ]
             },
@@ -121,7 +124,8 @@
                     {
                       "fontSize": "12",
                       "fontWeight": "400",
-                      "widgetType": "text"
+                      "widgetType": "text",
+                      "src": "1"
                     }
                   ]
                 },
@@ -137,7 +141,8 @@
                     {
                       "fontSize": "12",
                       "fontWeight": "400",
-                      "widgetType": "text"
+                      "widgetType": "text",
+                      "src": "2"
                     }
                   ]
                 },
@@ -153,7 +158,8 @@
                     {
                       "fontSize": "12",
                       "fontWeight": "400",
-                      "widgetType": "text"
+                      "widgetType": "text",
+                      "src": "3"
                     }
                   ]
                 }
