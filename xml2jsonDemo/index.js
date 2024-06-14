@@ -17,9 +17,13 @@ const originalJson = fs.readFileSync("./index.json", "utf-8");
 const originJsonObj = JSON.parse(originalJson);
 // console.log("======originalJson", originJsonObj);
 
-const resultJSON = transformXMLFileIntoJson("./demo2.xml", {
-  attrValueProcessors: [attrValueProcessor],
-});
+const resultJSON = transformXMLFileIntoJson(
+  "./demo2.xml",
+  {
+    attrValueProcessors: [attrValueProcessor],
+  },
+  transformNodeV2
+);
 const resultNode = JSON.parse(resultJSON);
 originJsonObj.root.layout = resultNode;
 originJsonObjString = JSON.stringify(originJsonObj, null, 2);

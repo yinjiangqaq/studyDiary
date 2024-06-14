@@ -60,9 +60,9 @@
               "widgetType": "layout",
               "children": [
                 {
-                  "width": "12dp",
-                  "height": "12dp",
-                  "src": "ic_shopeepay_coin",
+                  "width": "50",
+                  "height": "50",
+                  "src": "https://deo.shopeemobile.com/shopee/shopee-shopeepayfe-live-id/homepage/cd7de533ac1bbe3701101b2e7aa2c1d1.png",
                   "widgetType": "image"
                 },
                 {
@@ -89,7 +89,7 @@
                   "widgetType": "list",
                   "children": [
                     {
-                      "src": "https://sdfsdfjaljfa.jpg",
+                      "src": "https://deo.shopeemobile.com/shopee/shopee-shopeepayfe-live-id/homepage/cd7de533ac1bbe3701101b2e7aa2c1d1.png",
                       "height": "12dp",
                       "width": "12dp",
                       "widgetType": "image"
@@ -116,7 +116,28 @@
           "widgetType": "layout",
           "children": [
             {
-              "cellTemplate": "{\n  \"widgetType\": \"layout\",\n  \"children\": [\n    {\n      \"width\": \"12dp\",\n      \"height\": \"12dp\",\n      \"src\": \"ic_circle_item_1\",\n      \"widgetType\": \"image\"\n    },\n    {\n      \"fontSize\": \"12\",\n      \"fontWeight\": \"400\",\n      \"widgetType\": \"text\",\n      \"src\": \"1\"\n    }\n  ]\n}",
+              "cellTemplate": "{\n  \"widgetType\": \"layout\",\n  \"children\": [\n    {\n      \"width\": \"12dp\",\n      \"height\": \"12dp\",\n      \"src\": \"ic_circle_item_1\",\n      \"widgetType\": \"image\"\n    },\n    {\n      \"fontSize\": \"12\",\n      \"fontWeight\": \"400\",\n      \"widgetType\": \"text\",\n      \"src\": \"1\"\n    },\n    {\n      \"cellTemplate\": \"{\\n  \\\"widgetType\\\": \\\"layout\\\",\\n  \\\"children\\\": [\\n    {\\n      \\\"listType\\\": \\\"grid\\\",\\n      \\\"column\\\": \\\"4\\\",\\n      \\\"horizontal\\\": true,\\n      \\\"widgetType\\\": \\\"list\\\"\\n    }\\n  ]\\n}\",\n      \"widgetType\": \"list\"\n    }\n  ]\n}",
+              "widgetType": "list"
+            }
+          ]
+        },
+        {
+          "widgetType": "layout",
+          "children": [
+            {
+              "width": "12dp",
+              "height": "12dp",
+              "src": "ic_circle_item_1",
+              "widgetType": "image"
+            },
+            {
+              "fontSize": "12",
+              "fontWeight": "400",
+              "widgetType": "text",
+              "src": "1"
+            },
+            {
+              "cellTemplate": "{\n  \"widgetType\": \"layout\",\n  \"children\": [\n    {\n      \"listType\": \"grid\",\n      \"column\": \"4\",\n      \"horizontal\": true,\n      \"widgetType\": \"list\"\n    }\n  ]\n}",
               "widgetType": "list"
             }
           ]

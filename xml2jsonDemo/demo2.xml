@@ -1,13 +1,13 @@
 <layout flexDirection="column" padding="28dp" flex="1" enableScroll="true" justifyContent="flex-start">
   <layout flexDirection="row" justifyContent="center">
     <layout flexDirection="row" alignItems="center" width="200">
-      <image width="12dp" height="12dp" src="ic_shopeepay_coin" />
-      <text fontSize="20" fontWeight="400" fontStyle="bold" color="#FAAFFF" ellipsizeMode="tail" numberOfLines="2"  textAlign="center" >{{$coin_balance}fdkajfasddafklsdjfasdjfasdjfjkasdjfajslfjkasdjlfasdjfkajsfklasd}</text>
+      <image width="50" height="50" src="https://deo.shopeemobile.com/shopee/shopee-shopeepayfe-live-id/homepage/cd7de533ac1bbe3701101b2e7aa2c1d1.png" />
+      <text fontSize="20" fontWeight="400" fontStyle="bold" color="#FAAFFF" ellipsizeMode="tail" numberOfLines="2" textAlign="center">{{$coin_balance}fdkajfasddafklsdjfasdjfasdjfjkasdjfajslfjkasdjlfasdjfkajsfklasd}</text>
     </layout>
 
     <layout flexGrow="1">
       <list marginLeft="10dp" flexDirection="row" alignItems="center">
-        <image src="https://sdfsdfjaljfa.jpg" height="12dp" width="12dp"/>
+        <image src="https://deo.shopeemobile.com/shopee/shopee-shopeepayfe-live-id/homepage/cd7de533ac1bbe3701101b2e7aa2c1d1.png" height="12dp" width="12dp"/>
         <image src="https://sdfsdfjaljfa.jpg" height="12dp" width="12dp"/>
         <image src="https://sdfsdfjaljfa.jpg" height="12dp" width="12dp"/>
       </list>
@@ -18,20 +18,23 @@
     <list cellTemplate="import('./components/listItem.xml')"></list>
   </layout>
 
+  <!-- 引入自定义子组件 -->
+  <listItem src="./components/listItem.xml"/>
+
   <layout>
     <list>
-        <layout>
-            <image width="12dp" height="12dp" src="ic_circle_item_1"/>
-            <text fontSize="12" fontWeight="400">1</text>
-        </layout>
-            <layout>
-            <image width="12dp" height="12dp" src="ic_circle_item_2"/>
-            <text fontSize="12" fontWeight="400">2</text>
-        </layout>
-            <layout>
-            <image width="12dp" height="12dp" src="ic_circle_item_3"/>
-            <text fontSize="12" fontWeight="400">3</text>
-        </layout>
+      <layout>
+        <image width="12dp" height="12dp" src="ic_circle_item_1"/>
+        <text fontSize="12" fontWeight="400">1</text>
+      </layout>
+      <layout>
+        <image width="12dp" height="12dp" src="ic_circle_item_2"/>
+        <text fontSize="12" fontWeight="400">2</text>
+      </layout>
+      <layout>
+        <image width="12dp" height="12dp" src="ic_circle_item_3"/>
+        <text fontSize="12" fontWeight="400">3</text>
+      </layout>
     </list>
   </layout>
 </layout>

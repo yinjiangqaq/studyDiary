@@ -1,13 +1,11 @@
-<list  enableScroll="true" enableHeaderRefresh="true">
+<list enableScroll="true" enableHeaderRefresh="true">
   <!-- HomeHeader -->
   <layout>
-  <!-- Walletbalance -->
+    <!-- Walletbalance -->
     <layout>
     </layout>
     <!-- wallet bar -->
-    <layout>
-      <list listType="grid" column="4" horizontal="true"></list>
-    </layout>
+
   </layout>
   <!-- HomeModules -->
 </list>

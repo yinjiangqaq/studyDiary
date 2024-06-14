@@ -1,9 +1,10 @@
 const fs = require("fs");
 const xml2jsConvert = require("xml2js");
-const transformNodeV2 = require("./transformNode");
+// const transformNodeV2 = require("./transformNode");
 
-function transformXMLFileIntoJson(filePath, dependencies) {
+function transformXMLFileIntoJson(filePath, dependencies, transformNodeFunc) {
   const { attrValueProcessors = [] } = dependencies || {};
+
   const originXML = fs.readFileSync(filePath, "utf-8");
   let resultJSON;
   xml2jsConvert.parseString(
@@ -20,7 +21,7 @@ function transformXMLFileIntoJson(filePath, dependencies) {
       }
 
       const root = result.layout;
-      const resultNode = transformNodeV2(root);
+      const resultNode = transformNodeFunc(root);
       resultJSON =  JSON.stringify(resultNode, null, 2);
     }
   );
