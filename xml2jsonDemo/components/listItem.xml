@@ -1,6 +1,0 @@
-<layout>
-  <image width="12dp" height="12dp" src="ic_circle_item_1"/>
-  <text fontSize="12" fontWeight="400">1</text>
-
-  <list cellTemplate="import('./components/walletbar.xml')"></list>
-</layout>

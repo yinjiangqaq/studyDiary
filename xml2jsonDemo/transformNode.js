@@ -225,7 +225,7 @@ function transformListNodeWithCellTemplate(node) {
     // console.log("=============value,", value)
   } else {
     throw Error(
-      'cellTemplate attribute value error, the value is like cellTemplate="import("./xxxxxx")'
+      "cellTemplate attribute value error, the value is like cellTemplate=\"import('./xxxxxx')\""
     );
   }
 }

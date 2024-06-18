@@ -1,5 +1,6 @@
 {
-  "watch": ["demo2.xml"],
+  "watch": ["components", "demo2.xml"],
+  "ext": "xml",
   "ignore": ["node_modules"],
   "exec": "node index.js"
 }

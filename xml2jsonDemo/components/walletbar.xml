@@ -1,3 +1,4 @@
-<layout>
-  <list listType="grid" column="4" horizontal="true"></list>
+<layout backgroundColor="#FFFFFF" radius="8" width="100%"  paddingTop="20" paddingBottom="20" marginLeft="12" marginRight="12" flex="1">
+  <list listType="grid" column="4" horizontal="true" cellTemplate="import('./components/walletbarItem.xml')"></list>
+  <!-- tipsbanner -->
 </layout>

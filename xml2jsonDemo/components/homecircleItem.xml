@@ -1,0 +1,6 @@
+<layout flexDirection="column" alignItems="center">
+  <layout width="40" height="40" borderWidth="0.5" radius="12" borderColor="rgba(0, 0, 0, 0.09)" >
+     <image width="32" height="32" src="https://deo.shopeemobile.com/shopee/shopee-shopeepayfe-live-id/homepage/cd7de533ac1bbe3701101b2e7aa2c1d1.png"/>
+  </layout>
+  <text fontSize="12" fontWeight="400" textAlign="center" color="rgba(0, 0, 0, 0.87)">test</text>
+</layout>

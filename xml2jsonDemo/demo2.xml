@@ -4,23 +4,12 @@
       <image width="50" height="50" src="https://deo.shopeemobile.com/shopee/shopee-shopeepayfe-live-id/homepage/cd7de533ac1bbe3701101b2e7aa2c1d1.png" />
       <text fontSize="20" fontWeight="400" fontStyle="bold" color="#FAAFFF" ellipsizeMode="tail" numberOfLines="2" textAlign="center">{{$coin_balance}fdkajfasddafklsdjfasdjfasdjfjkasdjfajslfjkasdjlfasdjfkajsfklasd}</text>
     </layout>
-
-    <layout flexGrow="1">
-      <list marginLeft="10dp" flexDirection="row" alignItems="center">
-        <image src="https://deo.shopeemobile.com/shopee/shopee-shopeepayfe-live-id/homepage/cd7de533ac1bbe3701101b2e7aa2c1d1.png" height="12dp" width="12dp"/>
-        <image src="https://sdfsdfjaljfa.jpg" height="12dp" width="12dp"/>
-        <image src="https://sdfsdfjaljfa.jpg" height="12dp" width="12dp"/>
-      </list>
-    </layout>
-  </layout>
-
-  <layout>
-    <list cellTemplate="import('./components/listItem.xml')"></list>
   </layout>
 
   <!-- 引入自定义子组件 -->
-  <listItem src="./components/listItem.xml"/>
-
+  <walletbar src="./components/walletbar.xml"/>
+  <walletbarItem src="./components/walletbarItem.xml"/>
+  <homecircleItem src="./components/homecircleItem.xml"/>
   <layout>
     <list>
       <layout>

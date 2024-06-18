@@ -77,68 +77,85 @@
                   "src": "{{$coin_balance}fdkajfasddafklsdjfasdjfasdjfjkasdjfajslfjkasdjlfasdjfkajsfklasd}"
                 }
               ]
-            },
-            {
-              "flexGrow": "1",
-              "widgetType": "layout",
-              "children": [
-                {
-                  "marginLeft": "10dp",
-                  "flexDirection": "row",
-                  "alignItems": "center",
-                  "widgetType": "list",
-                  "children": [
-                    {
-                      "src": "https://deo.shopeemobile.com/shopee/shopee-shopeepayfe-live-id/homepage/cd7de533ac1bbe3701101b2e7aa2c1d1.png",
-                      "height": "12dp",
-                      "width": "12dp",
-                      "widgetType": "image"
-                    },
-                    {
-                      "src": "https://sdfsdfjaljfa.jpg",
-                      "height": "12dp",
-                      "width": "12dp",
-                      "widgetType": "image"
-                    },
-                    {
-                      "src": "https://sdfsdfjaljfa.jpg",
-                      "height": "12dp",
-                      "width": "12dp",
-                      "widgetType": "image"
-                    }
-                  ]
-                }
-              ]
             }
           ]
         },
         {
+          "backgroundColor": "#FFFFFF",
+          "radius": "8",
+          "width": "100%",
+          "paddingTop": "20",
+          "paddingBottom": "20",
+          "marginLeft": "12",
+          "marginRight": "12",
+          "flex": "1",
           "widgetType": "layout",
           "children": [
             {
-              "cellTemplate": "{\n  \"widgetType\": \"layout\",\n  \"children\": [\n    {\n      \"width\": \"12dp\",\n      \"height\": \"12dp\",\n      \"src\": \"ic_circle_item_1\",\n      \"widgetType\": \"image\"\n    },\n    {\n      \"fontSize\": \"12\",\n      \"fontWeight\": \"400\",\n      \"widgetType\": \"text\",\n      \"src\": \"1\"\n    },\n    {\n      \"cellTemplate\": \"{\\n  \\\"widgetType\\\": \\\"layout\\\",\\n  \\\"children\\\": [\\n    {\\n      \\\"listType\\\": \\\"grid\\\",\\n      \\\"column\\\": \\\"4\\\",\\n      \\\"horizontal\\\": true,\\n      \\\"widgetType\\\": \\\"list\\\"\\n    }\\n  ]\\n}\",\n      \"widgetType\": \"list\"\n    }\n  ]\n}",
+              "listType": "grid",
+              "column": "4",
+              "horizontal": true,
+              "cellTemplate": "{\n  \"alignItems\": \"center\",\n  \"widgetType\": \"layout\",\n  \"children\": [\n    {\n      \"justifyContent\": \"center\",\n      \"alignItems\": \"center\",\n      \"marginBottom\": \"8\",\n      \"widgetType\": \"layout\",\n      \"children\": [\n        {\n          \"width\": \"40\",\n          \"height\": \"40\",\n          \"src\": \"https://deo.shopeemobile.com/shopee/shopee-shopeepayfe-live-id/homepage/cd7de533ac1bbe3701101b2e7aa2c1d1.png\",\n          \"widgetType\": \"image\"\n        }\n      ]\n    },\n    {\n      \"fontSize\": \"12\",\n      \"fontWeight\": \"400\",\n      \"textAlign\": \"center\",\n      \"color\": \"rgba(0, 0, 0, 0.87)\",\n      \"widgetType\": \"text\",\n      \"src\": \"1\"\n    }\n  ]\n}",
               "widgetType": "list"
             }
           ]
         },
         {
+          "alignItems": "center",
           "widgetType": "layout",
           "children": [
             {
-              "width": "12dp",
-              "height": "12dp",
-              "src": "ic_circle_item_1",
-              "widgetType": "image"
+              "justifyContent": "center",
+              "alignItems": "center",
+              "marginBottom": "8",
+              "widgetType": "layout",
+              "children": [
+                {
+                  "width": "40",
+                  "height": "40",
+                  "src": "https://deo.shopeemobile.com/shopee/shopee-shopeepayfe-live-id/homepage/cd7de533ac1bbe3701101b2e7aa2c1d1.png",
+                  "widgetType": "image"
+                }
+              ]
             },
             {
               "fontSize": "12",
               "fontWeight": "400",
+              "textAlign": "center",
+              "color": "rgba(0, 0, 0, 0.87)",
               "widgetType": "text",
               "src": "1"
+            }
+          ]
+        },
+        {
+          "flexDirection": "column",
+          "alignItems": "center",
+          "widgetType": "layout",
+          "children": [
+            {
+              "width": "40",
+              "height": "40",
+              "borderWidth": "0.5",
+              "radius": "12",
+              "borderColor": "rgba(0, 0, 0, 0.09)",
+              "widgetType": "layout",
+              "children": [
+                {
+                  "width": "32",
+                  "height": "32",
+                  "src": "https://deo.shopeemobile.com/shopee/shopee-shopeepayfe-live-id/homepage/cd7de533ac1bbe3701101b2e7aa2c1d1.png",
+                  "widgetType": "image"
+                }
+              ]
             },
             {
-              "cellTemplate": "{\n  \"widgetType\": \"layout\",\n  \"children\": [\n    {\n      \"listType\": \"grid\",\n      \"column\": \"4\",\n      \"horizontal\": true,\n      \"widgetType\": \"list\"\n    }\n  ]\n}",
-              "widgetType": "list"
+              "fontSize": "12",
+              "fontWeight": "400",
+              "textAlign": "center",
+              "color": "rgba(0, 0, 0, 0.87)",
+              "widgetType": "text",
+              "src": "test"
             }
           ]
         },

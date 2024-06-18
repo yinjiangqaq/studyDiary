@@ -1,0 +1,16 @@
+<layout flexDirection="column">
+  <!-- walletbalance -->
+  <layout flexDirection="row" alignItems="center" height="28" paddingHorizontal="12">
+    <image height="28" width="68"/>
+
+    <layout flexDirection="row" alignItems="center">
+      <!-- coins -->
+      <layout flexDirection="row" alignItems="center" radius="20" backgroundColor="rgba(0, 0, 0, 0.09)" paddingHorizontal="4">
+        <image height="18" width="18"/>
+        <text>3100</text>
+        <image/>
+      </layout>
+    </layout>
+  </layout>
+  <walletbar src="./components/walletbar.xml"/>
+</layout>

@@ -1,0 +1,6 @@
+<layout alignItems="center">
+  <layout justifyContent="center" alignItems="center" marginBottom="8">
+    <image width="40" height="40" src="https://deo.shopeemobile.com/shopee/shopee-shopeepayfe-live-id/homepage/cd7de533ac1bbe3701101b2e7aa2c1d1.png"/>
+  </layout>
+  <text fontSize="12" fontWeight="400" textAlign="center" color="rgba(0, 0, 0, 0.87)">1</text>
+</layout>
